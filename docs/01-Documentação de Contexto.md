@@ -25,24 +25,43 @@ Nesse momento, o grupo pode optar por fazer uso  de ferramentas como Design Thin
 -->
 ## Objetivos
 
-Aqui você deve descrever os objetivos do trabalho indicando que o objetivo geral é desenvolver um software para solucionar o problema apresentado acima. 
+O objetivo geral deste trabalho é desenvolver uma aplicação móvel que solucione os desafios identificados na aplicação que é atualmente utilizada pela Barbearia Nordus, visando proporcionar uma experiência de usuário mais intuitiva e satisfatória, além do desenvolvimento de funcionalidades específicas, que gerem valor para a Empresa.
 
-Apresente também alguns (pelo menos 2) objetivos específicos dependendo de onde você vai querer concentrar a sua prática investigativa, ou como você vai aprofundar no seu trabalho.
- 
+### Objetivos Específicos:
+
+1. **Aprimorar a usabilidade:** Concentrar esforços no design e na interface do usuário para tornar a nova aplicação mais intuitiva e amigável, permitindo que os clientes realizem agendamentos de forma rápida e eficiente.
+
+2. **Destacar o clube de assinaturas:** Desenvolver estratégias dentro da aplicação móvel para destacar o Clube de Assinaturas da Barbearia Nordus, visando aumentar a adesão dos clientes ao clube de assinaturas, potencialmente aumentando o número de membros.
+
+Estes objetivos específicos foram selecionados com base na necessidade de resolver os problemas identificados na aplicação atual, priorizando a melhoria da experiência do usuário e a eficiência operacional da Barbearia Nordus, além de destacar e fortalecer o sistema de assinaturas como uma estratégia de marketing.
+
+<!--
 > **Links Úteis**:
 > - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
-
+-->
 ## Justificativa
 
+A decisão de desenvolver uma aplicação móvel para a Barbearia Nordus surge da necessidade de aprimorar a experiência do usuário e potencializar os lucros da empresa. A aplicação atual enfrenta desafios significativos de usabilidade, afetando a satisfação dos clientes. Ao criar uma nova aplicação mais intuitiva, podemos melhor atender às demandas dos clientes e promover o marketing do clube de assinaturas, estimulando a adesão dos clientes e garantindo uma fonte estável de receita. Essas melhorias não só fortalecerão a competitividade da Barbearia Nordus, mas também reforçarão sua posição no mercado.
+
+Além disso, melhorar a usabilidade e funcionalidades da aplicação pode otimizar o processo de agendamento, reduzindo erros e aprimorando a eficiência geral das operações. Isso não apenas melhorará a experiência do cliente, mas também beneficiará o time de barbeiros, tornando o gerenciamento de agendamentos mais eficiente e livre de complicações.
+
+Portanto, a modernização da aplicação móvel é crucial para a Barbearia Nordus manter sua relevância e competitividade no mercado em constante evolução. Oferecer uma aplicação móvel intuitiva e funcional é essencial para atender às expectativas dos clientes e se destacar em um mercado cada vez mais competitivo. Ao investir na melhoria contínua da experiência do usuário, a Barbearia Nordus demonstra seu compromisso com a excelência e sua capacidade de se adaptar às demandas do mercado.
+<!--
 Descreva a importância ou a motivação para trabalhar com esta aplicação que você escolheu. Indique as razões pelas quais você escolheu seus objetivos específicos ou as razões para aprofundar em certos aspectos do software.
 
 O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estatísticos, que podem ser apresentados, com o objetivo de esclarecer detalhes do problema que será abordado pelo grupo.
 
 > **Links Úteis**:
 > - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
-
+-->
 ## Público-Alvo
 
+O público-alvo da aplicação da Barbearia Nordus é diversificado, composto por clientes que buscam serviços de barbearia, e também pelo time de barbeiros.
+
+1. **Clientes:**: No geral serão homens de diversas faixas etárias que buscam serviços de corte de cabelo, barba, tratamentos capilares e outros serviços. Eles podem variar em relação ao conhecimento prévio de tecnologia, mas geralmente são usuários que estão familiarizados com smartphones e aplicativos móveis. Eles valorizam a conveniência, a qualidade do serviço e a facilidade de agendamento.
+
+2. **Time da Barbearia:** São os barbeiros e gerentes que trabalham na barbearia. Profissionais da área de beleza, com diferentes níveis de experiência e habilidades técnicas. Alguns podem ter mais afinidade com tecnologia do que outros, mas todos eles precisam utilizar a aplicação para gerenciar horários, agendamentos, serviços e clientes de forma eficiente.
+<!--
 Descreva quem serão as pessoas que usarão a sua aplicação indicando os diferentes perfis. O objetivo aqui não é definir quem serão os clientes ou quais serão os papéis dos usuários na aplicação. A ideia é, dentro do possível, conhecer um pouco mais sobre o perfil dos usuários: conhecimentos prévios, relação com a tecnologia, relações
 hierárquicas, etc.
 
@@ -53,3 +72,4 @@ Adicione informações sobre o público-alvo por meio de uma descrição textual
 > - [Como definir o público alvo](https://exame.com/pme/5-dicas-essenciais-para-definir-o-publico-alvo-do-seu-negocio/)
 > - [Público-alvo: o que é, tipos, como definir seu público e exemplos](https://klickpages.com.br/blog/publico-alvo-o-que-e/)
 > - [Qual a diferença entre público-alvo e persona?](https://rockcontent.com/blog/diferenca-publico-alvo-e-persona/)
+-->
