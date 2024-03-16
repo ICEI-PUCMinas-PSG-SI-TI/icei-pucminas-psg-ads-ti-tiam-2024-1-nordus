@@ -1,9 +1,9 @@
 # Introdução
 
 Este projeto irá abordar a jornada do desenvolvimento de uma aplicação móvel personalizada para atender às necessidades da Barbearia Nordus. A iniciativa surge da dificuldade enfrentada pela barbearia no gerenciamento eficiente de seus agendamentos através da aplicação móvel atual. Os problemas identificados incluem uma interface pouco intuitiva e uma experiência de usuário insatisfatória, resultando em dificuldades de uso para os clientes. Além disso, a Barbearia Nordus possui um sistema de assinaturas que desempenha um papel crucial em seu modelo de negócio atual, e deseja que esse aspecto seja devidamente integrado e destacado na nova aplicação, o que não era uma realidade na aplicação anterior. Assim, além de otimizar o processo de agendamento, a nova aplicação buscará abordar essas deficiências e destacar o sistema de assinaturas, proporcionando uma interface intuitiva e uma melhor experiência de usuário. O projeto almeja, portanto, não apenas resolver problemas operacionais, mas também elevar a qualidade geral da interação com a plataforma, melhorando a satisfação dos clientes, consequentemente aumentando os lucros da Barbearia Nordus.
-
+<!---
 Texto descritivo com a visão geral do projeto abordado. Inclui o contexto, o problema, os objetivos, a justificativa e o público-alvo do projeto.
-
+-->
 ## Problema
 
 O principal desafio enfrentado pela Barbearia Nordus não está na gestão dos agendamentos em si, mas sim na inadequação do aplicativo móvel atual. O principal problema reside na má qualidade da aplicação, que apresenta uma interface pouco intuitiva e uma experiência de usuário insatisfatória. Essa deficiência resulta em dificuldades significativas para os clientes utilizarem o aplicativo para realizar seus agendamentos. Consequentemente, a barbearia enfrenta uma série de problemas, como insatisfação dos clientes, e pouca aderência ao uso do aplicativo.
@@ -11,7 +11,7 @@ O principal desafio enfrentado pela Barbearia Nordus não está na gestão dos a
 Atualmente, a barbearia utiliza uma aplicação móvel para agendamento de seus serviços, embora o aplicativo não atenda às necessidades da empresa. No geral, os clientes da barbearia represnta um grupo de pessoas familiarizados com tecnologia, porém, a complexidade, falta de usabilidade, e a interface pouco amigável, ocasiona na pouca aderência ao aplicativo por parte destes clientes. Além disso, a Nordus opera um modelo de clube de assinaturas como parte de sua estratégia de fidelização de clientes e deseja que este aspecto seja melhor integrado e destacado na nova aplicação móvel, o que era inexistente na aplicação anterior.
 
 Dessa forma, fica destacada a importância de desenvolver uma solução que não apenas resolva as deficiências de funcionalidades do aplicativo móvel atual, mas que também forneça uma experiência de usuário satisfatória para os clientes. A nova aplicação deverá ser projetada levando em consideração as necessidades dos clientes e dos interesses de negócio da barbearia, visando garantir a satisfação geral dos clientes e do time da Barbearia Nordus.
-
+<!---
 Nesse momento você deve apresentar o problema que a sua aplicação deve  resolver. No entanto, não é a hora de comentar sobre a aplicação.
 
 Descreva também o contexto em que essa aplicação será usada, se  houver: empresa, tecnologias, etc. Novamente, descreva apenas o que de  fato existir, pois ainda não é a hora de apresentar requisitos  detalhados ou projetos.
@@ -22,7 +22,7 @@ Nesse momento, o grupo pode optar por fazer uso  de ferramentas como Design Thin
 > - [Objetivos, Problema de pesquisa e Justificativa](https://medium.com/@versioparole/objetivos-problema-de-pesquisa-e-justificativa-c98c8233b9c3)
 > - [Matriz Certezas, Suposições e Dúvidas](https://medium.com/educa%C3%A7%C3%A3o-fora-da-caixa/matriz-certezas-suposi%C3%A7%C3%B5es-e-d%C3%BAvidas-fa2263633655)
 > - [Brainstorming](https://www.euax.com.br/2018/09/brainstorming/)
-
+-->
 ## Objetivos
 
 Aqui você deve descrever os objetivos do trabalho indicando que o objetivo geral é desenvolver um software para solucionar o problema apresentado acima. 
