@@ -1,5 +1,7 @@
 # Introdução
 
+Este projeto irá abordar a jornada do desenvolvimento de uma aplicação móvel personalizada para atender às necessidades da Barbearia Nordus. A iniciativa surge da dificuldade enfrentada pela barbearia no gerenciamento eficiente de seus agendamentos através da aplicação móvel atual. Os problemas identificados incluem uma interface pouco intuitiva e uma experiência de usuário insatisfatória, resultando em dificuldades de uso para os clientes. Além disso, a Barbearia Nordus possui um sistema de assinaturas que desempenha um papel crucial em seu modelo de negócio atual, e deseja que esse aspecto seja devidamente integrado e destacado na nova aplicação, o que não era uma realidade na aplicação anterior. Assim, além de otimizar o processo de agendamento, a nova aplicação buscará abordar essas deficiências e destacar o sistema de assinaturas, proporcionando uma interface intuitiva e uma melhor experiência de usuário. O projeto almeja, portanto, não apenas resolver problemas operacionais, mas também elevar a qualidade geral da interação com a plataforma, melhorando a satisfação dos clientes, consequentemente aumentando os lucros da Barbearia Nordus.
+
 Texto descritivo com a visão geral do projeto abordado. Inclui o contexto, o problema, os objetivos, a justificativa e o público-alvo do projeto.
 
 ## Problema
