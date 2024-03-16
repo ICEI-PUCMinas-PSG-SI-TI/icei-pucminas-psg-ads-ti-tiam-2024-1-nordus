@@ -20,7 +20,7 @@ Ele procura algum aplicativo onde possa deixar com a cara de seu estabelecimento
 É um profissional de marketing que preza pela praticidade em sua rotina agitada, busca conveniência ao agendar seus cortes de cabelo e barbas, desejando um aplicativo intuitivo que permita marcar horários facilmente e receber lembretes automáticos. Além disso, ele está interessado em produtos de cuidados pessoais oferecidos pela barbearia e gostaria de explorar a "Loja" virtual para verificar oque a barbearia tem a oferecer.
 
 3° MARCOS ANTÔNIO - 23 Anos <br>
-É um empreendedor no ramo da moda e beleza. busca um aplicativo que ofereça praticidade ao agendar seus cortes e tratamentos, permitindo escolher entre diferentes profissionais e visualizar disponibilidade em tempo real. Além disso, como influenciador digital, ela está interessada em colaborações com a barbearia, buscando uma seção dedicada aos patrocinadores no aplicativo.
+É um empreendedor no ramo da moda e beleza, busca um aplicativo que ofereça praticidade ao agendar seus cortes e tratamentos, permitindo escolher entre diferentes profissionais e visualizar disponibilidade em tempo real. Além disso, como influenciador digital, ela está interessada em colaborações com a barbearia, buscando uma seção dedicada aos patrocinadores no aplicativo.
 
 4° RODRIGO PEREIRA - 26 Anos <br>
 É um talentoso barbeiro, com vasta experiência na área, ele é conhecido por sua habilidade em criar cortes modernos e estilosos. Como barbeiro dedicado, Rodrigo enfrenta desafios diários ao gerenciar seus horários de atendimento. Ele busca um sistema de agendamento que ofereça praticidade, permitindo-lhe visualizar facilmente sua agenda e planejar seu dia de trabalho de forma eficiente. 
@@ -50,9 +50,8 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |RF-002| Módulo de Gestão de Assinaturas para os Clientes  | ALTA |
 |RF-003| Seção para Destacar Patrocinadores no Aplicativo | MÉDIA|
 |RF-004| Implementar uma "Loja" Virtual para Exibição de Produtos|ALTA|
-|RF-005| Interface Personalizada que Reflita a Identidade da Barbearia|ALTA|
-|RF-006| Sistema de favoritar serviços para facilitar o agendamento|ALTA|
-|RF-007| Controle de Estoque para a "Loja" Virtual|ALTA|
+|RF-005| Interface Personalizada que Reflita a Identidade da Barbearia|MÈDIA|
+|RF-006| Sistema de favoritar serviços para facilitar o agendamento|Baixa|
 
 ### Requisitos não Funcionais
 
@@ -109,6 +108,8 @@ De acordo com o PMBoK v6 as dez áreas que constituem os pilares para gerenciar 
 
 ## Gestão de Orçamento
 
-![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/d89d0aa2-f543-427f-a22d-ed438cdae021)
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/9f4eead9-e67e-47ec-937f-93af9c037cbe)
+
+
 
 
