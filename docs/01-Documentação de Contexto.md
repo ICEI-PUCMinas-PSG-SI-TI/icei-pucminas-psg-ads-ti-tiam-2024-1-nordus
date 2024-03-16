@@ -5,6 +5,13 @@ Este projeto irá abordar a jornada do desenvolvimento de uma aplicação móvel
 Texto descritivo com a visão geral do projeto abordado. Inclui o contexto, o problema, os objetivos, a justificativa e o público-alvo do projeto.
 
 ## Problema
+
+O principal desafio enfrentado pela Barbearia Nordus não está na gestão dos agendamentos em si, mas sim na inadequação do aplicativo móvel atual. O principal problema reside na má qualidade da aplicação, que apresenta uma interface pouco intuitiva e uma experiência de usuário insatisfatória. Essa deficiência resulta em dificuldades significativas para os clientes utilizarem o aplicativo para realizar seus agendamentos. Consequentemente, a barbearia enfrenta uma série de problemas, como insatisfação dos clientes, e pouca aderência ao uso do aplicativo.
+
+Atualmente, a barbearia utiliza uma aplicação móvel para agendamento de seus serviços, embora o aplicativo não atenda às necessidades da empresa. No geral, os clientes da barbearia represnta um grupo de pessoas familiarizados com tecnologia, porém, a complexidade, falta de usabilidade, e a interface pouco amigável, ocasiona na pouca aderência ao aplicativo por parte destes clientes. Além disso, a Nordus opera um modelo de clube de assinaturas como parte de sua estratégia de fidelização de clientes e deseja que este aspecto seja melhor integrado e destacado na nova aplicação móvel, o que era inexistente na aplicação anterior.
+
+Dessa forma, fica destacada a importância de desenvolver uma solução que não apenas resolva as deficiências de funcionalidades do aplicativo móvel atual, mas que também forneça uma experiência de usuário satisfatória para os clientes. A nova aplicação deverá ser projetada levando em consideração as necessidades dos clientes e dos interesses de negócio da barbearia, visando garantir a satisfação geral dos clientes e do time da Barbearia Nordus.
+
 Nesse momento você deve apresentar o problema que a sua aplicação deve  resolver. No entanto, não é a hora de comentar sobre a aplicação.
 
 Descreva também o contexto em que essa aplicação será usada, se  houver: empresa, tecnologias, etc. Novamente, descreva apenas o que de  fato existir, pois ainda não é a hora de apresentar requisitos  detalhados ou projetos.
