@@ -1,26 +1,29 @@
 # Especificações do Projeto
 
-<span style="color:red">Pré-requisitos: <a href="1-Documentação de Contexto.md"> Documentação de Contexto</a></span>
+O aplicativo que será desenvolvido para a Barbearia Nordus visa resolver diversos desafios enfrentados pelo estabelecimento. A ideia principal é criar um sistema de agendamento intuitivo e eficiente, permitindo que os clientes marquem horários de forma simples, visualizem disponibilidade em tempo real e recebam lembretes para suas marcações.
 
-Definição do problema e ideia de solução a partir da perspectiva do usuário. É composta pela definição do  diagrama de personas, histórias de usuários, requisitos funcionais e não funcionais além das restrições do projeto.
+Além disso, pretende-se aprimorar a gestão das diferentes assinaturas oferecidas, como Assinante de Corte, Assinante de Barba e Assinante de Corte e Barba, com a criação de um módulo específico no aplicativo para que os clientes possam visualizar detalhes de suas assinaturas atuais.
 
-Apresente uma visão geral do que será abordado nesta parte do documento, enumerando as técnicas e/ou ferramentas utilizadas para realizar a especificações do projeto
+Para aumentar a visibilidade dos patrocinadores da barbearia, será implementada uma seção dedicada no aplicativo, exibindo logos e informações relevantes dos parceiros, proporcionando assim visibilidade para ambos.
+
+A barbearia também planeja expandir sua presença online com a introdução de uma área de "Loja" no aplicativo. Isso permitirá que os clientes naveguem pelos produtos, verifiquem a disponibilidade em tempo real e leiam descrições detalhadas antes de efetuarem a compra.
+
+Por fim, o aplicativo será desenvolvido com uma interface customizada, utilizando as cores, logotipos e estilo visual característicos da barbearia para criar uma conexão mais forte e pessoal com os clientes.
 
 ## Personas
 
-Pedro Paulo tem 26 anos, é arquiteto recém-formado e autônomo. Pensa em se desenvolver profissionalmente através de um mestrado fora do país, pois adora viajar, é solteiro e sempre quis fazer um intercâmbio. Está buscando uma agência que o ajude a encontrar universidades na Europa que aceitem alunos estrangeiros.
+1° SANTOS HENRIQUE - 37 Anos <br>
+Dono de estabelecimento de barbearia. Pensa em buscar uma forma de agilizar a gestão da sua barbearia e enriquecer sua presença online.
+Ele procura algum aplicativo onde possa deixar com a cara de seu estabelecimento
 
-Enumere e detalhe as personas da sua solução. Para tanto, baseie-se tanto nos documentos disponibilizados na disciplina e/ou nos seguintes links:
+2° FELIPE SILVA - 30 Anos <br>
+É um profissional de marketing que preza pela praticidade em sua rotina agitada, busca conveniência ao agendar seus cortes de cabelo e barbas, desejando um aplicativo intuitivo que permita marcar horários facilmente e receber lembretes automáticos. Além disso, ele está interessado em produtos de cuidados pessoais oferecidos pela barbearia e gostaria de explorar a "Loja" virtual para verificar oque a barbearia tem a oferecer.
 
-> **Links Úteis**:
-> - [Rock Content](https://rockcontent.com/blog/personas/)
-> - [Hotmart](https://blog.hotmart.com/pt-br/como-criar-persona-negocio/)
-> - [O que é persona?](https://resultadosdigitais.com.br/blog/persona-o-que-e/)
-> - [Persona x Público-alvo](https://flammo.com.br/blog/persona-e-publico-alvo-qual-a-diferenca/)
-> - [Mapa de Empatia](https://resultadosdigitais.com.br/blog/mapa-da-empatia/)
-> - [Mapa de Stalkeholders](https://www.racecomunicacao.com.br/blog/como-fazer-o-mapeamento-de-stakeholders/)
->
-Lembre-se que você deve ser enumerar e descrever precisamente e personalizada todos os clientes ideais que sua solução almeja.
+3° MARCOS ANTÔNIO - 23 Anos <br>
+É um empreendedor no ramo da moda e beleza. busca um aplicativo que ofereça praticidade ao agendar seus cortes e tratamentos, permitindo escolher entre diferentes profissionais e visualizar disponibilidade em tempo real. Além disso, como influenciador digital, ela está interessada em colaborações com a barbearia, buscando uma seção dedicada aos patrocinadores no aplicativo.
+
+4° RODRIGO PEREIRA - 26 Anos <br>
+É um talentoso barbeiro, com vasta experiência na área, ele é conhecido por sua habilidade em criar cortes modernos e estilosos. Como barbeiro dedicado, Rodrigo enfrenta desafios diários ao gerenciar seus horários de atendimento. Ele busca um sistema de agendamento que ofereça praticidade, permitindo-lhe visualizar facilmente sua agenda e planejar seu dia de trabalho de forma eficiente. 
 
 ## Histórias de Usuários
 
@@ -28,48 +31,12 @@ Com base na análise das personas forma identificadas as seguintes histórias de
 
 |EU COMO... `PERSONA`| QUERO/PRECISO ... `FUNCIONALIDADE` |PARA ... `MOTIVO/VALOR`                 |
 |--------------------|------------------------------------|----------------------------------------|
-|Usuário do sistema  | Registrar minhas tarefas           | Não esquecer de fazê-las               |
-|Administrador       | Alterar permissões                 | Permitir que possam administrar contas |
+|Dono da Barbearia   | QUERO/PRECISO de um sistema de agendamento intuitivo e eficiente         | PARA agilizar o processo de marcação de horários dos clientes, evitando conflitos e facilitando a gestão do estabelecimento.               |
+|Cliente da Barbearia      | QUERO/PRECISO de um aplicativo para agendar cortes e barbas                 | PARA ter a conveniência de marcar horários facilmente, receber lembretes automáticos e desfrutar da qualidade dos serviços da barbearia. |
+|Cliente da Barbearia| QUERO/PRECISO de uma seção na "Loja" virtual do aplicativo | PARA descobrir produtos exclusivos da barbearia, complementando meus cuidados de beleza e apoiando o estabelecimento. |
+|Dono da Barbearia| QUERO/PRECISO de um módulo de gestão de assinaturas |PARA facilitar o acompanhamento e renovação dos planos de Assinante de Corte, Assinante de Barba e Assinante de Corte e Barba oferecidos pela barbearia.
+|Funcionário da Barbearia |QUERO/PRECISO de acesso ao sistema de agendamento | PARA verificar meus horários de atendimento, visualizar as marcações dos clientes e organizar meu dia de trabalho de forma eficiente.|
 
-Apresente aqui as histórias de usuário que são relevantes para o projeto de sua solução. As Histórias de Usuário consistem em uma ferramenta poderosa para a compreensão e elicitação dos requisitos funcionais e não funcionais da sua aplicação. Se possível, agrupe as histórias de usuário por contexto, para facilitar consultas recorrentes à essa parte do documento.
-
-> **Links Úteis**:
-> - [Histórias de usuários com exemplos e template](https://www.atlassian.com/br/agile/project-management/user-stories)
-> - [Como escrever boas histórias de usuário (User Stories)](https://medium.com/vertice/como-escrever-boas-users-stories-hist%C3%B3rias-de-usu%C3%A1rios-b29c75043fac)
-> - [User Stories: requisitos que humanos entendem](https://www.luiztools.com.br/post/user-stories-descricao-de-requisitos-que-humanos-entendem/)
-> - [Histórias de Usuários: mais exemplos](https://www.reqview.com/doc/user-stories-example.html)
-> - [9 Common User Story Mistakes](https://airfocus.com/blog/user-story-mistakes/)
-
-## Modelagem do Processo de Negócio 
-
-### Análise da Situação Atual
-
-Apresente aqui os problemas existentes que viabilizam sua proposta. Apresente o modelo do sistema como ele funciona hoje. Caso sua proposta seja inovadora e não existam processos claramente definidos, apresente como as tarefas que o seu sistema pretende implementar são executadas atualmente, mesmo que não se utilize tecnologia computacional. 
-
-### Descrição Geral da Proposta
-
-Apresente aqui uma descrição da sua proposta abordando seus limites e suas ligações com as estratégias e objetivos do negócio. Apresente aqui as oportunidades de melhorias.
-
-### Processo 1 – NOME DO PROCESSO
-
-Apresente aqui o nome e as oportunidades de melhorias para o processo 1. Em seguida, apresente o modelo do processo 1, descrito no padrão BPMN. 
-
-![Processo 1](img/02-bpmn-proc1.png)
-
-### Processo 2 – NOME DO PROCESSO
-
-Apresente aqui o nome e as oportunidades de melhorias para o processo 2. Em seguida, apresente o modelo do processo 2, descrito no padrão BPMN.
-
-![Processo 2](img/02-bpmn-proc2.png)
-
-## Indicadores de Desempenho
-
-Apresente aqui os principais indicadores de desempenho e algumas metas para o processo. Atenção: as informações necessárias para gerar os indicadores devem estar contempladas no diagrama de classe. Colocar no mínimo 5 indicadores. 
-
-Usar o seguinte modelo: 
-
-![Indicadores de Desempenho](img/02-indic-desemp.png)
-Obs.: todas as informações para gerar os indicadores devem estar no diagrama de classe a ser apresentado a posteriori. 
 
 ## Requisitos
 
@@ -79,30 +46,25 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 |ID    | Descrição do Requisito  | Prioridade |
 |------|-----------------------------------------|----|
-|RF-001| Permitir que o usuário cadastre tarefas | ALTA | 
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
+|RF-001| Sistema de Agendamento Intuitivo e Eficiente| ALTA | 
+|RF-002| Módulo de Gestão de Assinaturas para os Clientes  | ALTA |
+|RF-003| Seção para Destacar Patrocinadores no Aplicativo | MÉDIA|
+|RF-004| Implementar uma "Loja" Virtual para Exibição de Produtos|ALTA|
+|RF-005| Interface Personalizada que Reflita a Identidade da Barbearia|ALTA|
+|RF-006| Sistema de favoritar serviços para facilitar o agendamento|ALTA|
+|RF-007| Controle de Estoque para a "Loja" Virtual|ALTA|
 
 ### Requisitos não Funcionais
 
 |ID     | Descrição do Requisito  |Prioridade |
 |-------|-------------------------|----|
-|RNF-001| O sistema deve ser responsivo para rodar em um dispositivos móvel | MÉDIA | 
-|RNF-002| Deve processar requisições do usuário em no máximo 3s |  BAIXA | 
-
-Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
-
-- [Requisitos Funcionais
- (RF)](https://pt.wikipedia.org/wiki/Requisito_funcional):
- correspondem a uma funcionalidade que deve estar presente na
-  plataforma (ex: cadastro de usuário).
-- [Requisitos Não Funcionais
-  (RNF)](https://pt.wikipedia.org/wiki/Requisito_n%C3%A3o_funcional):
-  correspondem a uma característica técnica, seja de usabilidade,
-  desempenho, confiabilidade, segurança ou outro (ex: suporte a
-  dispositivos iOS e Android).
-Lembre-se que cada requisito deve corresponder à uma e somente uma
-característica alvo da sua solução. Além disso, certifique-se de que
-todos os aspectos capturados nas Histórias de Usuário foram cobertos.
+|RNF-001|	Segurança dos Dados: Garantir a proteção e privacidade das informações dos clientes e da barbearia	|ALTA|
+|RNF-002| Usabilidade Intuitiva: Interface amigável e de fácil utilização para clientes e funcionários	|ALTA|
+|RNF-003|	Desempenho Eficiente: Respostas rápidas do sistema mesmo em horários de pico	|ALTA|
+|RNF-004|	Confiabilidade do Sistema: Garantir que o sistema esteja disponível 24/7 sem falhas frequentes	|ALTA|
+|RNF-005|	Manutenibilidade: Facilidade de realizar atualizações e manutenções no sistema	|MÉDIA|
+|RNF-006|	Backup e Recuperação: Implementar rotinas de backup regular e eficaz dos dados do aplicativo	|BAIXA|
+|RNF-007|	Escalabilidade: Capacidade de lidar com um aumento significativo de usuários sem perda de desempenho|	BAIXA|
 
 ## Restrições
 
@@ -111,13 +73,9 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 |ID| Restrição                                             |
 |--|-------------------------------------------------------|
 |01| O projeto deverá ser entregue até o final do semestre |
-|02| Não pode ser desenvolvido um módulo de backend        |
-
-Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.
-
-> **Links Úteis**:
-> - [O que são Requisitos Funcionais e Requisitos Não Funcionais?](https://codificar.com.br/requisitos-funcionais-nao-funcionais/)
-> - [O que são requisitos funcionais e requisitos não funcionais?](https://analisederequisitos.com.br/requisitos-funcionais-e-requisitos-nao-funcionais-o-que-sao/)
+|02| O sistema deve ser desenvolvido utilizando a linguagem de programação especificada pela equipe técnica.|
+|03| O sistema deve estar em conformidade com a LGPD|
+|04| A interface do aplicativo deve ser compatível com os principais sistemas operacionais móveis.|
 
 ## Diagrama de Casos de Uso
 
@@ -132,42 +90,25 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de
 > - [Astah](https://astah.net/)
 > - [Diagrams](https://app.diagrams.net/)
 
-# Matriz de Rastreabilidade
-
-A matriz de rastreabilidade é uma ferramenta usada para facilitar a visualização dos relacionamento entre requisitos e outros artefatos ou objetos, permitindo a rastreabilidade entre os requisitos e os objetivos de negócio. 
-
-A matriz deve contemplar todos os elementos relevantes que fazem parte do sistema, conforme a figura meramente ilustrativa apresentada a seguir.
-
-![Exemplo de matriz de rastreabilidade](img/02-matriz-rastreabilidade.png)
-
-> **Links Úteis**:
-> - [Artigo Engenharia de Software 13 - Rastreabilidade](https://www.devmedia.com.br/artigo-engenharia-de-software-13-rastreabilidade/12822/)
-> - [Verificação da rastreabilidade de requisitos usando a integração do IBM Rational RequisitePro e do IBM ClearQuest Test Manager](https://developer.ibm.com/br/tutorials/requirementstraceabilityverificationusingrrpandcctm/)
-> - [IBM Engineering Lifecycle Optimization – Publishing](https://www.ibm.com/br-pt/products/engineering-lifecycle-optimization/publishing/)
-
 
 # Gerenciamento de Projeto
 
 De acordo com o PMBoK v6 as dez áreas que constituem os pilares para gerenciar projetos, e que caracterizam a multidisciplinaridade envolvida, são: Integração, Escopo, Cronograma (Tempo), Custos, Qualidade, Recursos, Comunicações, Riscos, Aquisições, Partes Interessadas. Para desenvolver projetos um profissional deve se preocupar em gerenciar todas essas dez áreas. Elas se complementam e se relacionam, de tal forma que não se deve apenas examinar uma área de forma estanque. É preciso considerar, por exemplo, que as áreas de Escopo, Cronograma e Custos estão muito relacionadas. Assim, se eu amplio o escopo de um projeto eu posso afetar seu cronograma e seus custos.
 
 ## Gerenciamento de Tempo
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/7da5cbda-c07e-4cc8-94b2-d8f29f0531da)
 
-Com diagramas bem organizados que permitem gerenciar o tempo nos projetos, o gerente de projetos agenda e coordena tarefas dentro de um projeto para estimar o tempo necessário de conclusão.
-
-![Diagrama de rede simplificado notação francesa (método francês)](img/02-diagrama-rede-simplificado.png)
-
-O gráfico de Gantt ou diagrama de Gantt também é uma ferramenta visual utilizada para controlar e gerenciar o cronograma de atividades de um projeto. Com ele, é possível listar tudo que precisa ser feito para colocar o projeto em prática, dividir em atividades e estimar o tempo necessário para executá-las.
-
-![Gráfico de Gantt](img/02-grafico-gantt.png)
 
 ## Gerenciamento de Equipe
 
-O gerenciamento adequado de tarefas contribuirá para que o projeto alcance altos níveis de produtividade. Por isso, é fundamental que ocorra a gestão de tarefas e de pessoas, de modo que os times envolvidos no projeto possam ser facilmente gerenciados. 
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/9a00d516-ff46-4fbe-9e37-18355317fb85)
 
-![Simple Project Timeline](img/02-project-timeline.png)
+
+
+
 
 ## Gestão de Orçamento
 
-O processo de determinar o orçamento do projeto é uma tarefa que depende, além dos produtos (saídas) dos processos anteriores do gerenciamento de custos, também de produtos oferecidos por outros processos de gerenciamento, como o escopo e o tempo.
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/d89d0aa2-f543-427f-a22d-ed438cdae021)
 
-![Orçamento](img/02-orcamento.png)
+
