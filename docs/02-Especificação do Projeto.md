@@ -6,7 +6,7 @@ Além disso, pretende-se aprimorar a gestão das diferentes assinaturas oferecid
 
 Para aumentar a visibilidade dos patrocinadores da barbearia, será implementada uma seção dedicada no aplicativo, exibindo logos e informações relevantes dos parceiros, proporcionando assim visibilidade para ambos.
 
-A barbearia também planeja expandir sua presença online com a introdução de uma área de "Loja" no aplicativo. Isso permitirá que os clientes naveguem pelos produtos, verifiquem a disponibilidade em tempo real e leiam descrições detalhadas antes de efetuarem a compra.
+A barbearia também planeja expandir sua presença online com a introdução de uma área de catálogo no aplicativo. Isso permitirá que os clientes naveguem pelos produtos, verifiquem a disponibilidade em tempo real e leiam descrições detalhadas antes de efetuarem a reserva do produto.
 
 Por fim, o aplicativo será desenvolvido com uma interface customizada, utilizando as cores, logotipos e estilo visual característicos da barbearia para criar uma conexão mais forte e pessoal com os clientes.
 
@@ -17,10 +17,10 @@ Dono de estabelecimento de barbearia. Pensa em buscar uma forma de agilizar a ge
 Ele procura algum aplicativo onde possa deixar com a cara de seu estabelecimento
 
 2° FELIPE SILVA - 30 Anos <br>
-É um profissional de marketing que preza pela praticidade em sua rotina agitada, busca conveniência ao agendar seus cortes de cabelo e barbas, desejando um aplicativo intuitivo que permita marcar horários facilmente e receber lembretes automáticos. Além disso, ele está interessado em produtos de cuidados pessoais oferecidos pela barbearia e gostaria de explorar a "Loja" virtual para verificar oque a barbearia tem a oferecer.
+É um profissional de marketing que preza pela praticidade em sua rotina agitada, busca conveniência ao agendar seus cortes de cabelo e barbas, desejando um aplicativo intuitivo que permita marcar horários facilmente e receber lembretes automáticos. Além disso, ele está interessado em produtos de cuidados pessoais oferecidos pela barbearia e gostaria de explorar o catálogo para verificar oque a barbearia tem a oferecer.
 
 3° MARCOS ANTÔNIO - 23 Anos <br>
-É um empreendedor no ramo da moda e beleza, busca um aplicativo que ofereça praticidade ao agendar seus cortes e tratamentos, permitindo escolher entre diferentes profissionais e visualizar disponibilidade em tempo real. Além disso, como influenciador digital, ela está interessada em colaborações com a barbearia, buscando uma seção dedicada aos patrocinadores no aplicativo.
+É um empreendedor no ramo da moda e beleza, busca um aplicativo que ofereça praticidade ao agendar seus cortes e tratamentos, permitindo escolher entre diferentes profissionais e visualizar disponibilidade em tempo real. Além disso, como influenciador digital, ele está interessado em colaborações com a barbearia, buscando uma seção dedicada aos patrocinadores no aplicativo.
 
 4° RODRIGO PEREIRA - 26 Anos <br>
 É um talentoso barbeiro, com vasta experiência na área, ele é conhecido por sua habilidade em criar cortes modernos e estilosos. Como barbeiro dedicado, Rodrigo enfrenta desafios diários ao gerenciar seus horários de atendimento. Ele busca um sistema de agendamento que ofereça praticidade, permitindo-lhe visualizar facilmente sua agenda e planejar seu dia de trabalho de forma eficiente. 
@@ -33,8 +33,8 @@ Com base na análise das personas forma identificadas as seguintes histórias de
 |--------------------|------------------------------------|----------------------------------------|
 |Dono da Barbearia   | QUERO/PRECISO de um sistema de agendamento intuitivo e eficiente         | PARA agilizar o processo de marcação de horários dos clientes, evitando conflitos e facilitando a gestão do estabelecimento.               |
 |Cliente da Barbearia      | QUERO/PRECISO de um aplicativo para agendar cortes e barbas                 | PARA ter a conveniência de marcar horários facilmente, receber lembretes automáticos e desfrutar da qualidade dos serviços da barbearia. |
-|Cliente da Barbearia| QUERO/PRECISO de uma seção na "Loja" virtual do aplicativo | PARA descobrir produtos exclusivos da barbearia, complementando meus cuidados de beleza e apoiando o estabelecimento. |
-|Dono da Barbearia| QUERO/PRECISO de um módulo de gestão de assinaturas |PARA facilitar o acompanhamento e renovação dos planos de Assinante de Corte, Assinante de Barba e Assinante de Corte e Barba oferecidos pela barbearia.
+|Cliente da Barbearia| QUERO/PRECISO de uma seção na catálogo do aplicativo | PARA descobrir produtos exclusivos da barbearia, complementando meus cuidados de beleza e apoiando o estabelecimento. |
+|Dono da Barbearia| QUERO/PRECISO de um módulo de gestão de assinaturas |PARA facilitar o acompanhamento dos planos de Assinante de Corte, Assinante de Barba e Assinante de Corte e Barba oferecidos pela barbearia.
 |Funcionário da Barbearia |QUERO/PRECISO de acesso ao sistema de agendamento | PARA verificar meus horários de atendimento, visualizar as marcações dos clientes e organizar meu dia de trabalho de forma eficiente.|
 
 
@@ -49,9 +49,9 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |RF-001| Sistema de Agendamento Intuitivo e Eficiente| ALTA | 
 |RF-002| Módulo de Gestão de Assinaturas para os Clientes  | ALTA |
 |RF-003| Seção para Destacar Patrocinadores no Aplicativo | MÉDIA|
-|RF-004| Implementar uma "Loja" Virtual para Exibição de Produtos|ALTA|
+|RF-004| Implementar um catálogo para Exibição de Produtos|ALTA|
 |RF-005| Interface Personalizada que Reflita a Identidade da Barbearia|MÈDIA|
-|RF-006| Sistema de favoritar serviços para facilitar o agendamento|Baixa|
+|RF-006| Sistema de favoritar serviços para facilitar o agendamento|BAIXA|
 
 ### Requisitos não Funcionais
 
@@ -77,17 +77,14 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 |04| A interface do aplicativo deve ser compatível com os principais sistemas operacionais móveis.|
 
 ## Diagrama de Casos de Uso
+<strong>Caso de uso para agendamento de horário</strong> <br>
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/80ff81aa-56e1-44a2-87af-7322481e787a)
 
-O diagrama de casos de uso é o próximo passo após a elicitação de requisitos, que utiliza um modelo gráfico e uma tabela com as descrições sucintas dos casos de uso e dos atores. Ele contempla a fronteira do sistema e o detalhamento dos requisitos funcionais com a indicação dos atores, casos de uso e seus relacionamentos. 
+<strong>Caso de uso para reservar produtos</strong> <br>
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/3d876d64-b624-4929-a627-cf50c51b97e6)
 
-As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de Casos de Uso”.
-
-> **Links Úteis**:
-> - [Criando Casos de Uso](https://www.ibm.com/docs/pt-br/elm/6.0?topic=requirements-creating-use-cases)
-> - [Como Criar Diagrama de Caso de Uso: Tutorial Passo a Passo](https://gitmind.com/pt/fazer-diagrama-de-caso-uso.html/)
-> - [Lucidchart](https://www.lucidchart.com/)
-> - [Astah](https://astah.net/)
-> - [Diagrams](https://app.diagrams.net/)
+<strong> Caso de uso para assinar o plano Nordus</strong><br>
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/29bae029-dcf1-4deb-a9c7-6b90703cd4a3)
 
 
 # Gerenciamento de Projeto
