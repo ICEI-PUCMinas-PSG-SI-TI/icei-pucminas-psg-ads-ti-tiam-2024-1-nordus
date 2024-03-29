@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
-import Colors from "../constants/Colors";
+import Colors from "../../assets/util/Colors"
 
 export default function InputForm({ text, placeholder }) {
   return (
@@ -9,7 +9,7 @@ export default function InputForm({ text, placeholder }) {
       <TextInput
         placeholder={placeholder}
         style={styles.input}
-        placeholderTextColor="gray"
+        placeholderTextColor={Colors.lightGray}
       />
     </View>
   );
@@ -20,9 +20,9 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   label: {
-    fontSize: 18,
+    fontSize: 16,
     marginBottom: 5,
-    color: "#909090",
+    color: Colors.SILVER,
   },
   input: {
     width: 281,
@@ -31,6 +31,6 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 16,
     color: "white",
-    backgroundColor: "#353535",
+    backgroundColor: Colors.DARKER_GRAY
   },
 });
