@@ -1,11 +1,12 @@
-import { StatusBar } from "expo-status-bar";
+
 import { StyleSheet, Text, View } from "react-native";
+import InputForm from "./components/inputForm";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>O inicio de tudo, agora deu foi o carai</Text>
-      <StatusBar style="auto" />
+      <Text>O inicio de tudo, agora deu foi o arai</Text>
+      <InputForm/>
     </View>
   );
 }
