@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import NordusLogo from "../../assets/icons/icon-nordus-white";
+import NordusLogo from "../assets/icons/icon-nordus-white";
 
 const LogoComponent = ({ size }) => {
   let width, height;
