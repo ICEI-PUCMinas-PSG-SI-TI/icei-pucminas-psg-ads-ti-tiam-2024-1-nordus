@@ -6,7 +6,10 @@
 
 `4º SEMESTRE`
 
-Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
+
+O projeto em desenvolvimento foca na criação de uma aplicação móvel personalizada para atender às necessidades específicas da Barbearia Nordus. A iniciativa surge da dificuldade da barbearia em gerenciar eficientemente seus agendamentos devido à aplicação móvel atual, que possui uma interface pouco intuitiva e resulta em uma experiência de usuário insatisfatória. Além disso, a Barbearia Nordus busca destacar seu sistema de assinaturas, vital para seu modelo de negócio, algo não contemplado na aplicação anterior.
+
+A nova aplicação visa otimizar o processo de agendamento, abordar deficiências e destacar o sistema de assinaturas, proporcionando uma interface intuitiva e uma melhor experiência de usuário. O objetivo final do projeto é não apenas resolver problemas operacionais, mas também elevar a qualidade da interação com a plataforma, aumentando a satisfação dos clientes e os lucros da Barbearia Nordus
 
 ## Integrantes
 
