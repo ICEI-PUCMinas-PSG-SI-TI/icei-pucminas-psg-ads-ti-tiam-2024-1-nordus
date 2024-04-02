@@ -1,20 +1,24 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Colors from "../assets/util/Colors";
+import Input from "./Input";
 
-export default function Form() {
-  const [name, setName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Form = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    phoneNumber: "",
+    email: "",
+    password: "",
+  });
 
-  const register = () => {
+  const handleInputChange = (key, value) => {
+    //Atualiza o estado do formulário quando um campo é alterado
+    setFormData({ ...formData, [key]: value });
+  };
+
+  const handleRegister = () => {
+    //extrai os valores do estado e exibe (temporário)
+    const { name, phoneNumber, email, password } = formData;
     alert(name);
     alert(phoneNumber);
     alert(email);
@@ -25,36 +29,28 @@ export default function Form() {
     <View style={styles.container}>
       <View>
         <Text style={styles.label}>Nome*</Text>
-        <TextInput
-          style={styles.input}
+        <Input
           placeholder="Digite seu nome"
-          placeholderTextColor={Colors.SILVER}
-          onChangeText={(text) => setName(text)}
+          onChangeText={(text) => handleInputChange("name", text)}
         />
         <Text style={styles.label}>Telefone*</Text>
-        <TextInput
-          style={styles.input}
+        <Input
           placeholder="( xx ) xxxxx-xxxx"
-          placeholderTextColor={Colors.SILVER}
-          onChangeText={(text) => setPhoneNumber(text)}
+          onChangeText={(text) => handleInputChange("phoneNumber", text)}
         />
         <Text style={styles.label}>Email*</Text>
-        <TextInput
-          style={styles.input}
+        <Input
           placeholder="Digite seu e-mail"
-          placeholderTextColor={Colors.SILVER}
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={(text) => handleInputChange("email", text)}
         />
         <Text style={styles.label}>Senha*</Text>
-        <TextInput
+        <Input
           secureTextEntry={true}
-          style={styles.input}
           placeholder="Digite sua senha"
-          placeholderTextColor={Colors.SILVER}
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={(text) => handleInputChange("password", text)}
         />
       </View>
-      <TouchableOpacity style={styles.button} onPress={() => register()}>
+      <TouchableOpacity style={styles.button} onPress={handleRegister}>
         <Text style={styles.buttonText}>Cadastrar</Text>
       </TouchableOpacity>
       <View style={styles.linkContainer}>
@@ -64,7 +60,7 @@ export default function Form() {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -77,15 +73,6 @@ const styles = StyleSheet.create({
     color: Colors.SILVER,
     padding: 8,
     marginTop: 5,
-  },
-  input: {
-    width: 281,
-    height: 54,
-    borderRadius: 18,
-    fontSize: 16,
-    backgroundColor: Colors.DARKER_GRAY,
-    paddingLeft: 25,
-    marginBottom: 3,
   },
   button: {
     backgroundColor: Colors.TANGERINE,
@@ -111,6 +98,8 @@ const styles = StyleSheet.create({
   },
   link: {
     color: Colors.WHITE,
-    fontWeight: 600,
+    fontWeight: "600",
   },
 });
+
+export default Form;
