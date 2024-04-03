@@ -1,18 +1,17 @@
 import { useState } from "react";
 import { StyleSheet, Text, View, SafeAreaView, Image, FlatList, Pressable } from "react-native";
-import Colors from "../../assets/util/Colors";
+import Colors from "../assets/util/Colors";
 
-import Divider from "../../components/Divider";
-import Slide from "../../components/Slide";
+import Divider from "../components/Divider";
+import Slide from "../components/Slide";
 
-import Clock from '../../assets/icons/icon-clock.svg'
-import Location from '../../assets/icons/icon-location.svg'
+import Clock from '../assets/icons/icon-clock'
+import Location from '../assets/icons/icon-location.svg'
 
-import Instagram from '../../assets/icons/icon-instagram.svg'
-import Website from '../../assets/icons/icon-website.svg'
-import Whatsapp from '../../assets/icons/icon-whatsapp.svg'
-import Email from '../../assets/icons/icon-email.svg'
-
+import Instagram from '../assets/icons/icon-instagram.svg'
+import Website from '../assets/icons/icon-website.svg'
+import Whatsapp from '../assets/icons/icon-whatsapp.svg'
+import Email from '../assets/icons/icon-email.svg'
 
 
 export default function Home() {

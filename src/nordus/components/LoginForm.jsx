@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Colors from "../assets/util/Colors";
 import Input from "./Input";
+import { useNavigation } from "@react-navigation/native"; // Corrigido para useNavigation
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -9,16 +10,15 @@ const LoginForm = () => {
     password: "",
   });
 
+  const navigation = useNavigation(); // Usando o hook useNavigation
+
   const handleInputChange = (key, value) => {
     // Atualiza o estado do formulário quando um campo é alterado
     setFormData({ ...formData, [key]: value });
   };
 
   const handleLogin = () => {
-    // Extrai os valores do estado e exibe (temporário)
-    const { login, password } = formData;
-    alert(login);
-    alert(password);
+    navigation.navigate("Home"); // Acesso direto ao objeto de navegação
   };
 
   return (
