@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.BLACK,
     alignItems: "center",
-    flexDirection: "column", 
+    flexDirection: "column",
   },
   logoContainer: {
     flex: 1,
