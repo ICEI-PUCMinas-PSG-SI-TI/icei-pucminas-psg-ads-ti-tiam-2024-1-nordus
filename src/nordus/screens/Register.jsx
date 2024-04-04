@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.BLACK,
-    flexDirection: "column", 
+    alignItems: "center",
+    flexDirection: "column",
   },
   logoContainer: {
     flex: 1,
