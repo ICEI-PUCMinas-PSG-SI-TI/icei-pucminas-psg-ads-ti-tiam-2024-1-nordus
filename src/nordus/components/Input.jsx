@@ -2,10 +2,10 @@ import React from "react";
 import { TextInput, StyleSheet } from "react-native";
 import Colors from "../assets/util/Colors";
 
-const Input = ({ placeholder, placeholderTextColor, secureTextEntry, onChangeText }) => {
+const Input = ({ placeholder, placeholderTextColor, secureTextEntry, onChangeText, color }) => {
   return (
     <TextInput
-      style={styles.input}
+      style={[styles.input, { color: color || Colors.WHITE }]}
       placeholder={placeholder}
       placeholderTextColor={placeholderTextColor || Colors.SILVER}
       secureTextEntry={secureTextEntry}
