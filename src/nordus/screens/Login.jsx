@@ -5,6 +5,10 @@ import {
   KeyboardAvoidingView,
   Text,
   TouchableOpacity,
+  ScrollView,
+  Platform,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 import Colors from "../assets/util/Colors";
 import Input from "../components/Input";
@@ -17,15 +21,14 @@ export default function Login() {
     password: "",
   });
 
-  const navigation = useNavigation(); // Usando o hook useNavigation
+  const navigation = useNavigation(); 
 
   const handleInputChange = (key, value) => {
-    // Atualiza o estado do formulário quando um campo é alterado
     setFormData({ ...formData, [key]: value });
   };
 
   const handleLogin = () => {
-    navigation.navigate("Home"); // Acesso direto ao objeto de navegação
+    navigation.navigate("Home");
   };
 
   const navigateCadastro = () => {
@@ -33,62 +36,65 @@ export default function Login() {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-      <View style={styles.logoContainer}>
-        <Logo size="md" />
-      </View>
-      <View style={styles.formContainer}>
-        <View>
-          <Text style={styles.label}>Login*</Text>
-          <Input
-            placeholder="Digite seu email"
-            onChangeText={(text) => handleInputChange("login", text)}
-          />
-          <Text style={styles.label}>Senha*</Text>
-          <Input
-            secureTextEntry={true}
-            placeholder="Digite sua senha"
-            onChangeText={(text) => handleInputChange("password", text)}
-          />
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.logoContainer}>
+          <Logo size="md" />
         </View>
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Entrar</Text>
-        </TouchableOpacity>
-        <View style={styles.linkContainer}>
-          <TouchableOpacity
-            style={[styles.text, styles.centeredText]}
-            onPress={navigateCadastro}
-          >
-            <Text style={[styles.text, styles.boldText, styles.centeredText]}>
-              Cadastrar
-            </Text>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.formContainer}
+        >
+          <View>
+            <Text style={styles.label}>Login*</Text>
+            <Input
+              placeholder="Digite seu email"
+              onChangeText={(text) => handleInputChange("login", text)}
+            />
+            <Text style={styles.label}>Senha*</Text>
+            <Input
+              secureTextEntry={true}
+              placeholder="Digite sua senha"
+              onChangeText={(text) => handleInputChange("password", text)}
+            />
+          </View>
+          <TouchableOpacity style={styles.button} onPress={handleLogin}>
+            <Text style={styles.buttonText}>Entrar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.text, styles.centeredText]}>
-            <Text style={[styles.text, styles.centeredText, styles.linkItem]}>
-              Entrar sem Login
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </KeyboardAvoidingView>
+          <View style={styles.linkContainer}>
+            <TouchableOpacity
+              style={[styles.text, styles.centeredText]}
+              onPress={navigateCadastro}
+            >
+              <Text style={[styles.text, styles.boldText, styles.centeredText]}>
+                Cadastrar
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.text, styles.centeredText]}>
+              <Text style={[styles.text, styles.centeredText, styles.linkItem]}>
+                Entrar sem Login
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
+      </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: Colors.BLACK,
     alignItems: "center",
-    flexDirection: "column",
+    justifyContent: "center",
+    paddingTop: 50,
   },
   logoContainer: {
-    flex: 1,
-    marginTop: 100,
+    alignItems: "center",
   },
   formContainer: {
-    flex: 4,
-    justifyContent: "center",
     alignItems: "center",
+    paddingHorizontal: 20,
+    paddingBottom: 20,
   },
   label: {
     fontSize: 16,
@@ -112,16 +118,6 @@ const styles = StyleSheet.create({
   },
   linkContainer: {
     marginTop: 30,
-  },
-  linkText: {
-    fontSize: 18,
-    color: Colors.SILVER,
-    textAlign: "center",
-    marginBottom: 10,
-  },
-  link: {
-    color: Colors.WHITE,
-    fontWeight: "600",
   },
   text: {
     fontSize: 17,
