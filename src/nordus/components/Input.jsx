@@ -16,7 +16,7 @@ const Input = ({ placeholder, placeholderTextColor, secureTextEntry, onChangeTex
 
 const styles = StyleSheet.create({
   input: {
-    width: 281,
+    width: 300,
     height: 54,
     borderRadius: 18,
     fontSize: 16,
