@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <SafeAreaView style={styles.container}>
 
-      <Slide timing={0} arr={slider}/>
+      <Slide arr={slider}/>
 
       <View style={styles.contentInformation}>
         <Text style={styles.title}>Sobre Nós</Text>
