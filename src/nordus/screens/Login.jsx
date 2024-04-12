@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Platform,
   ActivityIndicator,
+  Alert,
 } from "react-native";
 import Colors from "../assets/util/Colors";
 import Input from "../components/Input";
@@ -43,6 +44,7 @@ export default function Login() {
       navigation.navigate("Home");
     } catch (error) {
       console.log(error);
+      Alert.alert("Erro de Login", "Por favor, verifique seu email e senha.");
     } finally {
       setLoading(false);
     }
