@@ -5,6 +5,8 @@ import {
   KeyboardAvoidingView,
   Text,
   TouchableOpacity,
+  ScrollView,
+  Platform,
 } from "react-native";
 import Colors from "../assets/util/Colors";
 import Input from "../components/Input";
@@ -17,15 +19,14 @@ export default function Login() {
     password: "",
   });
 
-  const navigation = useNavigation(); // Usando o hook useNavigation
+  const navigation = useNavigation();
 
   const handleInputChange = (key, value) => {
-    // Atualiza o estado do formulário quando um campo é alterado
     setFormData({ ...formData, [key]: value });
   };
 
   const handleLogin = () => {
-    navigation.navigate("Home"); // Acesso direto ao objeto de navegação
+    navigation.navigate("Home");
   };
 
   const navigateCadastro = () => {
@@ -33,11 +34,14 @@ export default function Login() {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+    <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.logoContainer}>
         <Logo size="md" />
       </View>
-      <View style={styles.formContainer}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.formContainer}
+      >
         <View>
           <Text style={styles.label}>Login*</Text>
           <Input
@@ -69,26 +73,26 @@ export default function Login() {
             </Text>
           </TouchableOpacity>
         </View>
-      </View>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: Colors.BLACK,
     alignItems: "center",
-    flexDirection: "column",
+    justifyContent: "center",
+    paddingTop: 50,
   },
   logoContainer: {
-    flex: 1,
-    marginTop: 100,
+    alignItems: "center",
   },
   formContainer: {
-    flex: 4,
-    justifyContent: "center",
     alignItems: "center",
+    paddingHorizontal: 20,
+    paddingBottom: 20,
   },
   label: {
     fontSize: 16,
@@ -112,16 +116,6 @@ const styles = StyleSheet.create({
   },
   linkContainer: {
     marginTop: 30,
-  },
-  linkText: {
-    fontSize: 18,
-    color: Colors.SILVER,
-    textAlign: "center",
-    marginBottom: 10,
-  },
-  link: {
-    color: Colors.WHITE,
-    fontWeight: "600",
   },
   text: {
     fontSize: 17,
