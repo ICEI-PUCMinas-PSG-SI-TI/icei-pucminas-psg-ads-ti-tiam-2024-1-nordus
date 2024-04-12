@@ -22,7 +22,6 @@ import Whatsapp from "../assets/icons/icon-whatsapp.svg";
 import Email from "../assets/icons/icon-email.svg";
 
 export default function Home() {
-  const [index, setIndex] = useState([0]);
   const [slider, setSlider] = useState([
     {
       id: 0,
@@ -46,21 +45,10 @@ export default function Home() {
     },
   ]);
 
-  function changeIndex() {
-    var i = index;
-    var newIndex = (i + 1) % slider.length;
-    setIndex(newIndex);
-  }
-
-  loop(4000, changeIndex);
-
-  function loop(time, func) {
-    setTimeout(func, time);
-  }
-
   return (
     <SafeAreaView style={styles.container}>
-      <Slide index={index} arr={slider} />
+
+      <Slide arr={slider}/>
 
       <View style={styles.contentInformation}>
         <Text style={styles.title}>Sobre Nós</Text>

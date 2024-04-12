@@ -24,11 +24,9 @@ export default function Login() {
   });
 
   const [loading, setLoading] = useState(false);
-
-  const navigation = useNavigation(); // Usando o hook useNavigation
+  const navigation = useNavigation();
 
   const handleInputChange = (key, value) => {
-    // Atualiza o estado do formulário quando um campo é alterado
     setFormData({ ...formData, [key]: value });
   };
 
@@ -122,16 +120,16 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.BLACK,
     alignItems: "center",
-    flexDirection: "column",
+    justifyContent: "center",
+    paddingTop: 50,
   },
   logoContainer: {
-    flex: 1,
-    marginTop: 100,
+    alignItems: "center",
   },
   formContainer: {
-    flex: 4,
-    justifyContent: "center",
     alignItems: "center",
+    paddingHorizontal: 20,
+    paddingBottom: 20,
   },
   label: {
     fontSize: 16,
@@ -155,16 +153,6 @@ const styles = StyleSheet.create({
   },
   linkContainer: {
     marginTop: 30,
-  },
-  linkText: {
-    fontSize: 18,
-    color: Colors.SILVER,
-    textAlign: "center",
-    marginBottom: 10,
-  },
-  link: {
-    color: Colors.WHITE,
-    fontWeight: "600",
   },
   text: {
     fontSize: 17,
