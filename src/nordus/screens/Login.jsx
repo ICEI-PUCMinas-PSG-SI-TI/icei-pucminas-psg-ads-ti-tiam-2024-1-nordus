@@ -4,12 +4,18 @@ import {
   View,
   KeyboardAvoidingView,
   Text,
+  ScrollView,
   TouchableOpacity,
+  Platform,
+  ActivityIndicator,
+  Alert,
 } from "react-native";
 import Colors from "../assets/util/Colors";
 import Input from "../components/Input";
 import Logo from "../components/Logo";
 import { useNavigation } from "@react-navigation/native";
+import { auth } from "../FirebaseConfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -17,15 +23,29 @@ export default function Login() {
     password: "",
   });
 
-  const navigation = useNavigation(); // Usando o hook useNavigation
+  const [loading, setLoading] = useState(false);
+  const navigation = useNavigation();
 
   const handleInputChange = (key, value) => {
-    // Atualiza o estado do formulário quando um campo é alterado
     setFormData({ ...formData, [key]: value });
   };
 
-  const handleLogin = () => {
-    navigation.navigate("Home"); // Acesso direto ao objeto de navegação
+  const handleLogin = async () => {
+    setLoading(true);
+    try {
+      const response = await signInWithEmailAndPassword(
+        auth,
+        formData.login,
+        formData.password
+      );
+      console.log(response);
+      navigation.navigate("Home");
+    } catch (error) {
+      console.log(error);
+      Alert.alert("Erro de Login", "Por favor, verifique seu email e senha.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const navigateCadastro = () => {
@@ -33,62 +53,83 @@ export default function Login() {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-      <View style={styles.logoContainer}>
-        <Logo size="md" />
-      </View>
-      <View style={styles.formContainer}>
-        <View>
-          <Text style={styles.label}>Login*</Text>
-          <Input
-            placeholder="Digite seu email"
-            onChangeText={(text) => handleInputChange("login", text)}
-          />
-          <Text style={styles.label}>Senha*</Text>
-          <Input
-            secureTextEntry={true}
-            placeholder="Digite sua senha"
-            onChangeText={(text) => handleInputChange("password", text)}
-          />
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+      <ScrollView contentContainerStyle={[styles.container, styles.outerView]}>
+        <View style={styles.logoContainer}>
+          <Logo size="md" />
         </View>
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Entrar</Text>
-        </TouchableOpacity>
-        <View style={styles.linkContainer}>
-          <TouchableOpacity
-            style={[styles.text, styles.centeredText]}
-            onPress={navigateCadastro}
-          >
-            <Text style={[styles.text, styles.boldText, styles.centeredText]}>
-              Cadastrar
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.text, styles.centeredText]}>
-            <Text style={[styles.text, styles.centeredText, styles.linkItem]}>
-              Entrar sem Login
-            </Text>
-          </TouchableOpacity>
+
+        <View style={styles.formContainer}>
+          <View>
+            <Text style={styles.label}>Login*</Text>
+            <Input
+              placeholder="Digite seu email"
+              onChangeText={(text) => handleInputChange("login", text)}
+            />
+            <Text style={styles.label}>Senha*</Text>
+            <Input
+              secureTextEntry={true}
+              placeholder="Digite sua senha"
+              onChangeText={(text) => handleInputChange("password", text)}
+            />
+
+            {loading ? (
+              <ActivityIndicator size="large" color={Colors.TANGERINE} />
+            ) : (
+              <>
+                <View style={styles.container}>
+                  <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => handleLogin()}
+                  >
+                    <Text style={styles.buttonText}>Entrar</Text>
+                  </TouchableOpacity>
+                </View>
+              </>
+            )}
+          </View>
+
+          <View style={styles.linkContainer}>
+            <TouchableOpacity
+              style={[styles.text, styles.centeredText]}
+              onPress={navigateCadastro}
+            >
+              <Text style={[styles.text, styles.boldText, styles.centeredText]}>
+                Cadastrar
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.text, styles.centeredText]}>
+              <Text style={[styles.text, styles.centeredText, styles.linkItem]}>
+                Entrar sem Login
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  outerView: {
+    flexGrow: 1,
+  },
   container: {
-    flex: 1,
     backgroundColor: Colors.BLACK,
     alignItems: "center",
-    flexDirection: "column",
+    justifyContent: "center",
+    paddingTop: 50,
   },
   logoContainer: {
-    flex: 1,
-    marginTop: 100,
+    alignItems: "center",
   },
   formContainer: {
-    flex: 4,
-    justifyContent: "center",
     alignItems: "center",
+    paddingHorizontal: 20,
+    paddingBottom: 20,
   },
   label: {
     fontSize: 16,
@@ -112,16 +153,6 @@ const styles = StyleSheet.create({
   },
   linkContainer: {
     marginTop: 30,
-  },
-  linkText: {
-    fontSize: 18,
-    color: Colors.SILVER,
-    textAlign: "center",
-    marginBottom: 10,
-  },
-  link: {
-    color: Colors.WHITE,
-    fontWeight: "600",
   },
   text: {
     fontSize: 17,
