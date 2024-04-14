@@ -14,7 +14,7 @@ const Header = ({ navigation }) => {
         <Menu height={14} width={22}/>
       </TouchableOpacity>
       <View style={styles.headerImage}>
-        <Image source={Logo}/>
+        <Image source={Logo}  style={{width: 110, height: 30}} />
       </View>
     </View>
   );
