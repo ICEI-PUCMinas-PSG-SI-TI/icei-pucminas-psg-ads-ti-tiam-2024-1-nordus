@@ -114,7 +114,7 @@ export function DrawerRoutes () {
                    
                    <Pressable 
                         style={styles.contactItem}
-                        onPress={() => openURL('https://open.spotify.com/intl-pt/artist/3ayMqcjEBli5NSwumXll2e')}>
+                        onPress={() => openURL('https://open.spotify.com/playlist/0V5h0aQrVEJ6AGmsmdDZLy?si=5bebf95ec53448f3&nd=1&dlsi=546065a093d847a1')}>
                         <Spotify height={22} width={22}/>
                         <Text style={styles.contactText}>NordusPlay</Text>
                     </Pressable> 
