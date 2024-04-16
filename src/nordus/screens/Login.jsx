@@ -4,6 +4,7 @@ import {
   View,
   KeyboardAvoidingView,
   Text,
+  ScrollView,
   TouchableOpacity,
   ScrollView,
   Platform,
@@ -14,6 +15,8 @@ import Colors from "../assets/util/Colors";
 import Input from "../components/Input";
 import Logo from "../components/Logo";
 import { useNavigation } from "@react-navigation/native";
+import { auth } from "../FirebaseConfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -81,18 +84,26 @@ export default function Login() {
 }
 
 const styles = StyleSheet.create({
+  outerView: {
+    flexGrow: 1,
+  },
   container: {
     flexGrow: 1,
     backgroundColor: Colors.BLACK,
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 50,
+    justifyContent: "center",
+    paddingTop: 50,
   },
   logoContainer: {
+    alignItems: "center",
     alignItems: "center",
   },
   formContainer: {
     alignItems: "center",
+    paddingHorizontal: 20,
+    paddingBottom: 20,
     paddingHorizontal: 20,
     paddingBottom: 20,
   },
