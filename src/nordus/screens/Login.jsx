@@ -124,13 +124,18 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     justifyContent: "center",
     paddingTop: 50,
+    justifyContent: "center",
+    paddingTop: 50,
   },
   logoContainer: {
+    alignItems: "center",
     alignItems: "center",
     alignItems: "center",
   },
   formContainer: {
     alignItems: "center",
+    paddingHorizontal: 20,
+    paddingBottom: 20,
     paddingHorizontal: 20,
     paddingBottom: 20,
     paddingHorizontal: 20,
