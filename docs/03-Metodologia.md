@@ -3,7 +3,7 @@
 
 A metodologia de trabalho adotada pelo grupo para abordar o problema irá se basear no Scrum, o que irá permitir uma abordagem iterativa e colaborativa para o desenvolvimento do projeto. Para isso, utilizaremos uma série de ambientes e ferramentas que promovem a organização, comunicação e gestão eficaz do projeto.
 
-Dessa forma, para gerenciar o código fonte e controle de versionamento, utilizaremos o GitHub, o que irá facilitar a colaboração dentre os membros da equipe. Para gestão das atividades e tarefas, utilizaremos o ClickUp, ferramente que permite uma visão clara das tarefas, atribuição de responsabilidades e definição de prazos, em conformidade com os princípios do Scrum. Para fins de comunicação e reuniões entre os membros da equipe, optamos pelo Discord, uma plataforma que se destaca por sua versatilidade, facilitando a interação entre o time. O bom uso dessas ferramentas, será essencial para garantir uma colaboração eficiente e uma gestão transparente do projeto, visando atingir os objetivos estabelecidos pelo Cliente.
+Dessa forma, para gerenciar o código fonte e controle de versionamento, utilizaremos o GitHub, o que irá facilitar a colaboração dentre os membros da equipe. Para gestão das atividades e tarefas, utilizaremos o Projects do GitHub, ferramente que permite uma visão clara das tarefas, atribuição de responsabilidades, em conformidade com os princípios do Scrum. Para fins de comunicação e reuniões entre os membros da equipe, optamos pelo Discord, uma plataforma que se destaca por sua versatilidade, facilitando a interação entre o time e o WhatsApp. O bom uso dessas ferramentas, será essencial para garantir uma colaboração eficiente e uma gestão transparente do projeto, visando atingir os objetivos estabelecidos pelo Cliente.
 
 <!--
 <span style="color:red">Pré-requisitos: <a href="2-Especificação do Projeto.md"> Documentação de Especificação</a></span>
@@ -17,7 +17,7 @@ Descreva aqui a metodologia de trabalho do grupo para atacar o problema. Defini�
 | Ambiente          | Plataforma        | Link de Acesso                                |
 |-------------------|-------------------|-----------------------------------------------|
 | Controle de Versão| GitHub            | [GitHub](https://github.com/)                |
-| Gestão de Atividades | ClickUp        | [ClickUp](https://clickup.com/)              |
+| Gestão de Atividades | ClickUp        | [ClickUp](https://github.com/orgs/ICEI-PUCMinas-PSG-SI-TI/projects/24)              |
 | Comunicação       | Discord           | [Discord](https://discord.com/)              |
 
 
@@ -32,18 +32,34 @@ foi utilizado para hospedagem do repositório.
 
 O projeto segue a seguinte convenção para o nome de branches:
 
-- `main`: versão estável já testada do software
-- `unstable`: versão já testada do software, porém instável
-- `testing`: versão em testes do software
-- `dev`: versão de desenvolvimento do software
+- `main` versão estável já testada do software
+- `dev` versão para testes e desenvolvimento
+- `Feature` - Novas funcionalidades ex: feature/login-system
+- `Bugfix` - Consertar bugs no codigo ex: bugfix/header-styling
+- `Hotfix` - Consertar bugs críticos (que estão na branch de produção) ex: hotfix/critical-security-issue.
+- `Release` - Preparadas para lançamento de uma nova versão. ex: release/v1.01.1
+- `Docs` - Para documentação ex: docs/api-endpoints
 
-Quanto à gerência de issues, o projeto adota a seguinte convenção para
-etiquetas:
+Quanto à commits, o projeto adota a seguinte convenção para etiquetas:
 
-- `documentation`: melhorias ou acréscimos à documentação
-- `bug`: uma funcionalidade encontra-se com problemas
-- `enhancement`: uma funcionalidade precisa ser melhorada
-- `feature`: uma nova funcionalidade precisa ser introduzida
+- `feat` indica o desenvolvimento de uma nova feature ao projeto.
+
+- `refactor` usado quando houver uma refatoração de código que não tenha qualquer tipo de impacto na lógica/regras de negócio do sistema.
+
+- `style` empregado quando há mudanças de formatação e estilo do código que não alteram o sistema de nenhuma forma.
+
+- `fix` utilizado quando há correção de erros que estão gerando bugs no sistema.
+
+- `chore:` indica mudanças no projeto que não afetem o sistema ou arquivos de testes. São mudanças de desenvolvimento.
+
+- `docs` usado quando há mudanças na documentação do projeto.
+
+- `build` utilizada para indicar mudanças que afetam o processo de build do projeto ou dependências externas.
+
+- `perf` indica uma alteração que melhorou a performance do sistema.
+
+- `revert` indica a reverão de um commit anterior
+
 <!--
 Discuta como a configuração do projeto foi feita na ferramenta de versionamento escolhida. Exponha como a gerência de tags, merges, commits e branchs é realizada. Discuta como a gerência de issues foi realizada.
 
@@ -97,7 +113,7 @@ As ferramentas empregadas no projeto são:
 - **Visual Studio Code:** Possui forte integração com o ambiente de desenvolvimento React Native através do Expo.
 - **GitHub:** Ferramenta que é amplamente utilizada em equipes de desenvolvimento de software, permitindo colaboração, revisão de código e acompanhamento das alterações realizadas durante o desenvolvimento.
 - **Discord:** Devido à familiaridade do time com a ferramenta, o Discord será utilizado como ferramenta de comunicação em tempo real entre os membros da equipe, facilitando discussões, reuniões e troca de informações durante o desenvolvimento do projeto.
-- **ClickUp:** Ferramenta de gestão de projetos poderosa e altamente personalizável, o ClickUp oferece recursos abrangentes para planejamento, acompanhamento de tarefas e colaboração entre os membros da equipe, garantindo uma gestão eficaz do projeto.
+- **GitHub Projects:** Ferramenta de gestão de projetos, que oferece recursos abrangentes para planejamento, acompanhamento de tarefas e colaboração entre os membros da equipe, garantindo uma gestão eficaz do projeto.
 - **Figma:** Ferramenta de wireframing a ser utilizada devido à sua facilidade de uso, recursos avançados de design e colaboração em tempo real. O Figma permite criar e iterar rapidamente nos designs da aplicação móvel, capturando as necessidades e requisitos do projeto de forma precisa e visualmente atraente.
 
 <!--
