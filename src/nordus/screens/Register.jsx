@@ -15,8 +15,8 @@ import Input from "../components/Input";
 import Logo from "../components/Logo";
 import { useNavigation } from "@react-navigation/native";
 import { auth } from "../FirebaseConfig";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"; // Corrigido a importação do método createUserWithEmailAndPassword
-import { getFirestore, collection, addDoc } from "firebase/firestore"; // Corrigido a importação de firestore
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"; 
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -31,15 +31,15 @@ export default function Register() {
     setFormData({ ...formData, [key]: value });
   };
 
-  const auth = getAuth(); // Corrigido para chamar a função getAuth
-  const firestore = getFirestore(); // Adicionado
+  const auth = getAuth(); 
+  const firestore = getFirestore(); 
 
   const handleRegister = () => {
     const { name, phoneNumber, email, password } = formData;
     if (name && phoneNumber && email && password) {
-      createUserWithEmailAndPassword(auth, email, password) // Corrigido para chamar o método corretamente
+      createUserWithEmailAndPassword(auth, email, password)
         .then((res) => {
-          addDoc(collection(firestore, "users"), { // Corrigido para adicionar um documento na coleção "users"
+          addDoc(collection(firestore, "users"), {
             id: res.user.uid,
             name,
             phoneNumber,
@@ -48,7 +48,7 @@ export default function Register() {
           })
           .then(() => {
             alert("Usuário cadastrado!");
-            navigation.navigate("Login"); // Navegar para a tela de login após o cadastro
+            navigation.navigate("Login");
           })
           .catch((error) => {
             console.error("Erro ao adicionar usuário: ", error);

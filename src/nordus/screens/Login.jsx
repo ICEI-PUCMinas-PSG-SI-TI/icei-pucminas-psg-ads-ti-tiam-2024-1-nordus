@@ -15,7 +15,10 @@ import Input from "../components/Input";
 import Logo from "../components/Logo";
 import { useNavigation } from "@react-navigation/native";
 import { auth } from "../FirebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -25,7 +28,6 @@ export default function Login() {
 
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
-
   const handleInputChange = (key, value) => {
     setFormData({ ...formData, [key]: value });
   };
@@ -42,9 +44,31 @@ export default function Login() {
       navigation.navigate("Home");
     } catch (error) {
       console.log(error);
-      Alert.alert("Erro de Login", "Por favor, verifique seu email e senha.");
+      Alert.alert("Erro de Login", getErrorMessage(error));
     } finally {
       setLoading(false);
+    }
+  };
+
+  const recoverPassword = () => {
+    sendPasswordResetEmail(formData.login)
+      .then(() => {
+        alert("Email de recuperação enviado com sucesso");
+      })
+      .catch((error) => {
+        alert(getErrorMessage(error));
+      });
+  };
+
+  const getErrorMessage = (error) => {
+    if (error.code === "auth/user-not-found") {
+      return "Usuário não encontrado";
+    } else if (error.code === "auth/invalid-email") {
+      return "Email inválido";
+    } else if (error.code === "auth/wrong-password") {
+      return "Senha incorreta";
+    } else {
+      return error.message;
     }
   };
 
@@ -101,9 +125,12 @@ export default function Login() {
                 Cadastrar
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.text, styles.centeredText]}>
+            <TouchableOpacity
+              style={[styles.text, styles.centeredText]}
+              onPress={recoverPassword}
+            >
               <Text style={[styles.text, styles.centeredText, styles.linkItem]}>
-                Entrar sem Login
+                Esqueci minha senha
               </Text>
             </TouchableOpacity>
           </View>
