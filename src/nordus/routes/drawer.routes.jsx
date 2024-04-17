@@ -1,5 +1,5 @@
 import { DrawerContentScrollView, createDrawerNavigator, DrawerItem, navigation } from '@react-navigation/drawer';
-import { Linking, Alert, View, Text, Pressable, StyleSheet, Image } from 'react-native';
+import { Linking, Alert, View, Text, Pressable, StyleSheet, Image, TouchableHighlight } from 'react-native';
 import { Dimensions } from 'react-native';
 
 import Colors from '../assets/util/Colors';
@@ -73,9 +73,9 @@ const CustomDrawer = (props) => {
         <DrawerContentScrollView {...props} contentContainerStyle={styles.drawerContent}>
             <View style={styles.drawerHeader}>
                 <Image source={Logo}  style={{width: 110, height: 30}} />
-                <Pressable style={styles.drawerCloseIcon} onPress={closeMenu}>
+                <TouchableHighlight style={styles.drawerCloseIcon} onPress={closeMenu} underlayColor='#fff'>
                     <Close height={18} width={18}/>
-                </Pressable>
+                </TouchableHighlight>
             </View>
 
             <DrawerItem 
