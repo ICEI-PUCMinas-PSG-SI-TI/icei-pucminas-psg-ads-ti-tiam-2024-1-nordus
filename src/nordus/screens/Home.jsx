@@ -97,7 +97,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "top",
-    paddingBottom: 60,
   },
   contentInformation: {
     flex: 1,
@@ -133,7 +132,7 @@ const styles = StyleSheet.create({
     width: "50%",
     borderRadius: 20,
     position: "absolute",
-    bottom: 90,
+    bottom: 30,
     zIndex: 50,
     flex: 1,
     justifyContent: "center",
