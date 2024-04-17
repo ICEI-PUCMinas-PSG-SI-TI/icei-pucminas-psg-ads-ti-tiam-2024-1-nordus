@@ -14,6 +14,9 @@ import Colors from "../assets/util/Colors";
 import Input from "../components/Input";
 import Logo from "../components/Logo";
 import { useNavigation } from "@react-navigation/native";
+import { auth } from "../FirebaseConfig";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"; // Corrigido a importação do método createUserWithEmailAndPassword
+import { getFirestore, collection, addDoc } from "firebase/firestore"; // Corrigido a importação de firestore
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -23,22 +26,44 @@ export default function Register() {
     password: "",
   });
 
-  const [logoVisible, setLogoVisible] = useState(true);
 
   const handleInputChange = (key, value) => {
-    //Atualiza o estado do formulário quando um campo é alterado
     setFormData({ ...formData, [key]: value });
   };
 
+  const auth = getAuth(); // Corrigido para chamar a função getAuth
+  const firestore = getFirestore(); // Adicionado
+
   const handleRegister = () => {
-    //extrai os valores do estado e exibe (temporário)
     const { name, phoneNumber, email, password } = formData;
-    alert(name);
-    alert(phoneNumber);
-    alert(email);
-    alert(password);
+    if (name && phoneNumber && email && password) {
+      createUserWithEmailAndPassword(auth, email, password) // Corrigido para chamar o método corretamente
+        .then((res) => {
+          addDoc(collection(firestore, "users"), { // Corrigido para adicionar um documento na coleção "users"
+            id: res.user.uid,
+            name,
+            phoneNumber,
+            email,
+            password,
+          })
+          .then(() => {
+            alert("Usuário cadastrado!");
+            navigation.navigate("Login"); // Navegar para a tela de login após o cadastro
+          })
+          .catch((error) => {
+            console.error("Erro ao adicionar usuário: ", error);
+            alert("Usuário não cadastrado");
+          });
+        })
+        .catch((error) => {
+          console.error("Erro ao criar usuário: ", error);
+          alert("Usuário não pode ser cadastrado");
+        });
+    }
   };
 
+
+  const [logoVisible, setLogoVisible] = useState(true);
   const navigation = useNavigation();
 
   const keyboardDidShow = () => {
