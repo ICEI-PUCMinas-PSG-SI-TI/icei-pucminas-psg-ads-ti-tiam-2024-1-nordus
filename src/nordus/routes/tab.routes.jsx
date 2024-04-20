@@ -3,6 +3,8 @@ import Home from "../screens/Home";
 import Profile from "../screens/Profile";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
+import Assinaturas from '../screens/others/Assinaturas'
+import Agendamento from '../screens/others/Agendamento'
 import { SvgUri } from 'react-native';
 import { Header } from "react-native/Libraries/NewAppScreen";
 
@@ -45,8 +47,8 @@ export function TabRoutes(){
             }}
             />
              <Tab.Screen
-            name="Register"
-            component={Register}
+            name="Agendamento"
+            component={Agendamento}
             options={{
                 tabBarIcon:({focused}) => {
                     if(focused){
@@ -58,8 +60,8 @@ export function TabRoutes(){
             />
 
 <Tab.Screen
-            name="Login"
-            component={Login}
+            name="Assinaturas"
+            component={Assinaturas}
             options={{
                 tabBarIcon:({focused}) => {
                     if(focused){
