@@ -27,8 +27,9 @@ export default function Slide({arr}) {
             onMomentumScrollEnd={changeIndex}
             snapToStart={true}
             renderItem={({item}) => (  
-                  <Image style={{width:width, height:230}} source={{uri:item.url}}/>  
+                  <Image style={{width:width, height:230}} source={item.url}/>  
             )}
+            keyExtractor={(item) => item.id}
           />
 
           <Paginator arr={arr} currentIndex={index} />
