@@ -1,9 +1,8 @@
 import { DrawerContentScrollView, createDrawerNavigator, DrawerItem, navigation } from '@react-navigation/drawer';
 import { Linking, Alert, View, Text, Pressable, StyleSheet, Image, TouchableHighlight } from 'react-native';
 import { Dimensions } from 'react-native';
-
+import { useState, useEffect } from 'react';
 import Colors from '../assets/util/Colors';
-import Home from '../screens/Home'
 import Header from '../components/Header';
 
 import Spotify from '../assets/icons/icon-spotify-dark.svg';
@@ -13,6 +12,12 @@ import Whatsapp from '../assets/icons/icon-whatsapp-dark.svg';
 import Email from '../assets/icons/icon-email-dark.svg';
 import Logo from '../assets/nordus-horizontal.png'
 import Close from '../assets/icons/icon-close.svg';
+import { TabRoutes } from './tab.routes';
+
+
+import React from 'react';
+import { StackRoutes } from './stack.routes';
+
 
 const Drawer = createDrawerNavigator();
 
@@ -26,53 +31,44 @@ const openURL = async (url) => {
 }
 
 export function DrawerRoutes() {
+    const [screenAtual, setScreenAtual] = useState('Home');
+
     return (
         <Drawer.Navigator
-            initialRouteName='Home'
             screenOptions={{
                 drawerStyle: {
                   width: Dimensions.get('window').width / 1.3,
                 },
               }}
-            drawerContent={(props) => <CustomDrawer {...props} />}>
+            drawerContent={(props) => (<CustomDrawer {...props} screenAtual={screenAtual} setScreenAtual={setScreenAtual} />)}>
 
-            <Drawer.Screen name='Serviços' component={Home}  
+            <Drawer.Screen name='Tab' component={TabRoutes}
             options={{
                 header: ({ navigation }) => <Header navigation={navigation} />,
             }} />
-            <Drawer.Screen name='Patrocinadores' component={Home}  
+
+            <Drawer.Screen name='Stack' component={StackRoutes}
             options={{
                 header: ({ navigation }) => <Header navigation={navigation} />,
             }} />
-            <Drawer.Screen name='Produtos' component={Home}  
-            options={{
-                header: ({ navigation }) => <Header navigation={navigation} />,
-            }} />
-            <Drawer.Screen name='Assinaturas' component={Home}  
-            options={{
-                header: ({ navigation }) => <Header navigation={navigation} />,
-            }} />
-            <Drawer.Screen name='Equipe' component={Home}  
-            options={{
-                header: ({ navigation }) => <Header navigation={navigation} />,
-            }} />     
+
 
         </Drawer.Navigator>
     );
 }
 
-const CustomDrawer = (props) => {
-    const {routeNames, index } = props.state;
-    const focused = routeNames[index];
+const CustomDrawer = ({navigation, screenAtual, setScreenAtual}) => {
 
     const closeMenu = () => {
-        props.navigation.closeDrawer();
+        navigation.closeDrawer();
     };
 
     return(
-        <DrawerContentScrollView {...props} contentContainerStyle={styles.drawerContent}>
+        <DrawerContentScrollView {...navigation} contentContainerStyle={styles.drawerContent}>
             <View style={styles.drawerHeader}>
-                <Image source={Logo}  style={{width: 110, height: 30}} />
+                <Pressable onPress={()=> {navigation.navigate('Tab', { screen: 'Home' }); setScreenAtual('Home'); }}>
+                    <Image source={Logo} style={{width: 110, height: 30}}/>
+                </Pressable>
                 <TouchableHighlight style={styles.drawerCloseIcon} onPress={closeMenu} underlayColor='#fff'>
                     <Close height={18} width={18}/>
                 </TouchableHighlight>
@@ -80,51 +76,51 @@ const CustomDrawer = (props) => {
 
             <DrawerItem 
                 label={'Serviços'} 
-                onPress={()=> {props.navigation.navigate("Serviços")}}
-                activeTintColor={Colors.TANGERINE} 
+                onPress={()=> {navigation.navigate('Tab', { screen: 'Agendamento' }); setScreenAtual('Agendamento'); }}
+                activeTintColor={Colors.BLACK} 
                 inactiveTintColor={Colors.BLACK}
                 activeBackgroundColor={Colors.WHITE_SMOKE} 
-                focused={focused == 'Serviços'}
+                focused={screenAtual == 'Agendamento'}
                 style={styles.drawerItemWrapper}
                 labelStyle={styles.drawerItem}
              />
             <DrawerItem 
                 label={'Patrocinadores'} 
-                onPress={()=> {props.navigation.navigate("Patrocinadores")}}
-                activeTintColor={Colors.TANGERINE} 
+                onPress={()=> {navigation.navigate('Stack', { screen: 'Patrocinadores' }); setScreenAtual('Patrocinadores'); }}
+                activeTintColor={Colors.BLACK} 
                 inactiveTintColor={Colors.BLACK}
                 activeBackgroundColor={Colors.WHITE_SMOKE} 
-                focused={focused == 'Patrocinadores'}
+                focused={screenAtual == 'Patrocinadores'}
                 style={styles.drawerItemWrapper}
                 labelStyle={styles.drawerItem}
              />
             <DrawerItem 
                 label={'Produtos'} 
-                onPress={()=> {props.navigation.navigate("Produtos")}}
-                activeTintColor={Colors.TANGERINE} 
+                onPress={()=> {navigation.navigate('Stack', { screen: 'Produtos' }); setScreenAtual('Produtos'); }}
+                activeTintColor={Colors.BLACK} 
                 inactiveTintColor={Colors.BLACK}
                 activeBackgroundColor={Colors.WHITE_SMOKE} 
-                focused={focused == 'Produtos'}
+                focused={screenAtual == 'Produtos'}
                 style={styles.drawerItemWrapper}
                 labelStyle={styles.drawerItem}
              />
             <DrawerItem 
                 label={'Assinaturas'} 
-                onPress={()=> {props.navigation.navigate("Assinaturas")}}
-                activeTintColor={Colors.TANGERINE} 
+                onPress={()=> {navigation.navigate('Tab', { screen: 'Assinaturas' }); setScreenAtual('Assinaturas'); }}
+                activeTintColor={Colors.BLACK} 
                 inactiveTintColor={Colors.BLACK}
                 activeBackgroundColor={Colors.WHITE_SMOKE} 
-                focused={focused == 'Assinaturas'}
+                focused={screenAtual == 'Assinaturas'}
                 style={styles.drawerItemWrapper}
                 labelStyle={styles.drawerItem}
              />
             <DrawerItem 
                 label={'Equipe'} 
-                onPress={()=> {props.navigation.navigate("Equipe")}}
-                activeTintColor={Colors.TANGERINE} 
+                onPress={()=> {navigation.navigate('Stack', { screen: 'Equipe' }); setScreenAtual('Equipe'); }}
+                activeTintColor={Colors.BLACK} 
                 inactiveTintColor={Colors.BLACK}
                 activeBackgroundColor={Colors.WHITE_SMOKE} 
-                focused={focused == 'Equipe'}
+                focused={screenAtual == 'Equipe'}
                 style={styles.drawerItemWrapper}
                 labelStyle={styles.drawerItem}
              />
