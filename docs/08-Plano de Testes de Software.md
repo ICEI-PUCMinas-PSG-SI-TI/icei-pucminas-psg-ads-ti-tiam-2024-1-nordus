@@ -34,16 +34,6 @@ Passos:<br>
 
 #### Resultado Esperado: O aplicativo exibe uma mensagem de erro indicando que o formato do e-mail é inválido e não permite o registro.
 
-## Teste de Registro com Senhas Diferentes
-### Objetivo: Verificar se o aplicativo valida corretamente a confirmação de senha durante o registro.
-Passos:<br>
-1° Acessar a página de registro do aplicativo.<br>
-2° Preencher o formulário de registro com senhas diferentes nos campos de senha e confirmação de senha.<br>
-3°Tentar enviar o formulário.<br>
-
-#### Resultado Esperado: O aplicativo exibe uma mensagem de erro indicando que as senhas não coincidem e não permite o registro
-
-
 # Testes de Login
 ## Teste de Login Básico
 ### Objetivo: Verificar se um usuário pode fazer login com sucesso fornecendo credenciais válidas.
