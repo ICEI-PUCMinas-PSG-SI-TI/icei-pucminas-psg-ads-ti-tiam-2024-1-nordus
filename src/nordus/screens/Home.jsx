@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, SafeAreaView, Linking, Pressable, TouchableHighlight} from "react-native";
+import { StyleSheet, Text, View, ScrollView, Linking, Pressable, TouchableHighlight} from "react-native";
 
 import Colors from "../assets/util/Colors";
 
@@ -62,7 +62,7 @@ export default function Home() {
 }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
     <StatusBar
       barStyle="dark-content"
       backgroundColor="#f5f5f5"
@@ -110,20 +110,23 @@ export default function Home() {
             <Email height={26} width={26}/>
           </Pressable>
         </View>
-      </View>
 
-      <TouchableHighlight underlayColor='#d96541' style={styles.button} onPress={()=> {navigation.navigate('Tab', { screen: 'Assinaturas' })}}>
+
+
+      </View>
+      <TouchableHighlight underlayColor='#d96541' style={styles.button} onPress={()=> {navigation.navigate('Tab', { screen: 'Agendamento' })}}>
         <Text style={styles.buttonText}>Agendar</Text>
       </TouchableHighlight>
-    </SafeAreaView>
+      
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     alignItems: "center",
-    justifyContent: "top",
+    justifyContent: "flex-start", 
     backgroundColor: Colors.BLACK,
     paddingBottom: 27,
   },
@@ -162,6 +165,7 @@ const styles = StyleSheet.create({
     width: "50%",
     borderRadius: 20,
     justifyContent: "center",
+    marginTop: 20
   },
   buttonText: {
     fontWeight: "400",
