@@ -4,10 +4,14 @@ import {DrawerRoutes} from "./drawer.routes"
 import { TabRoutes } from "./tab.routes";
 
 
-export function Routes () {
+export function Routes ({ isUserLoggedIn, setIsUserLoggedIn }) {
     return (
         <NavigationContainer>
-            <DrawerRoutes/>
+            {isUserLoggedIn ? (
+                <DrawerRoutes/>
+            ) : (
+                <StackRoutes setIsUserLoggedIn={setIsUserLoggedIn} />
+            )}        
         </NavigationContainer>
     )
 }
