@@ -17,7 +17,8 @@ import { useNavigation } from "@react-navigation/native";
 import { auth } from "../FirebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
-export default function Login() {
+export default function Login({ setIsUserLoggedIn }) {
+
   const [formData, setFormData] = useState({
     login: "",
     password: "",
@@ -38,8 +39,11 @@ export default function Login() {
         formData.login,
         formData.password
       );
+      setIsUserLoggedIn(true);
+
       console.log(response);
-      navigation.navigate("Home");
+      //navigation.navigate("Home");
+
     } catch (error) {
       console.log(error);
       Alert.alert("Erro de Login", "Por favor, verifique seu email e senha.");
@@ -99,11 +103,6 @@ export default function Login() {
             >
               <Text style={[styles.text, styles.boldText, styles.centeredText]}>
                 Cadastrar
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.text, styles.centeredText]}>
-              <Text style={[styles.text, styles.centeredText, styles.linkItem]}>
-                Entrar sem Login
               </Text>
             </TouchableOpacity>
           </View>

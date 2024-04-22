@@ -8,14 +8,15 @@ import Equipe from '../screens/others/Equipe'
 
 const { Screen, Navigator } = createNativeStackNavigator();
 
-export function StackRoutes() {
+export function StackRoutes({setIsUserLoggedIn}) {
   return (
     <Navigator>
       <Screen 
         name="Login" 
-        component={Login} 
         options={{ headerShown: false }} 
-      />
+      >
+        {() => <Login setIsUserLoggedIn={setIsUserLoggedIn} />}
+      </Screen>
       <Screen 
         name="Register" 
         component={Register} 
