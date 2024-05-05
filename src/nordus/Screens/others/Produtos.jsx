@@ -1,24 +1,46 @@
 import React from "react";
-import { SafeAreaView, Text, StyleSheet } from "react-native";
-
+import { SafeAreaView, ScrollView, Text, StyleSheet, Image, View } from "react-native";
+import Colors from "../../assets/util/Colors";
+import ProductItem from "../../components/ProductItem";
 export default function Produto() {
   return (
-    <SafeAreaView style={styles.container} >
-      <Text style={styles.text}>Produtos</Text>
-    </SafeAreaView>
+    <ScrollView style={styles.container} >
+      <Text style={styles.title}>Produtos</Text>
+      
+      <View style={styles.products}>
+          <ProductItem name="Pomada Capilar King" price="20,00"></ProductItem>
+          <ProductItem name="Pomada Capilar King" price="20,00"></ProductItem>
+          <ProductItem name="Pomada Capilar King" price="20,00"></ProductItem>
+          <ProductItem name="Pomada Capilar King" price="20,00"></ProductItem>
+          <ProductItem name="Pomada Capilar King" price="20,00"></ProductItem>
+          <ProductItem name="Pomada Capilar King" price="20,00"></ProductItem>
+
+      </View>
+      
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#2e2e2e',
+    backgroundColor: Colors.BLACK,
     flex: 1,
-    justifyContent: 'center',
-    alignItems: "center"
+    paddingHorizontal: 30
   },
-  text: {
-    fontSize: 42,
-    color: '#fff'
-  }
+  title: {
+    fontSize: 24,
+    fontWeight: '300',
+    color: '#fff',
+    marginTop: 10,
+    paddingVertical: 20,
+    paddingLeft:12,
+  },
+  products: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 25,
+    justifyContent: 'center'
+  },
+
 })
  
