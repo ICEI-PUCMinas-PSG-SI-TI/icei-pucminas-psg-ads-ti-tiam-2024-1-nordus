@@ -1,109 +1,128 @@
 import React from "react";
 import Colors from "../assets/util/Colors";
-import { View, TextInput, SafeAreaView, Text, TouchableOpacity, StyleSheet, } from "react-native";
+import Divider from '../components/Divider'
+import Ads from '../components/Ads'
+
+import { View, TextInput, SafeAreaView, Text, TouchableHighlight, StyleSheet, } from "react-native";
+import Exit from '../assets/icons/exit-icon.svg'
 
 export default function Profile() {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>Meus Dados</Text>
+      <Ads></Ads>
+      <View style={styles.options}>
+        <View style={styles.header}>
+          <Text style={styles.title}>
+            Felipe Silva
+          </Text>
+          <TouchableHighlight>
+            <Exit/>
+          </TouchableHighlight>
+        </View>
+        <Divider color={"#353535"}/>
+        <View>
+          <Text style={styles.subtitle}>
+            Meus dados
+          </Text>
+          <Text style={styles.description}>
+            Acesse informações pessoais, como e-mail, nome...
+          </Text>
+        </View>
+        <Divider color={"#353535"}/>
+        <View>
+          <Text style={styles.subtitle}>
+          Minha assinatura
+          </Text>
+          <Text style={styles.description}>
+          Acesse para entender os preços e os beneficios
+          </Text>
+        </View>
+        <Divider color={"#353535"}/>
+        <View>
+          <Text style={styles.subtitle}>
+          Histórico
+          </Text>
+          <Text style={styles.description}>
+          Veja seus agendamentos
+          </Text>
+        </View>
+        <Divider color={"#353535"}/>
+        <View>
+          <Text style={styles.subtitle}>
+          Avaliar o app
+          </Text>
+          <Text style={styles.description}>
+          Comente sua opinião ou informe possiveis bugs
+                    </Text>
+        </View>
+        <Divider color={"#353535"}/>
 
-      <Text style={styles.textInput}>Nome*</Text>
+      </View>
+      
+      <View style={styles.aboutApp}>
+        <Text style={styles.aboutAppText}>
+          Desenvolvido por Triad Software.
+        </Text>
+        <View>
+        <Text style={styles.aboutAppText}>
+            Nordus app
+          </Text>
+          <Text style={styles.aboutAppText}>
+            Versão: 1.3
+          </Text>
+        </View>
 
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Felipe Champs"
-          placeholderTextColor={Colors.SILVER}
-        ></TextInput>
       </View>
 
-      <Text style={styles.textInput}>Telefone*</Text>
-
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="(31) 98451-1512"
-          placeholderTextColor={Colors.SILVER}
-        ></TextInput>
-      </View>
-
-      <Text style={styles.textInput}>Email</Text>
-
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="felipechamp@gmail.com"
-          placeholderTextColor={Colors.SILVER}
-        ></TextInput>
-      </View>
-
-      <Text style={styles.textInput}>Senha*</Text>
-
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="21/11/1998"
-          placeholderTextColor={Colors.SILVER}
-        ></TextInput>
-      </View>
-
-      <View style={styles.containerButton}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.textButton}>Salvar</Text>
-        </TouchableOpacity>
-      </View>
     </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    height: "100%",
+    flex:1,
     backgroundColor: Colors.BLACK,
+    paddingVertical: 50,
+    paddingHorizontal: 20,
+    gap: 30
   },
-  text: {
-    fontSize: 32,
-    textAlign: "left",
-    paddingLeft: 18,
-    fontWeight: "400",
-    color: Colors.WHITE,
+  header: {
+    flexDirection:'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },  
+  options: {
+    gap: 16,
+    paddingHorizontal: 20,
   },
-  textInput: {
-    fontSize: 16,
-    textAlign: "left",
-    paddingLeft: 35,
-    paddingTop: 12,
-    paddingBottom: 6,
-    fontWeight: "300",
-    color: Colors.SILVER,
+  aboutApp:{
+    position: 'absolute',
+    color: '#fff',
+    bottom: 16,
+    flexDirection: 'row',
+    gap: 30,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    alignSelf: 'center'
+  },  
+  aboutAppText: {
+    color: '#fff', 
+    fontWeight: '100', 
+    fontSize: 12
   },
-  input: {
-    width: "85%",
-    height: 54,
-    borderRadius: 18,
-    fontSize: 16,
-    backgroundColor: Colors.DARKER_GRAY,
-    paddingLeft: 25,
-    marginBottom: 3,
+  title: {
+    color: '#fff',
+    fontSize: 22,
+    fontWeight: '500'
   },
-  inputContainer: {
-    alignItems: "center",
+  subtitle: {
+    color: '#fff',
+    fontSize: 16
   },
-  containerButton: {
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: "12%",
-  },
-  button: {
-    backgroundColor: Colors.TANGERINE,
-    width: "50%",
-    padding: 20,
-    borderRadius: 25,
-  },
-  textButton: {
-    color: "white",
-    textAlign: "center",
-    fontSize: 18,
-    fontWeight: "500",
-  },
-});
+  description: {
+    color: '#fff',
+    fontSize: 12,
+    fontWeight: '300'
+
+  }
+})
+  
