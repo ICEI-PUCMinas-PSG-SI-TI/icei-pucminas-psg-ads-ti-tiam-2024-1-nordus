@@ -14,7 +14,6 @@ export default function Produto() {
           <ProductItem name="Pomada Capilar King" price="20,00"></ProductItem>
           <ProductItem name="Pomada Capilar King" price="20,00"></ProductItem>
           <ProductItem name="Pomada Capilar King" price="20,00"></ProductItem>
-          <ProductItem name="Pomada Capilar King" price="20,00"></ProductItem>
 
       </View>
       
@@ -26,22 +25,20 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.BLACK,
     flex: 1,
- 
+    paddingHorizontal: 30
   },
   title: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: '300',
     color: '#fff',
-    marginTop: 90,
-    paddingVertical: 30,
-    paddingLeft: 55,
-    alignSelf: 'flex-start'
+    marginTop: 10,
+    paddingVertical: 20,
+    paddingLeft:12,
   },
   products: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 25,
-    flex: 1,
     justifyContent: 'center'
   },
 

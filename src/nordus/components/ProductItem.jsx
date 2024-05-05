@@ -16,22 +16,22 @@ export default function ProductItem({imageUrl, name, price }) {
 
 const styles = StyleSheet.create({
     productItem: {
-        height: 180,
-        width: 140,
+        height: 190,
+        width: 150,
         gap: 8,
       },
       productImage: {
         position: 'relative'
       },
       image: {
-        height: 135,
-        width: 135,
+        height: 145,
+        width: 145,
         backgroundColor: Colors.DARK_GRAY,
         zIndex: 1
       },
       imageShadow: {
-        height: 135,
-        width: 135,
+        height: 145,
+        width: 145,
         backgroundColor: Colors.DARKER_GRAY,
         position: 'absolute',
         left: 7,
