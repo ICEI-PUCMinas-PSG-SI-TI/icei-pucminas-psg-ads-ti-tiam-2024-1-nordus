@@ -1,17 +1,23 @@
-import { StyleSheet, View, Text} from "react-native";
+import { StyleSheet, View, Text, Image} from "react-native";
 
-export default function ProductItem({imageUrl, name, price }) {
+export default function ProductItem({imageURL, externalURL, name, price }) {
+  
   return (
-    <View style={styles.productItem}>
-    <View style={styles.productImage}>
-      <View style={styles.image}></View>
-      <View style={styles.imageShadow}></View>
-    </View>
-    <View>
-      <Text  numberOfLines={1} ellipsizeMode="tail" style={styles.productName}>{name}</Text>            
-      <Text style={styles.productPrice}>R$ {price}</Text>            
-    </View>
-  </View>  );
+    <View >
+      <View style={styles.productItem}>
+        <View style={styles.productImage}>
+
+            <Image source={{uri: imageURL}} style={styles.image}></Image>
+
+          <View style={styles.imageShadow}></View>
+        </View>
+        <View>
+          <Text  numberOfLines={1} ellipsizeMode="tail" style={styles.productName}>{name}</Text>            
+          <Text style={styles.productPrice}>R$ {price}</Text>            
+        </View>
+      </View>  
+  </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -26,7 +32,6 @@ const styles = StyleSheet.create({
       image: {
         height: 145,
         width: 145,
-        backgroundColor: Colors.DARK_GRAY,
         zIndex: 1
       },
       imageShadow: {

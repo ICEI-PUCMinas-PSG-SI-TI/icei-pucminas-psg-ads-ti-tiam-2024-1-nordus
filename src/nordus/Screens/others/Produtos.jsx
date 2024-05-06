@@ -1,23 +1,45 @@
-import React from "react";
-import { SafeAreaView, ScrollView, Text, StyleSheet, Image, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Pressable, ScrollView, Text, StyleSheet, Image, View } from "react-native";
 import Colors from "../../assets/util/Colors";
 import ProductItem from "../../components/ProductItem";
-export default function Produto() {
-  return (
-    <ScrollView style={styles.container} >
-      <Text style={styles.title}>Produtos</Text>
-      
-      <View style={styles.products}>
-          <ProductItem name="Pomada Capilar King" price="20,00"></ProductItem>
-          <ProductItem name="Pomada Capilar King" price="20,00"></ProductItem>
-          <ProductItem name="Pomada Capilar King" price="20,00"></ProductItem>
-          <ProductItem name="Pomada Capilar King" price="20,00"></ProductItem>
-          <ProductItem name="Pomada Capilar King" price="20,00"></ProductItem>
-          <ProductItem name="Pomada Capilar King" price="20,00"></ProductItem>
 
-      </View>
+import {FIREBASE_DB} from '../../FirebaseConfig'
+import {collection, getDocs} from 'firebase/firestore'
+
+export default function Produto() {
+  const [products, setProducts] = useState([]); 
+
+  const getProducts = async () => {
+    console.log("Pesquisando produtos.")
+    const query = await getDocs(collection(FIREBASE_DB, "products"));
+    const productsData = [];
+
+    query.forEach((p) => {
+      productsData.push(p.data());
+    });
+    console.log("Pesquisa concluída.")
+    setProducts(productsData); 
+  }
+
+  useEffect(()=> {
+    getProducts();
+  },[])
+
+  return (
+    <View style={styles.container} >
+     <Pressable onPress={getProducts}>
+        <Text style={styles.title}>Produtos</Text>
+      </Pressable>
       
-    </ScrollView>
+      <ScrollView contentContainerStyle={styles.productsList}>
+        {
+          products.map((product, index) => (
+            <ProductItem key={index} name={product.name} price={product.price} imageURL={product.URL} externalURL={product.externalURL} />
+          ))
+        }
+      </ScrollView>
+      
+    </View>
   );
 }
 
@@ -25,7 +47,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.BLACK,
     flex: 1,
-    paddingHorizontal: 30
+    paddingHorizontal: 30,
+    justifyContent: 'center'
   },
   title: {
     fontSize: 24,
@@ -35,11 +58,11 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingLeft:12,
   },
-  products: {
+  productsList: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 25,
-    justifyContent: 'center'
+    justifyContent: "center",
   },
 
 })
