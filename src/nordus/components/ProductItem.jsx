@@ -1,9 +1,17 @@
-import { StyleSheet, View, Text, Image} from "react-native";
+import { StyleSheet, View, Text, Image, Linking, Pressable} from "react-native";
 
 export default function ProductItem({imageURL, externalURL, name, price }) {
   
+  const openURL = async (url) => {
+    const suporta = await Linking.canOpenURL(url);
+    if(suporta) {
+        await Linking.openURL(url);
+    } else {
+        Alert.alert('nao sei abrir')
+    }
+}
   return (
-    <View >
+    <Pressable onPress={() => openURL(externalURL)} >
       <View style={styles.productItem}>
         <View style={styles.productImage}>
 
@@ -16,7 +24,7 @@ export default function ProductItem({imageURL, externalURL, name, price }) {
           <Text style={styles.productPrice}>R$ {price}</Text>            
         </View>
       </View>  
-  </View>
+  </Pressable>
   );
 }
 
