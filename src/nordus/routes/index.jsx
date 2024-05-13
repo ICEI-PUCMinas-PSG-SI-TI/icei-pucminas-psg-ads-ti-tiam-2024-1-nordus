@@ -1,10 +1,17 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { StackRoutes } from "./stack.routes";
+import {StackRoutes} from "./stack.routes"
+import {DrawerRoutes} from "./drawer.routes"
+import { TabRoutes } from "./tab.routes";
 
-export function Routes() {
-  return (
-    <NavigationContainer>
-      <StackRoutes />
-    </NavigationContainer>
-  );
+
+export function Routes ({ isUserLoggedIn, setIsUserLoggedIn }) {
+    return (
+        <NavigationContainer>
+            {isUserLoggedIn ? (
+                <DrawerRoutes/>
+            ) : (
+                <StackRoutes setIsUserLoggedIn={setIsUserLoggedIn} />
+            )}        
+        </NavigationContainer>
+    )
 }
