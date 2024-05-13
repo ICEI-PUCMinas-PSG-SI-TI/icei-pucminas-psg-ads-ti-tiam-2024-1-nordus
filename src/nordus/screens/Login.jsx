@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -16,6 +16,7 @@ import Logo from "../components/Logo";
 import { useNavigation } from "@react-navigation/native";
 import { auth } from "../FirebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Login({ setIsUserLoggedIn }) {
 
@@ -26,6 +27,21 @@ export default function Login({ setIsUserLoggedIn }) {
 
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    checkLoginStatus();
+  }, []);
+
+  const checkLoginStatus = async () => {
+    try {
+      const userToken = await AsyncStorage.getItem("userToken");
+      if (userToken) {
+        setIsUserLoggedIn(true);
+      }
+    } catch (error) {
+      console.log("Erro ao verificar status de login:", error);
+    }
+  };
 
   const handleInputChange = (key, value) => {
     setFormData({ ...formData, [key]: value });
@@ -39,13 +55,10 @@ export default function Login({ setIsUserLoggedIn }) {
         formData.login,
         formData.password
       );
+      await AsyncStorage.setItem("userToken", response.user.uid);
       setIsUserLoggedIn(true);
-
-      console.log(response);
-      //navigation.navigate("Home");
-
     } catch (error) {
-      console.log(error);
+      console.log("Erro ao fazer login:", error);
       Alert.alert("Erro de Login", "Por favor, verifique seu email e senha.");
     } finally {
       setLoading(false);
@@ -173,8 +186,5 @@ const styles = StyleSheet.create({
   },
   boldText: {
     fontWeight: "bold",
-  },
-  linkItem: {
-    marginTop: 10,
   },
 });
