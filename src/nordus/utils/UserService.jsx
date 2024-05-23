@@ -7,10 +7,10 @@ export const getUser = async (id) => {
   try {
     const usersCollection = collection(FIREBASE_DB, "users");
     const q = query(usersCollection, where("id", "==", id));
-    const queryResposne = await getDocs(q);
+    const queryResponse = await getDocs(q);
 
-    if (!queryResposne.empty) {
-      const user = queryResposne.docs[0].data();
+    if (!queryResponse.empty) {
+      const user = queryResponse.docs[0].data();
       return user;
     } else {
       console.log("Nenhum documento encontrado para o ID fornecido: " + id);
