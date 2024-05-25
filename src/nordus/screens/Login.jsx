@@ -56,6 +56,7 @@ export default function Login({ setIsUserLoggedIn }) {
         formData.password
       );
       await AsyncStorage.setItem("userToken", response.user.uid);
+      await AsyncStorage.setItem("userData", toString(response.user));
       setIsUserLoggedIn(true);
     } catch (error) {
       console.log("Erro ao fazer login:", error);

@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Colors from "../assets/util/Colors";
 import Divider from '../components/Divider'
 import Ads from '../components/Ads'
 
-import { View, TextInput, SafeAreaView, Text, TouchableHighlight, StyleSheet, } from "react-native";
+import {getUser, logoutUser} from '../utils/UserService';
+import { useState } from "react";
+import { View, TextInput, SafeAreaView, Text, TouchableHighlight, StyleSheet, Touchable } from "react-native";
 import Exit from '../assets/icons/exit-icon.svg'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function Profile() {
+export default function Profile({setIsUserLoggedIn}) {
+
+  const [user, setUser] = useState('');
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: Colors.BLACK}} >
       <View style={styles.container}>
@@ -14,9 +20,9 @@ export default function Profile() {
       <View style={styles.options}>
         <View style={styles.header}>
           <Text style={styles.title}>
-            Felipe Silva
+            aaaa
           </Text>
-          <TouchableHighlight>
+          <TouchableHighlight onPressIn={()=>logoutUser(setIsUserLoggedIn)}>
             <Exit/>
           </TouchableHighlight>
         </View>

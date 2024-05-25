@@ -20,7 +20,7 @@ import IconHomePressed from "../assets/icons/icon-home-tangerine.svg"
 import Colors from "../assets/util/Colors";
 const Tab = createBottomTabNavigator();
 
-export function TabRoutes(){
+export function TabRoutes({setIsUserLoggedIn}){
     return(
         <Tab.Navigator  
         screenOptions={{
@@ -75,18 +75,30 @@ export function TabRoutes(){
 
             
 
-           <Tab.Screen
-            name="Profile"
-            component={Profile}
-            options={{
-                tabBarIcon:({focused}) => {
-                    if(focused){
-                        return <IconProfilePressed/>
+            <Tab.Screen
+                name="Profile"
+                options={{
+                tabBarIcon: ({ focused }) => {
+                    if (focused) {
+                    return <IconProfilePressed />;
                     }
-                    return <IconProfile/>
-                }
-            }}
-            />
+                    return <IconProfile />;
+                },
+                }}
+            >
+            {() => <Profile setIsUserLoggedIn={setIsUserLoggedIn}/>}
+            </Tab.Screen>
         </Tab.Navigator>
     )
 }
+
+
+/*
+      <Screen 
+        name="Login" 
+        options={{ headerShown: false }} 
+      >
+        {() => <Login setIsUserLoggedIn={setIsUserLoggedIn} />}
+      </Screen>
+
+*/

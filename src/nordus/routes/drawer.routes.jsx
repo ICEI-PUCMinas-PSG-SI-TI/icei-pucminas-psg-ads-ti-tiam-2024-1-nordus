@@ -30,7 +30,7 @@ const openURL = async (url) => {
     }
 }
 
-export function DrawerRoutes() {
+export function DrawerRoutes({setIsUserLoggedIn}) {
     const [screenAtual, setScreenAtual] = useState('Home');
 
     return (
@@ -42,16 +42,35 @@ export function DrawerRoutes() {
               }}
             drawerContent={(props) => (<CustomDrawer {...props} screenAtual={screenAtual} setScreenAtual={setScreenAtual} />)}>
 
-            <Drawer.Screen name='Tab' component={TabRoutes}
+            <Drawer.Screen name='Tab'
             options={{
                 header: ({ navigation }) => <Header navigation={navigation} />,
-            }} />
+            }}>
+            {() => <TabRoutes setIsUserLoggedIn={setIsUserLoggedIn} />}
+            </Drawer.Screen>
 
             <Drawer.Screen name='Stack' component={StackRoutes}
             options={{
                 header: ({ navigation }) => <Header navigation={navigation} />,
             }} />
 
+
+{/* 
+        <Tab.Screen
+                name="Profile"
+                options={{
+                tabBarIcon: ({ focused }) => {
+                    if (focused) {
+                    return <IconProfilePressed />;
+                    }
+                    return <IconProfile />;
+                },
+                }}
+            >
+            {() => <Profile setIsUserLoggedIn={setIsUserLoggedIn} />}
+            </Tab.Screen>
+
+*/}
 
         </Drawer.Navigator>
     );

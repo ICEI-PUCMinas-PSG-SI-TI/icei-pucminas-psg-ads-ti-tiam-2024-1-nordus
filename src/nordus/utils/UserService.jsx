@@ -23,7 +23,7 @@ export const getUser = async (id) => {
 };
 
 //TODO: Implementar função de logout do usuário
-export const logoutUser = async () => {
+export const logoutUser = async (setIsUserLoggedIn) => {
   await AsyncStorage.removeItem("userToken");
   await auth.signOut();
   setIsUserLoggedIn(false);
