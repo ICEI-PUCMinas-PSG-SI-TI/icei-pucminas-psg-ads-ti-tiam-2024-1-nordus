@@ -1,5 +1,5 @@
 import React from "react";
-import Colors from "../assets/util/Colors";
+import Colors from "../../assets/util/Colors";
 import { View, TextInput, SafeAreaView, Text, TouchableOpacity, StyleSheet, } from "react-native";
 
 export default function MeusDados() {

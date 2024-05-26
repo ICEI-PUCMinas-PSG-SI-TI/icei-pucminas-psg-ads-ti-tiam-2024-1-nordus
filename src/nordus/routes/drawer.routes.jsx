@@ -17,6 +17,7 @@ import { TabRoutes } from './tab.routes';
 
 import React from 'react';
 import { StackRoutes } from './stack.routes';
+import MeusDados from '../screens/others/MeusDados';
 
 
 const Drawer = createDrawerNavigator();
@@ -50,6 +51,11 @@ export function DrawerRoutes({setIsUserLoggedIn}) {
             </Drawer.Screen>
 
             <Drawer.Screen name='Stack' component={StackRoutes}
+            options={{
+                header: ({ navigation }) => <Header navigation={navigation} />,
+            }} />
+
+            <Drawer.Screen name='MeusDados' component={MeusDados}
             options={{
                 header: ({ navigation }) => <Header navigation={navigation} />,
             }} />
