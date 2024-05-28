@@ -1,43 +1,63 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Colors from "../assets/util/Colors";
 import Divider from '../components/Divider'
 import Ads from '../components/Ads'
 
-import { View, TextInput, SafeAreaView, Text, TouchableHighlight, StyleSheet, } from "react-native";
+import {getUser, logoutUser, getUserLoggedID} from '../utils/UserService';
+import { useState } from "react";
+import { View, TextInput, SafeAreaView, Text, TouchableHighlight, StyleSheet, Touchable, Pressable } from "react-native";
 import Exit from '../assets/icons/exit-icon.svg'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function Profile() {
+export default function Profile({navigation, setIsUserLoggedIn}) {
+
+  const [user, setUser] = useState('');
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const userData = await getUser();
+        setUser(userData);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: Colors.BLACK}} >
       <View style={styles.container}>
-      <Ads></Ads>
+      <Ads navigation={navigation}></Ads>
       <View style={styles.options}>
         <View style={styles.header}>
           <Text style={styles.title}>
-            Felipe Silva
+            {user.name}
           </Text>
-          <TouchableHighlight>
+          <Pressable onPressIn={()=>logoutUser(setIsUserLoggedIn)}>
             <Exit/>
-          </TouchableHighlight>
+          </Pressable>
         </View>
         <Divider color={"#353535"}/>
-        <View>
+        <Pressable onPress={() => navigation.navigate('MeusDados')}>
           <Text style={styles.subtitle}>
             Meus dados
           </Text>
           <Text style={styles.description}>
             Acesse informações pessoais, como e-mail, nome...
           </Text>
-        </View>
+        </Pressable>
         <Divider color={"#353535"}/>
-        <View>
+        <Pressable onPress={() => navigation.navigate('Assinaturas')}>
           <Text style={styles.subtitle}>
           Minha assinatura
           </Text>
           <Text style={styles.description}>
           Acesse para entender os preços e os beneficios
           </Text>
-        </View>
+        </Pressable>
         <Divider color={"#353535"}/>
         <View>
           <Text style={styles.subtitle}>

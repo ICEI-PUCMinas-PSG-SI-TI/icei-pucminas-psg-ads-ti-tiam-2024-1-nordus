@@ -8,7 +8,7 @@ export function Routes ({ isUserLoggedIn, setIsUserLoggedIn }) {
     return (
         <NavigationContainer>
             {isUserLoggedIn ? (
-                <DrawerRoutes/>
+                <DrawerRoutes setIsUserLoggedIn={setIsUserLoggedIn} />
             ) : (
                 <StackRoutes setIsUserLoggedIn={setIsUserLoggedIn} />
             )}        

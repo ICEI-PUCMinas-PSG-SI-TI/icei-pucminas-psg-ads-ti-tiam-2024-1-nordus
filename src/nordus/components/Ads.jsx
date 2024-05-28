@@ -1,7 +1,7 @@
 import { StyleSheet, View, Text, TouchableHighlight} from "react-native";
 import Colors from "../assets/util/Colors";
 
-export default function Ads() {
+export default function Ads({navigation}) {
   return (
       <View style={styles.container} >
         <Text style={styles.title}>
@@ -10,7 +10,7 @@ export default function Ads() {
         <Text style={styles.descriptions}>
         O Clube Nordus é uma opção interessante para aqueles que buscam economizar e desfrutar de um atendimento personalizado e de qualidade.
         </Text>
-        <TouchableHighlight underlayColor="#C04D2A" style={styles.button}>
+        <TouchableHighlight underlayColor="#DA5F39" onPress={()=> navigation.navigate('Assinaturas')} style={styles.button}>
             <Text style={styles.buttonText}>Conferir agora!</Text>
         </TouchableHighlight>
       </View>
@@ -23,8 +23,9 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         borderColor: Colors.TANGERINE,
         backgroundColor: Colors.WHITE,
-        gap: 12,
-        padding: 8,
+        gap: 8,
+        paddingHorizontal: 14,
+        paddingVertical: 8,
     },
     title: {
         color: Colors.TANGERINE,
@@ -32,8 +33,8 @@ const styles = StyleSheet.create({
     },
     descriptions: {
         fontSize: 14,
-        paddingHorizontal: 4,
-        textAlign: 'center',
+        paddingHorizontal: 16,
+        textAlign: 'justify',
     },
     button: {
         width: "60%",
@@ -42,9 +43,10 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         borderRadius: 8,
         justifyContent: "center",
+        elevation: 5
     },
     buttonText: {
-        fontSize: 16,
+        fontSize: 14,
         color: Colors.WHITE,
         fontWeight: '300',
         textAlign: "center",
