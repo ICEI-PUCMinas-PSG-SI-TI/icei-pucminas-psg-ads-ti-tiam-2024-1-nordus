@@ -1,8 +1,14 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import Profile from "../screens/Profile";
+
+import Login from "../screens/Login";
+import Register from "../screens/Register";
 import Assinaturas from "../screens/others/Assinaturas";
-import Agendamento from "../screens/others/Agendamento";
+import Agendamento from "../screens/others/Servicos";
+import { SvgUri } from "react-native";
+import { Header } from "react-native/Libraries/NewAppScreen";
+import Assinaturas from "../screens/others/Assinaturas";
 
 import IconProfile from "../assets/icons/icon-profile.svg";
 import IconProfilePressed from "../assets/icons/icon-profile-tangerine.svg";
