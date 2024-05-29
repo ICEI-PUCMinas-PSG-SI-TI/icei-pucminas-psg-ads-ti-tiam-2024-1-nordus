@@ -1,7 +1,7 @@
 import { Text, StyleSheet, View, FlatList, Pressable } from "react-native";
 import { useState } from "react";
-export default function Hour() {
 
+export default function Hour() {
     const arr = [
         '09:00', '09:10', '09:20', '09:30', '09:40', '09:50',
         '10:00', '10:10', '10:20', '10:30', '10:40', '10:50',
@@ -16,15 +16,36 @@ export default function Hour() {
     ];
 
     const [hour, setHour] = useState(null);
+    const [viewable, setViewble] = useState('');
+
+    function verificaHour() {
+        if( hour==viewable[0]?.item ||
+            hour==viewable[1]?.item ||
+            hour==viewable[2]?.item) {
+                return false;
+        }
+        return true;
+    }
 
     return (
         <View style={styles.container}>
             <FlatList
+                style={{width:200, height: 50}}
+                contentContainerStyle={{justifyContent: 'center'}}
+                horizontal={false}
+                onViewableItemsChanged={({viewableItems, changed}) => {
+                    setViewble(viewableItems);
+                }}
                 data={arr}
+                windowSize={5}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => (
                 <Pressable onPress={() => setHour(item)} style={styles.item}>
-                    <Text style={[{fontSize:28, color:'#9F9F9F', paddingVertical: 4}, item===hour && {color: '#fff', fontSize:32} ]}>{item}</Text>
+                    <Text style={[
+                        styles.text,
+                        item===hour && [styles.text, styles.textSelected],
+                        (viewable[1]?.item==item && verificaHour()) && [styles.text, styles.textActive]
+                        ]}>{item}</Text>
                 </Pressable>
                 )}
             />
@@ -37,8 +58,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center', 
         alignItems: 'center',
         backgroundColor: '#353535',
-        height: 130,
-        borderRadius: 20
+        height: 140,
+        borderRadius: 20,
+        paddingVertical: 14
     },
     image: {
         width: 70, 
@@ -46,9 +68,22 @@ const styles = StyleSheet.create({
         borderRadius: 100
     },
     text: {
-        color: '#fff',
+        fontSize:22, 
+        color:'#9F9F9F', 
+        paddingVertical: 4,
+        width: '100%',
+        textAlign: 'center',
+    },
+    textSelected: {
+        color: '#EA714C', 
+        fontSize:26,
+    },
+    textActive: {
+        color: '#FFF', 
+        fontSize:26
     },
     item: {
         justifyContent:'center',
+        alignItems: 'center',
     }
 });

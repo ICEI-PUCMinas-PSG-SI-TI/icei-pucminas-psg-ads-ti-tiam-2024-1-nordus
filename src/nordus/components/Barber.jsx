@@ -12,11 +12,12 @@ export default function Barber({name, uri}) {
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center', 
-        alignItems: 'center'
+        alignItems: 'center',
+        gap:4
     },
     image: {
-        width: 70, 
-        height:70, 
+        width: 65, 
+        height:65, 
         borderRadius: 100
     },
     text: {

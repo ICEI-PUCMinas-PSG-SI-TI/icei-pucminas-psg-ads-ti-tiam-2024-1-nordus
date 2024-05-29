@@ -1,63 +1,89 @@
-import React, { useState } from "react";
-import { SafeAreaView, Text, StyleSheet, View, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { SafeAreaView, Text, StyleSheet, View, ScrollView } from "react-native";
 
 import Barber from "../../components/Barber";
-import DatePicker from "react-native-modern-datepicker";
 import Hour from "../../components/Hour";
+import Calendar from "../../components/Calendar";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import { FIREBASE_DB } from "../../FirebaseConfig";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 export default function AgendamentoAdicional() {
 
-        var month = new Date().getMonth()+1;
-        var year = new Date().getFullYear();
-        var todaysDate = new Date(2024, month, 0);
-        var qntDays =  todaysDate.toString().split(' ')[2];
+  
+  
+  const [barbers, setBarbers] = useState([]);
 
-        const [data, setData] = useState(null);
+  const getBarbers = async () => {
+    
+    try {
 
-        function handleDate(dataSelecionada) {
-            setData(dataSelecionada);
-            console.log(dataSelecionada);
+      let barbersAsync = await AsyncStorage.getItem("barbers");
+      var barbersArr = barbersAsync ? JSON.parse(barbersAsync) : null;
+  
+      if(!barbersArr) {
+
+        console.log("buscando barbeiros.")
+        const usersCollection = collection(FIREBASE_DB, "users");
+        const q = query(usersCollection, where("barber", "==", true));
+        const queryResponse = await getDocs(q);
+  
+        if (!queryResponse.empty) {
+          barbersArr =  [];
+          queryResponse.docs.map(doc => 
+            {
+              let dt = doc.data();
+              barbersArr.push(dt);
+              doc.data();
+            }
+            );
+          setBarbers(barbersArr);
+        } else {
+            console.log("Nenhum barbeiro encontrado");
+          return null;
         }
+      } else {
+        console.log("barbeiros já estão armazenados.")
+        console.log(barbers)
+        return barbers;
+      }
+    } catch (error) {
+      console.log("Erro ao obter barbeiros:", error);
+      throw error;
+    }
+  };
+
+  useEffect(() => {
+    getBarbers();
+  }, []);
+
+
+
 
   return (
     <SafeAreaView style={styles.container} >
-      <View>
+      <View style={{gap:12}}>
         <Text style={{color: '#fff', fontSize: 24}}>Escolha um profissional:</Text>
-
-        <View style={{flexDirection: 'row', gap: 20, paddingVertical: 20}}>
-            <Barber name='Tiel' uri="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8fVcE4WxMXIqqndR0VGaDZMpDWNZqblRtjL3rIpLAnA&s" />
-            <Barber name='Cabral' uri="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8fVcE4WxMXIqqndR0VGaDZMpDWNZqblRtjL3rIpLAnA&s" />
-            <Barber name='Emanuel' uri="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8fVcE4WxMXIqqndR0VGaDZMpDWNZqblRtjL3rIpLAnA&s" />
+        <View style={{flexDirection: 'row', gap: 20}}>
+            {
+              barbers.map((barber, index) => (
+                <Barber name={barber.name} uri={barber.imageURL} />
+              ))
+            } 
         </View>
+      </View>
 
-        <View>
-            <View>
-                <Text style={{color: '#fff', fontSize: 20}}>Escolha uma data: </Text>
-                <DatePicker
-                mode='calendar'
-                minimumDate={year+"/"+month+"/01"}
-                maximumDate={year+"/"+month+"/"+qntDays}
-                style={{borderRadius: 20}}
-                onDateChange={handleDate}
-                options={{
-                    backgroundColor: '#353535',
-                    textHeaderColor: '#fff',
-                    textDefaultColor: '#fff',
-                    selectedTextColor: '#fff',
-                    mainColor: '#EA714C',
-                    textSecondaryColor: '#909090',
-                    borderColor: 'rgba(122, 146, 165, 0.1)',
-                    }}
-                /> 
-            </View>
+      <View style={{gap: 24}}>
+          <View style={{gap:12, height: 370, overflow: 'hidden', borderBottomEndRadius: 20, borderBottomLeftRadius: 20}}>
+              <Text style={{color: '#fff', fontSize: 20}}>Escolha uma data: </Text>
+              <Calendar/>
+          </View>
 
-            <View>
-                <Text style={{color: '#fff', fontSize: 20}}>Escolha uma horario: </Text>
-                <Hour></Hour>
-            </View>
-  
-        </View>
-    
+          <View style={{gap:12}}>
+              <Text style={{color: '#fff', fontSize: 20}}>Escolha uma horario: </Text>
+              <Hour/>
+          </View>
       </View>
     </SafeAreaView>
   );
@@ -68,8 +94,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#1A1E21',
     flex: 1,
     alignItems: "left",
-    paddingTop: 10,
+    paddingTop: 20,
     paddingHorizontal: 30,
+    gap: 18,
   },
   text: {
     fontSize: 42,
