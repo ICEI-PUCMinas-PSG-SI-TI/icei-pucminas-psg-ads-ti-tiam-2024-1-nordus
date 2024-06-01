@@ -2,20 +2,17 @@ import {StyleSheet } from "react-native";
 import { useState } from "react";
 import DatePicker from "react-native-modern-datepicker";
 
-export default function Calendar() {
+export default function Calendar({setData}) {
 
     var month = new Date().getMonth()+1;
     var year = new Date().getFullYear();
     var todaysDate = new Date(2024, month, 0);
     var qntDays =  todaysDate.toString().split(' ')[2];
 
-    const [data, setData] = useState(null);
-
     function handleDate(dataSelecionada) {
         setData(dataSelecionada);
         console.log(dataSelecionada);
     }
-
 
     return (
         <DatePicker

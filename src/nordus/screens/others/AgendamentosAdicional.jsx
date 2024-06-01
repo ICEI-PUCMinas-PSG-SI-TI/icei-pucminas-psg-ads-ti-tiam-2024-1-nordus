@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, Text, StyleSheet, View, ScrollView } from "react-native";
+import { SafeAreaView, Text, StyleSheet, View, ScrollView, Pressable } from "react-native";
 
 import Barber from "../../components/Barber";
 import Hour from "../../components/Hour";
 import Calendar from "../../components/Calendar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { getAppointments } from "../../utils/AppointmentService";
 import { FIREBASE_DB } from "../../FirebaseConfig";
 import { collection, getDocs, query, where } from "firebase/firestore";
 
-export default function AgendamentoAdicional() {
+export default function AgendamentoAdicional({duration}) {
 
-  
-  
   const [barbers, setBarbers] = useState([]);
+  const [barbeiroEscolhido, setBarbeiroEscolhido] = useState(null);
+  const [data, setData] = useState(null);
+  const [horario, setHorario] = useState(null);
 
   const getBarbers = async () => {
     
@@ -58,8 +59,15 @@ export default function AgendamentoAdicional() {
     getBarbers();
   }, []);
 
+  useEffect(() => {
+    try {
+      getAppointments(barbeiroEscolhido, data);
+    } catch (error) {
+      console.log(error)
+    }
+  },[data]);
 
-
+ 
 
   return (
     <SafeAreaView style={styles.container} >
@@ -68,7 +76,13 @@ export default function AgendamentoAdicional() {
         <View style={{flexDirection: 'row', gap: 20}}>
             {
               barbers.map((barber, index) => (
-                <Barber name={barber.name} uri={barber.imageURL} />
+                <Pressable key={index} onPress={() => 
+                  {
+                    setBarbeiroEscolhido(barber.id);
+                    console.log(JSON.stringify(barber.id))
+                  }}>
+                  <Barber name={barber.name} escolhido={barbeiroEscolhido==barber.id? true: false} uri={barber.imageURL} />
+                </Pressable>
               ))
             } 
         </View>
@@ -77,12 +91,12 @@ export default function AgendamentoAdicional() {
       <View style={{gap: 24}}>
           <View style={{gap:12, height: 370, overflow: 'hidden', borderBottomEndRadius: 20, borderBottomLeftRadius: 20}}>
               <Text style={{color: '#fff', fontSize: 20}}>Escolha uma data: </Text>
-              <Calendar/>
+              <Calendar setData={setData}/>
           </View>
 
           <View style={{gap:12}}>
               <Text style={{color: '#fff', fontSize: 20}}>Escolha uma horario: </Text>
-              <Hour/>
+              <Hour setHorario={setHorario}/>
           </View>
       </View>
     </SafeAreaView>

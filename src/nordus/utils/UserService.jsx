@@ -6,12 +6,15 @@ import { auth } from "../FirebaseConfig";
 export const getUser = async () => {
   try {
     let userData = await AsyncStorage.getItem("userData");
-    let user = userData ? JSON.parse(userData) : null;
+    let user=null;
 
+    if(!userData) {
+      user = JSON.parse(userData);
+    }
+   
     if(!user) {
       console.log("buscando user.")
       const id = await getUserLoggedID();
-      console.log(id);
       const usersCollection = collection(FIREBASE_DB, "users");
       const q = query(usersCollection, where("id", "==", id));
       const queryResponse = await getDocs(q);
@@ -19,6 +22,7 @@ export const getUser = async () => {
       if (!queryResponse.empty) {
         user = queryResponse.docs[0].data();
         await AsyncStorage.setItem("userData", JSON.stringify(user));
+        console.log(user);
         return user;
       } else {
         console.log("Nenhum documento encontrado para o ID fornecido: " + id);
@@ -38,6 +42,7 @@ export const getUser = async () => {
 //TODO: Implementar função de logout do usuário
 export const logoutUser = async (setIsUserLoggedIn) => {
   await AsyncStorage.removeItem("userToken");
+  await AsyncStorage.removeItem("userData");
   await auth.signOut();
   setIsUserLoggedIn(false);
 };

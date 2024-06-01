@@ -1,9 +1,9 @@
-import { Text, StyleSheet, View, Image } from "react-native";
+import { Text, StyleSheet, Image, View } from "react-native";
 
-export default function Barber({name, uri}) {
+export default function Barber({name, uri, escolhido}) {
     return (
         <View style={styles.container}>
-            <Image source={{uri: uri}} style={styles.image}></Image>
+            <Image source={{uri: uri}} style={escolhido ? [styles.image, {borderColor: '#EA714C', borderWidth: 4, borderRadius: 100 }] : styles.image}></Image>
             <Text style={styles.text}>{name}</Text>
         </View>
     )

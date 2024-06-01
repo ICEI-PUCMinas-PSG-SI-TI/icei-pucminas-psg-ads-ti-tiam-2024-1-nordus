@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, StyleSheet, View, Text } from "react-native";
+import { ScrollView, StyleSheet, View, Text, Pressable } from "react-native";
 import ServicoItem from "../../components/ServicoItem";
 import { FIREBASE_DB } from "../../FirebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import Colors from "../../assets/util/Colors";
 
-export default function Servicos() {
+export default function Servicos({setDuration}) {
   const [services, setServices] = useState([]);
 
   const getServices = async () => {
@@ -39,14 +39,14 @@ export default function Servicos() {
       <Text style={styles.subtitle}>Selecione um serviço:</Text>
       <ScrollView contentContainerStyle={styles.servicesList}>
         {services.map((service, index) => (
-          <View key={index} style={styles.cardContainer}>
+          <Pressable onPress={() => setDuration(service.duration)} key={index} style={styles.cardContainer}>
             <ServicoItem
               image={service.image}
               name={service.name}
               price={`R$ ${service.price}`}
               duration={`${service.duration}min`}
             />
-          </View>
+          </Pressable>
         ))}
       </ScrollView>
     </View>

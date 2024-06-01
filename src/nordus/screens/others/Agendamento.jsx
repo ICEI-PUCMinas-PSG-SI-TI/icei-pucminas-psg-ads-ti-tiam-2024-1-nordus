@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { SafeAreaView, Text, StyleSheet } from "react-native";
+import Servicos from "./Servicos";
+import AgendamentoAdicional from "./AgendamentosAdicional";
 
 export default function Agendamento() {
-  return (
-    <SafeAreaView style={styles.container} >
-      <Text style={styles.text}>Agendamento</Text>
-    </SafeAreaView>
-  );
+  const [duration, setDuration] = useState(null);
+
+  if(duration==null) {
+    return (
+      <Servicos setDuration={setDuration}/>
+    );
+  } else {
+    return (
+      <AgendamentoAdicional duration={duration}/>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
