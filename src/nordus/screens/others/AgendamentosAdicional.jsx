@@ -8,7 +8,6 @@ import {
   ScrollView,
 } from "react-native";
 import Barber from "../../components/Barber";
-import Hour from "../../components/Hour";
 import Calendar from "../../components/Calendar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAppointments } from "../../utils/AppointmentService";
@@ -21,110 +20,90 @@ export default function AgendamentoAdicional({ duration }) {
   const [data, setData] = useState(null);
   const [horario, setHorario] = useState(null);
 
-  const getBarbers = async () => {
-    try {
-      let barbersAsync = await AsyncStorage.getItem("barbers");
-      let barbersArr = barbersAsync ? JSON.parse(barbersAsync) : null;
-
-      if (!barbersArr) {
-        console.log("buscando barbeiros.");
-        const usersCollection = collection(FIREBASE_DB, "users");
-        const q = query(usersCollection, where("barber", "==", true));
-        const queryResponse = await getDocs(q);
-
-        if (!queryResponse.empty) {
-          barbersArr = [];
-          queryResponse.docs.forEach((doc) => {
-            let dt = doc.data();
-            barbersArr.push(dt);
-          });
-          await AsyncStorage.setItem("barbers", JSON.stringify(barbersArr));
-          setBarbers(barbersArr);
-        } else {
-          console.log("Nenhum barbeiro encontrado");
-        }
-      } else {
-        console.log("barbeiros já estão armazenados.");
-        setBarbers(barbersArr);
-      }
-    } catch (error) {
-      console.log("Erro ao obter barbeiros:", error);
-    }
-  };
-
   useEffect(() => {
-    getBarbers();
+    const fetchBarbers = async () => {
+      try {
+        let storedBarbers = await AsyncStorage.getItem("barbers");
+        let barberArray = storedBarbers ? JSON.parse(storedBarbers) : null;
+
+        if (!barberArray) {
+          console.log("Buscando barbeiros do Firebase.");
+          const usersCollection = collection(FIREBASE_DB, "users");
+          const q = query(usersCollection, where("barber", "==", true));
+          const querySnapshot = await getDocs(q);
+
+          if (!querySnapshot.empty) {
+            barberArray = querySnapshot.docs.map((doc) => doc.data());
+            await AsyncStorage.setItem("barbers", JSON.stringify(barberArray));
+          } else {
+            console.log("Nenhum barbeiro encontrado");
+          }
+        } else {
+          console.log("Barbeiros carregados do AsyncStorage.");
+        }
+        
+        setBarbers(barberArray);
+      } catch (error) {
+        console.error("Erro ao obter barbeiros:", error);
+      }
+    };
+
+    fetchBarbers();
   }, []);
 
   useEffect(() => {
-    if (barbeiroEscolhido && data) {
-      try {
-        getAppointments(barbeiroEscolhido, data).then((appointments) => {
+    const fetchAppointments = async () => {
+      if (barbeiroEscolhido && data) {
+        try {
+          const appointments = await getAppointments(barbeiroEscolhido, data);
           console.log("Compromissos obtidos:", appointments);
-        });
-      } catch (error) {
-        console.log("Erro ao obter compromissos:", error);
+        } catch (error) {
+          console.error("Erro ao obter compromissos:", error);
+        }
       }
-    }
+    };
+
+    fetchAppointments();
   }, [barbeiroEscolhido, data]);
 
-  const qntHorarios = 66;
-  console.log("asa");
-  const HourTwo = 9;
+  const generateTimeSlots = () => {
+    const qntHorarios = 66;
+    const startHour = 9;
+    let min = 0;
+    let hour = startHour;
+    const slots = [];
 
-  var min = 0;
-  var hora2 = HourTwo;
-  var agendArray = [];
-
-  for (let i = 0; i < qntHorarios; i++) {
-    let temp = i % 6;
-    min = temp * 10;
-    if (min == 0 && i != 0) {
-      hora2++;
+    for (let i = 0; i < qntHorarios; i++) {
+      min = (i % 6) * 10;
+      if (i !== 0 && min === 0) hour++;
+      slots.push(`${hour}:${min < 10 ? "0" + min : min}`);
     }
-    let horacaralho = hora2 + ":" + min;
-    agendArray.push(horacaralho);
-    min = 0;
-  }
 
-  /**
-   * barberID "QZcAbsueFGNLI93VNWOcG72ctbC2" (string)
+    return slots;
+  };
 
-clientID "IjDHmA1yjaSZ8ropiDGsJYfv6As1" (string)
+  const handleSubmit = async (hour) => {
+    try {
+      await addDoc(collection(getFirestore(), "appointments"), { 
+        hour 
+      });
+      console.log(`Horário ${hour} agendado com sucesso.`);
+    } catch (error) {
+      console.error("Erro ao agendar horário:", error);
+    }
+  };
 
-date "2024/06/20" (string)
-
-hour "12:30" (string)
-
-service /services/01 (reference)
-
-serviceDuration 20 (number)
-
-serviceName "Corte"
-
-status "valid"
-   * 
-   */
-
-  const handleSubmit = (hora) => {
-  addDoc(collection(getFirestore(), "appointments"), { // Adiciona um documento na coleção "users"
-    hour: hora
-  })};
+  const timeSlots = generateTimeSlots();
 
   return (
     <ScrollView style={styles.container}>
       <View style={{ gap: 12 }}>
-        <Text style={{ color: "#fff", fontSize: 24 }}>
-          Escolha um profissional:
-        </Text>
+        <Text style={{ color: "#fff", fontSize: 24 }}>Escolha um profissional:</Text>
         <View style={{ flexDirection: "row", gap: 20 }}>
           {barbers.map((barber, index) => (
             <Pressable
               key={index}
-              onPress={() => {
-                setBarbeiroEscolhido(barber.id);
-                console.log(JSON.stringify(barber.id));
-              }}
+              onPress={() => setBarbeiroEscolhido(barber.id)}
             >
               <Barber
                 name={barber.name}
@@ -137,34 +116,17 @@ status "valid"
       </View>
 
       <View style={{ gap: 24 }}>
-        <View
-          style={{
-            gap: 12,
-            height: 370,
-            overflow: "hidden",
-            borderBottomEndRadius: 20,
-            borderBottomLeftRadius: 20,
-          }}
-        >
-          <Text style={{ color: "#fff", fontSize: 20 }}>
-            Escolha uma data:{" "}
-          </Text>
+        <View style={styles.calendarContainer}>
+          <Text style={{ color: "#fff", fontSize: 20 }}>Escolha uma data:</Text>
           <Calendar setData={setData} />
         </View>
 
         <View style={{ gap: 12 }}>
-          <Text style={{ color: "#fff", fontSize: 20 }}>
-            Escolha um horário:{" "}
-          </Text>
-          <View>
-            {agendArray.map((agend, index) => (
-              <Pressable
-                key={index}
-                onPress={() => {
-                  handleSubmit(agend);
-                }}
-              >
-                <Text style={styles.text}>{agend}</Text>
+          <Text style={{ color: "#fff", fontSize: 20 }}>Escolha um horário:</Text>
+          <View style={styles.timeSlotsContainer}>
+            {timeSlots.map((slot, index) => (
+              <Pressable key={index} onPress={() => handleSubmit(slot)} style={styles.timeSlot}>
+                <Text style={styles.timeSlotText}>{slot}</Text>
               </Pressable>
             ))}
           </View>
@@ -178,7 +140,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#1A1E21",
     flex: 1,
-    // alignItems: "left",
     paddingTop: 20,
     paddingHorizontal: 30,
     gap: 18,
@@ -186,5 +147,29 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 42,
     color: "#fff",
+  },
+  calendarContainer: {
+    gap: 15,
+    height: 400,
+    overflow: "hidden",
+    borderBottomEndRadius: 20,
+    borderBottomLeftRadius: 20,
+  },
+  timeSlotsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  timeSlot: {
+    backgroundColor: '#333',
+    borderRadius: 8,
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '23%',
+    margin: '1%',
+  },
+  timeSlotText: {
+    color: '#fff',
+    fontSize: 16,
   },
 });
