@@ -1,24 +1,36 @@
 import React, { useState, useEffect } from "react";
 import {
-  SafeAreaView,
   Text,
   StyleSheet,
   View,
   Pressable,
   ScrollView,
+  TouchableHighlight,
 } from "react-native";
 import Barber from "../../components/Barber";
 import Calendar from "../../components/Calendar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAppointments } from "../../utils/AppointmentService";
 import { FIREBASE_DB } from "../../FirebaseConfig";
-import { collection, getDocs, query, where, addDoc, getFirestore } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  addDoc,
+  getFirestore,
+} from "firebase/firestore";
 
 export default function AgendamentoAdicional({ duration }) {
   const [barbers, setBarbers] = useState([]);
   const [barbeiroEscolhido, setBarbeiroEscolhido] = useState(null);
   const [data, setData] = useState(null);
   const [horario, setHorario] = useState(null);
+
+  //variáveis de teste
+  const clientID = "IjDHmA1yjaSZ8ropiDGsJYfv6As1";
+  const serviceName = "Corte"; 
+  const status = "valid";
 
   useEffect(() => {
     const fetchBarbers = async () => {
@@ -41,7 +53,7 @@ export default function AgendamentoAdicional({ duration }) {
         } else {
           console.log("Barbeiros carregados do AsyncStorage.");
         }
-        
+
         setBarbers(barberArray);
       } catch (error) {
         console.error("Erro ao obter barbeiros:", error);
@@ -82,23 +94,46 @@ export default function AgendamentoAdicional({ duration }) {
     return slots;
   };
 
-  const handleSubmit = async (hour) => {
-    try {
-      await addDoc(collection(getFirestore(), "appointments"), { 
-        hour 
-      });
-      console.log(`Horário ${hour} agendado com sucesso.`);
-    } catch (error) {
-      console.error("Erro ao agendar horário:", error);
+  const handleSubmit = async () => {
+    if (barbeiroEscolhido && data && horario) {
+      try {
+        await addDoc(collection(getFirestore(), "appointments"), {
+          barberID: barbeiroEscolhido,
+          clientID: clientID,
+          date: data,
+          hour: horario,
+          serviceDuration: duration,
+          serviceName: serviceName,
+          status: status,
+        });
+        console.log("Agendamento realizado com sucesso.");
+      } catch (error) {
+        console.error("Erro ao agendar horário:", error);
+      }
+    } else {
+      console.log("Preencha todos os campos antes de agendar.");
     }
   };
 
   const timeSlots = generateTimeSlots();
 
+  /** TODO
+   * [ ] puxar id do usuário e o nome do serviço para setar no banco (variáveis foram setadas manualmente)
+   * [ ] Não permitir que aconteça agendamentos no mesmo horário
+   * [ ] Tirar os timeSlots dos horários que foram agendados (sugestão: hash)
+   * [ ] Melhorar a visualização de horários, por horário ou turno
+   * [ ] Fazer um fetch ao clicar no barbeiro, e não no dia (fetch do dia atual +30 dias)
+   * [ ] Setar disable para os dias que já passaram 
+   * [ ] Criar um loading de interação quando for feito o agendamento, e colocar alguma mensagem de confirmação do agendamento
+   * [ ] Voltar para a página inicial após agendamento feito 
+   */
+
   return (
     <ScrollView style={styles.container}>
       <View style={{ gap: 12 }}>
-        <Text style={{ color: "#fff", fontSize: 24 }}>Escolha um profissional:</Text>
+        <Text style={{ color: "#fff", fontSize: 24 }}>
+          Escolha um profissional:
+        </Text>
         <View style={{ flexDirection: "row", gap: 20 }}>
           {barbers.map((barber, index) => (
             <Pressable
@@ -122,14 +157,32 @@ export default function AgendamentoAdicional({ duration }) {
         </View>
 
         <View style={{ gap: 12 }}>
-          <Text style={{ color: "#fff", fontSize: 20 }}>Escolha um horário:</Text>
+          <Text style={{ color: "#fff", fontSize: 20 }}>
+            Escolha um horário:
+          </Text>
           <View style={styles.timeSlotsContainer}>
             {timeSlots.map((slot, index) => (
-              <Pressable key={index} onPress={() => handleSubmit(slot)} style={styles.timeSlot}>
+              <Pressable
+                key={index}
+                onPress={() => setHorario(slot)}
+                style={[
+                  styles.timeSlot,
+                  horario === slot && styles.timeSlotSelected,
+                ]}
+              >
                 <Text style={styles.timeSlotText}>{slot}</Text>
               </Pressable>
             ))}
           </View>
+        </View>
+        <View style={styles.handleButton}>
+          <TouchableHighlight
+            underlayColor="#d96541"
+            style={styles.button}
+            onPress={handleSubmit}
+          >
+            <Text style={styles.buttonText}>Agendar</Text>
+          </TouchableHighlight>
         </View>
       </View>
     </ScrollView>
@@ -149,27 +202,48 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   calendarContainer: {
-    gap: 15,
+    gap: 12,
     height: 400,
     overflow: "hidden",
     borderBottomEndRadius: 20,
     borderBottomLeftRadius: 20,
   },
   timeSlotsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
   },
   timeSlot: {
-    backgroundColor: '#333',
+    backgroundColor: "#333",
     borderRadius: 8,
     padding: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '23%',
-    margin: '1%',
+    alignItems: "center",
+    justifyContent: "center",
+    width: "22%",
+    margin: "1%",
+  },
+  timeSlotSelected: {
+    backgroundColor: "#555",
   },
   timeSlotText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
+  },
+  button: {
+    backgroundColor: Colors.TANGERINE,
+    height: 50,
+    width: "50%",
+    borderRadius: 20,
+    justifyContent: "center",
+    marginTop: 8,
+  },
+  buttonText: {
+    fontWeight: "400",
+    fontSize: 20,
+    textAlign: "center",
+    color: Colors.BLACK,
+  },
+  handleButton: {
+    paddingBottom: 50,
+    alignItems: "center",
   },
 });

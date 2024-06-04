@@ -5,6 +5,13 @@ import HistoryCard from "../../components/HistoryCard";
 import {FIREBASE_DB} from '../../FirebaseConfig'
 import {collection, getDocs} from 'firebase/firestore'
 export default function Equipe() {
+
+  /** TODO
+   * [ ] Fazer o fetch de agendamento do usuário
+   * [ ] Fazer a iteração para mostrar os cards com os agendamentos
+   * 
+   */
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Histórico</Text>
