@@ -21,15 +21,11 @@ import {
   getFirestore,
 } from "firebase/firestore";
 
-export default function AgendamentoAdicional({ duration }) {
+export default function AgendamentoAdicional({ serviceDuration, serviceName, clientID }) {
   const [barbers, setBarbers] = useState([]);
   const [barbeiroEscolhido, setBarbeiroEscolhido] = useState(null);
   const [data, setData] = useState(null);
   const [horario, setHorario] = useState(null);
-
-  //variáveis de teste
-  const clientID = "IjDHmA1yjaSZ8ropiDGsJYfv6As1";
-  const serviceName = "Corte"; 
   const status = "valid";
 
   useEffect(() => {
@@ -99,11 +95,11 @@ export default function AgendamentoAdicional({ duration }) {
       try {
         await addDoc(collection(getFirestore(), "appointments"), {
           barberID: barbeiroEscolhido,
-          clientID: clientID,
+          clientID,
           date: data,
           hour: horario,
-          serviceDuration: duration,
-          serviceName: serviceName,
+          serviceDuration,
+          serviceName,
           status: status,
         });
         console.log("Agendamento realizado com sucesso.");

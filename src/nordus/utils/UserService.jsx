@@ -47,6 +47,6 @@ export const logoutUser = async (setIsUserLoggedIn) => {
   setIsUserLoggedIn(false);
 };
 
-const getUserLoggedID = async () => {
+export const getUserLoggedID = async () => {
   return await AsyncStorage.getItem("userToken");
 };

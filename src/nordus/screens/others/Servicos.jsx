@@ -5,7 +5,7 @@ import { FIREBASE_DB } from "../../FirebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import Colors from "../../assets/util/Colors";
 
-export default function Servicos({setDuration}) {
+export default function Servicos({setServiceDuration, setServiceName}) {
   const [services, setServices] = useState([]);
 
   const getServices = async () => {
@@ -33,13 +33,18 @@ export default function Servicos({setDuration}) {
     getServices();
   }, []);
 
+  function handlePress(service) {
+    setServiceDuration(service.duration);
+    setServiceName(service.name);
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Agendar</Text>
       <Text style={styles.subtitle}>Selecione um serviço:</Text>
       <ScrollView contentContainerStyle={styles.servicesList}>
         {services.map((service, index) => (
-          <Pressable onPress={() => setDuration(service.duration)} key={index} style={styles.cardContainer}>
+          <Pressable onPress={() =>handlePress(service)} key={index} style={styles.cardContainer}>
             <ServicoItem
               image={service.image}
               name={service.name}

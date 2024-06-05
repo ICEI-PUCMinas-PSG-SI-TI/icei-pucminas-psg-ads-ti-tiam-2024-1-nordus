@@ -1,18 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView, Text, StyleSheet } from "react-native";
 import Servicos from "./Servicos";
 import AgendamentoAdicional from "./AgendamentosAdicional";
-
+import { getUserLoggedID } from "../../utils/UserService";
 export default function Agendamento() {
-  const [duration, setDuration] = useState(null);
+  const [serviceDuration, setServiceDuration] = useState(null);
+  const [serviceName, setServiceName] = useState(null);
+  const [clientID, setClientID] = useState(null);
 
-  if(duration==null) {
+  async function getUserID() {
+    try {
+      let ID = await getUserLoggedID();
+      setClientID(ID);
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  }
+
+  useEffect(()=> {
+    getUserID();
+  },[])
+
+  if(serviceDuration==null) {
     return (
-      <Servicos setDuration={setDuration}/>
+      <Servicos setServiceDuration={setServiceDuration} setServiceName={setServiceName}/>
     );
   } else {
     return (
-      <AgendamentoAdicional duration={duration}/>
+      <AgendamentoAdicional serviceDuration={serviceDuration} serviceName={serviceName} clientID={clientID}/>
     );
   }
 }
