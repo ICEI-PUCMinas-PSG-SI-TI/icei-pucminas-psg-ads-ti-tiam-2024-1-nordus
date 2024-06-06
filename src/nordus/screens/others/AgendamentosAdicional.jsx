@@ -19,6 +19,7 @@ import {
   where,
   addDoc,
   getFirestore,
+  Timestamp
 } from "firebase/firestore";
 
 export default function AgendamentoAdicional({ serviceDuration, serviceName, clientID }) {
@@ -60,11 +61,14 @@ export default function AgendamentoAdicional({ serviceDuration, serviceName, cli
   }, []);
 
   useEffect(() => {
+
     const fetchAppointments = async () => {
       if (barbeiroEscolhido && data) {
         try {
-          const appointments = await getAppointments(barbeiroEscolhido, data);
+          const appointments = await getAppointments(barbeiroEscolhido);
           console.log("Compromissos obtidos:", appointments);
+          //console.log("Data vem em obj:", appointments[0].date.toDate());
+
         } catch (error) {
           console.error("Erro ao obter compromissos:", error);
         }
@@ -72,7 +76,7 @@ export default function AgendamentoAdicional({ serviceDuration, serviceName, cli
     };
 
     fetchAppointments();
-  }, [barbeiroEscolhido, data]);
+  }, [barbeiroEscolhido]);
 
   const generateTimeSlots = () => {
     const qntHorarios = 66;
@@ -92,11 +96,19 @@ export default function AgendamentoAdicional({ serviceDuration, serviceName, cli
 
   const handleSubmit = async () => {
     if (barbeiroEscolhido && data && horario) {
+
+      let horarioDividido = horario.split(':');
+      let hora = horarioDividido[0];
+      let minuto = horarioDividido[1];
+      data.setHours(hora, minuto);
+
+      let date = Timestamp.fromDate(new Date(data));
+      
       try {
         await addDoc(collection(getFirestore(), "appointments"), {
           barberID: barbeiroEscolhido,
           clientID,
-          date: data,
+          date: date,
           hour: horario,
           serviceDuration,
           serviceName,
@@ -114,11 +126,12 @@ export default function AgendamentoAdicional({ serviceDuration, serviceName, cli
   const timeSlots = generateTimeSlots();
 
   /** TODO
-   * [ ] puxar id do usuário e o nome do serviço para setar no banco (variáveis foram setadas manualmente)
+   * [ ] salvar dados do fetch do barbeiro para evitar req toda hora que recarrega.
+   * [X] puxar id do usuário e o nome do serviço para setar no banco (variáveis foram setadas manualmente)
    * [ ] Não permitir que aconteça agendamentos no mesmo horário
    * [ ] Tirar os timeSlots dos horários que foram agendados (sugestão: hash)
    * [ ] Melhorar a visualização de horários, por horário ou turno
-   * [ ] Fazer um fetch ao clicar no barbeiro, e não no dia (fetch do dia atual +30 dias)
+   * [X] Fazer um fetch ao clicar no barbeiro, e não no dia (fetch do dia atual +30 dias)
    * [ ] Setar disable para os dias que já passaram 
    * [ ] Criar um loading de interação quando for feito o agendamento, e colocar alguma mensagem de confirmação do agendamento
    * [ ] Voltar para a página inicial após agendamento feito 

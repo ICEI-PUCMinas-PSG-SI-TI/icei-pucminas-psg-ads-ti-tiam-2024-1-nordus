@@ -1,4 +1,4 @@
-import { query, where, collection, getDocs, and } from "firebase/firestore";
+import { query, where, collection, getDocs, Timestamp } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FIREBASE_DB } from "../FirebaseConfig";
 
@@ -8,16 +8,21 @@ import { FIREBASE_DB } from "../FirebaseConfig";
 // [ ] Verifico o tipo de servico (duracao) e o horario. (horario+duracao = tempo indisponivel)
 // [ ]-> verificacoes do horario de trabalho - tempos indisponiveis.
 
-export const getAppointments = async (barberID, dataEscolhida) => {
+export const getAppointments = async (barberID) => {
   try {
+    const today = new Date();
+    const LimitPeriod = today.setDate(today.getDate()+30); // armazena o dia maximo para a pesquisa.
+
+    const formattedDate = Timestamp.fromDate(new Date(LimitPeriod));
+
+    console.log("dataAtual ", today)
     console.log("barberID", barberID);
-    console.log("dataEscolhida", dataEscolhida);
 
     const appointmentsCollection = collection(FIREBASE_DB, "appointments");
     const q = query(
       appointmentsCollection,
       where("barberID", "==", barberID),
-      where("date", "==", dataEscolhida)
+      where("date", "<=", formattedDate)
     );
 
     const queryResponse = await getDocs(q);
