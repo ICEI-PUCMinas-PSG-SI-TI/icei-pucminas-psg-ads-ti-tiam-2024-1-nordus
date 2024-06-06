@@ -10,8 +10,16 @@ export default function Calendar({setData}) {
     var qntDays =  todaysDate.toString().split(' ')[2];
 
     function handleDate(dataSelecionada) {
-        setData(dataSelecionada);
-        console.log(dataSelecionada);
+        let dataArr = dataSelecionada.split('/');
+        let ano = dataArr[0];
+        let mes = dataArr[1];
+        let dia = dataArr[2];
+  
+        let stringData = ano+'-'+mes+'-'+dia;
+        let data = new Date(stringData);
+
+        setData(data);
+        console.log(data);
     }
 
     return (
