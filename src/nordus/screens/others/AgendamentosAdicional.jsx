@@ -19,15 +19,22 @@ import {
   where,
   addDoc,
   getFirestore,
-  Timestamp
+  Timestamp,
 } from "firebase/firestore";
+import { useNavigation } from "@react-navigation/native";
 
-export default function AgendamentoAdicional({ serviceDuration, serviceName, clientID }) {
+export default function AgendamentoAdicional({
+  serviceDuration,
+  serviceName,
+  clientID,
+}) {
   const [barbers, setBarbers] = useState([]);
   const [barbeiroEscolhido, setBarbeiroEscolhido] = useState(null);
   const [data, setData] = useState(null);
   const [horario, setHorario] = useState(null);
   const status = "valid";
+  const [showModal, setShowModal] = useState(false);
+  const navigation = useNavigation();
 
   useEffect(() => {
     const fetchBarbers = async () => {
@@ -61,14 +68,12 @@ export default function AgendamentoAdicional({ serviceDuration, serviceName, cli
   }, []);
 
   useEffect(() => {
-
     const fetchAppointments = async () => {
       if (barbeiroEscolhido && data) {
         try {
           const appointments = await getAppointments(barbeiroEscolhido);
           console.log("Compromissos obtidos:", appointments);
           //console.log("Data vem em obj:", appointments[0].date.toDate());
-
         } catch (error) {
           console.error("Erro ao obter compromissos:", error);
         }
@@ -96,14 +101,13 @@ export default function AgendamentoAdicional({ serviceDuration, serviceName, cli
 
   const handleSubmit = async () => {
     if (barbeiroEscolhido && data && horario) {
-
-      let horarioDividido = horario.split(':');
+      let horarioDividido = horario.split(":");
       let hora = horarioDividido[0];
       let minuto = horarioDividido[1];
       data.setHours(hora, minuto);
 
       let date = Timestamp.fromDate(new Date(data));
-      
+
       try {
         await addDoc(collection(getFirestore(), "appointments"), {
           barberID: barbeiroEscolhido,
@@ -114,6 +118,7 @@ export default function AgendamentoAdicional({ serviceDuration, serviceName, cli
           serviceName,
           status: status,
         });
+        setShowModal(true);
         console.log("Agendamento realizado com sucesso.");
       } catch (error) {
         console.error("Erro ao agendar horário:", error);
@@ -125,17 +130,31 @@ export default function AgendamentoAdicional({ serviceDuration, serviceName, cli
 
   const timeSlots = generateTimeSlots();
 
-  /** TODO
-   * [ ] salvar dados do fetch do barbeiro para evitar req toda hora que recarrega.
-   * [X] puxar id do usuário e o nome do serviço para setar no banco (variáveis foram setadas manualmente)
-   * [ ] Não permitir que aconteça agendamentos no mesmo horário
-   * [ ] Tirar os timeSlots dos horários que foram agendados (sugestão: hash)
-   * [ ] Melhorar a visualização de horários, por horário ou turno
-   * [X] Fazer um fetch ao clicar no barbeiro, e não no dia (fetch do dia atual +30 dias)
-   * [ ] Setar disable para os dias que já passaram 
-   * [ ] Criar um loading de interação quando for feito o agendamento, e colocar alguma mensagem de confirmação do agendamento
-   * [ ] Voltar para a página inicial após agendamento feito 
-   */
+  const ConfirmationModal = () => {
+    const handleReturnHome = () => {
+      setShowModal(false);
+      navigation.navigate("Home");
+    };
+
+    if (!showModal) {
+      return null; // Não renderiza nada se showModal for falso
+    }
+
+    return (
+      <View style={[styles.modalContainer]}>
+        <View style={styles.modalContent}>
+          <Text style={{ fontSize: 20}}>Agendamento realizado com sucesso!</Text>
+          <TouchableHighlight
+            underlayColor="#d96541"
+            style={styles.buttonModal}
+            onPress={handleReturnHome} // Evento de pressionar para voltar para a página inicial
+          >
+            <Text style={styles.buttonTextModal}>Voltar para página Inicial</Text>
+          </TouchableHighlight>
+        </View>
+      </View>
+    );
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -194,6 +213,7 @@ export default function AgendamentoAdicional({ serviceDuration, serviceName, cli
           </TouchableHighlight>
         </View>
       </View>
+      {showModal && <ConfirmationModal />}
     </ScrollView>
   );
 }
@@ -254,5 +274,35 @@ const styles = StyleSheet.create({
   handleButton: {
     paddingBottom: 50,
     alignItems: "center",
+  },
+  modalContainer: {
+    // backgroundColor: "rgba(0, 0, 0, 0.2)",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  modalContent: {
+    backgroundColor: "#fff",
+    padding: 20,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  buttonModal: {
+    backgroundColor: Colors.TANGERINE,
+    height: 50,
+    width: 200,
+    borderRadius: 20,
+    justifyContent: "center",
+    marginTop: 8,
+  },
+  buttonTextModal: {
+    fontWeight: "400",
+    fontSize: 16,
+    textAlign: "center",
+    color: Colors.BLACK,
   },
 });
