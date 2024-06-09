@@ -67,6 +67,7 @@ export default function AgendamentoAdicional({
     fetchBarbers();
   }, []);
 
+<<<<<<< HEAD
   useEffect(() => {
     const fetchAppointments = async () => {
       if (barbeiroEscolhido && data) {
@@ -74,30 +75,19 @@ export default function AgendamentoAdicional({
           const appointments = await getAppointments(barbeiroEscolhido);
           console.log("Compromissos obtidos:", appointments);
           //console.log("Data vem em obj:", appointments[0].date.toDate());
+=======
+
+    const fetchAppointments = async (barberId) => {
+      if (barberId) {
+        try {
+          const appointments = await getAppointments(barberId);
+          return(appointments);
+>>>>>>> e4d12acf2be670b76f97047c020bfa4a7e4286cb
         } catch (error) {
           console.error("Erro ao obter compromissos:", error);
         }
       }
     };
-
-    fetchAppointments();
-  }, [barbeiroEscolhido]);
-
-  const generateTimeSlots = () => {
-    const qntHorarios = 66;
-    const startHour = 9;
-    let min = 0;
-    let hour = startHour;
-    const slots = [];
-
-    for (let i = 0; i < qntHorarios; i++) {
-      min = (i % 6) * 10;
-      if (i !== 0 && min === 0) hour++;
-      slots.push(`${hour}:${min < 10 ? "0" + min : min}`);
-    }
-
-    return slots;
-  };
 
   const handleSubmit = async () => {
     if (barbeiroEscolhido && data && horario) {
@@ -128,6 +118,7 @@ export default function AgendamentoAdicional({
     }
   };
 
+<<<<<<< HEAD
   const timeSlots = generateTimeSlots();
 
   const ConfirmationModal = () => {
@@ -155,6 +146,111 @@ export default function AgendamentoAdicional({
       </View>
     );
   };
+=======
+  /** TODO
+   * [ ] salvar dados do fetch do barbeiro para evitar req toda hora que recarrega.
+   * [X] puxar id do usuário e o nome do serviço para setar no banco (variáveis foram setadas manualmente)
+   * [ ] Não permitir que aconteça agendamentos no mesmo horário
+   * [ ] Tirar os timeSlots dos horários que foram agendados (sugestão: hash)
+   * [ ] Melhorar a visualização de horários, por horário ou turno
+   * [X] Fazer um fetch ao clicar no barbeiro, e não no dia (fetch do dia atual +30 dias)
+   * [ ] Setar disable para os dias que já passaram 
+   * [ ] Criar um loading de interação quando for feito o agendamento, e colocar alguma mensagem de confirmação do agendamento
+   * [ ] Voltar para a página inicial após agendamento feito 
+   */
+>>>>>>> e4d12acf2be670b76f97047c020bfa4a7e4286cb
+
+  const agendamentosPorBarbeiro = new Map();
+
+  async function escolherBarbeiro() {
+    try {
+      if (agendamentosPorBarbeiro.has(barbeiroEscolhido.toString())) {
+        console.log('Barbeiro com dados já salvos.');
+      } else {
+        const result = await fetchAppointments(barbeiroEscolhido);
+        
+        result.forEach((appointment) => {
+          appointment.date = appointment.date.toDate();
+          console.log("Existe um agendamento: ", appointment.date)
+        });
+        console.log('Salvando no hashmap.');
+        agendamentosPorBarbeiro.set(barbeiroEscolhido.toString(), result);
+      }
+      let agg = agendamentosPorBarbeiro.get(barbeiroEscolhido.toString());
+      return agg
+
+    } catch (error) {
+      console.error('Erro ao buscar os agendamentos:', error);
+    }
+  }
+
+  async function calculaHorariosDisponiveis(dayTimeSlots) {
+    let objAppointments = await escolherBarbeiro(barbeiroEscolhido);
+
+      if(objAppointments==undefined || objAppointments == null) {
+        console.log('undefined')
+        return;
+  
+      } else {
+  
+        objAppointments.map((el) => {
+          const data = el.date;
+
+          if(dayTimeSlots.has(data.toString())) { 
+            let qntPeriodosMinimos = el.serviceDuration/10;
+
+            for(let i=0; i<qntPeriodosMinimos; i++) { 
+              var qntMinutoPorPeriodo=0;
+              if(i!=0)
+                qntMinutoPorPeriodo = 10;
+                
+              let horaAntiga = data.getHours();
+              let minutoAntiga = data.getMinutes();
+
+              let minutoNovo = minutoAntiga+qntMinutoPorPeriodo;
+
+              if(minutoNovo>59) {
+                let horaNova = Math.floor(minutoNovo/60); 
+                minutoNovo = minutoNovo%60; 
+                data.setHours(horaNova+horaAntiga);
+              } 
+
+              data.setMinutes(minutoNovo);
+                
+              dayTimeSlots.delete(data.toString());
+            }
+          }
+        })
+        console.log(dayTimeSlots)
+      }
+  }
+
+  const generateDayTimeSlots = (diaEscolhido) => {
+    const qntHorarios = 66;
+    const startHour = 9;
+    let min = 0;
+    let hour = startHour;
+    const slots = new Map();
+
+    for (let i = 0; i < qntHorarios; i++) {
+      min = (i % 6) * 10;
+      if (i !== 0 && min === 0) hour++;
+      min = min < 10 ? "0" + min : min;
+      diaEscolhido.setMinutes(min)
+      diaEscolhido.setHours(hour);
+      slots.set(diaEscolhido.toString(), diaEscolhido.toString());
+    }
+    return slots;
+  };
+
+  useEffect(() => {
+    if(data!=null) {
+      console.log('verifcando datas')
+      let slots = generateDayTimeSlots(data)
+      calculaHorariosDisponiveis(slots);
+    }
+
+  }, [data])
 
   return (
     <ScrollView style={styles.container}>
@@ -166,7 +262,8 @@ export default function AgendamentoAdicional({
           {barbers.map((barber, index) => (
             <Pressable
               key={index}
-              onPress={() => setBarbeiroEscolhido(barber.id)}
+              onPress={() => setBarbeiroEscolhido(barber.id)
+                }
             >
               <Barber
                 name={barber.name}
@@ -189,7 +286,7 @@ export default function AgendamentoAdicional({
             Escolha um horário:
           </Text>
           <View style={styles.timeSlotsContainer}>
-            {timeSlots.map((slot, index) => (
+            {/* {timeSlots.map((slot, index) => (
               <Pressable
                 key={index}
                 onPress={() => setHorario(slot)}
@@ -200,7 +297,7 @@ export default function AgendamentoAdicional({
               >
                 <Text style={styles.timeSlotText}>{slot}</Text>
               </Pressable>
-            ))}
+            ))} */}
           </View>
         </View>
         <View style={styles.handleButton}>
