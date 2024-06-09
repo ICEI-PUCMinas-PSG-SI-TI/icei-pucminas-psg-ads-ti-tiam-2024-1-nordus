@@ -11,18 +11,18 @@ import { FIREBASE_DB } from "../FirebaseConfig";
 export const getAppointments = async (barberID) => {
   try {
     const today = new Date();
-    const LimitPeriod = today.setDate(today.getDate()+30); // armazena o dia maximo para a pesquisa.
+    const LimitPeriod = new Date(today); 
+    LimitPeriod.setDate(today.getDate() + 30); 
 
-    const formattedDate = Timestamp.fromDate(new Date(LimitPeriod));
-
-    console.log("dataAtual ", today)
-    console.log("barberID", barberID);
-
+    const formattedDate = Timestamp.fromDate(LimitPeriod);
+    const todayDate = Timestamp.fromDate(today);
+    
     const appointmentsCollection = collection(FIREBASE_DB, "appointments");
     const q = query(
       appointmentsCollection,
       where("barberID", "==", barberID),
-      where("date", "<=", formattedDate)
+      where("date", ">=", todayDate),
+      where("date", "<=", formattedDate),
     );
 
     const queryResponse = await getDocs(q);
