@@ -67,22 +67,12 @@ export default function AgendamentoAdicional({
     fetchBarbers();
   }, []);
 
-<<<<<<< HEAD
-  useEffect(() => {
-    const fetchAppointments = async () => {
-      if (barbeiroEscolhido && data) {
-        try {
-          const appointments = await getAppointments(barbeiroEscolhido);
-          console.log("Compromissos obtidos:", appointments);
-          //console.log("Data vem em obj:", appointments[0].date.toDate());
-=======
 
     const fetchAppointments = async (barberId) => {
       if (barberId) {
         try {
           const appointments = await getAppointments(barberId);
           return(appointments);
->>>>>>> e4d12acf2be670b76f97047c020bfa4a7e4286cb
         } catch (error) {
           console.error("Erro ao obter compromissos:", error);
         }
@@ -118,9 +108,6 @@ export default function AgendamentoAdicional({
     }
   };
 
-<<<<<<< HEAD
-  const timeSlots = generateTimeSlots();
-
   const ConfirmationModal = () => {
     const handleReturnHome = () => {
       setShowModal(false);
@@ -146,19 +133,6 @@ export default function AgendamentoAdicional({
       </View>
     );
   };
-=======
-  /** TODO
-   * [ ] salvar dados do fetch do barbeiro para evitar req toda hora que recarrega.
-   * [X] puxar id do usuário e o nome do serviço para setar no banco (variáveis foram setadas manualmente)
-   * [ ] Não permitir que aconteça agendamentos no mesmo horário
-   * [ ] Tirar os timeSlots dos horários que foram agendados (sugestão: hash)
-   * [ ] Melhorar a visualização de horários, por horário ou turno
-   * [X] Fazer um fetch ao clicar no barbeiro, e não no dia (fetch do dia atual +30 dias)
-   * [ ] Setar disable para os dias que já passaram 
-   * [ ] Criar um loading de interação quando for feito o agendamento, e colocar alguma mensagem de confirmação do agendamento
-   * [ ] Voltar para a página inicial após agendamento feito 
-   */
->>>>>>> e4d12acf2be670b76f97047c020bfa4a7e4286cb
 
   const agendamentosPorBarbeiro = new Map();
 
