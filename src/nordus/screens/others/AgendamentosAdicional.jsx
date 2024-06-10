@@ -25,7 +25,6 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function AgendamentoAdicional({
   serviceDuration,
-  setServiceDuration,
   serviceName,
   clientID,
 }) {
@@ -36,7 +35,6 @@ export default function AgendamentoAdicional({
   const status = "valid";
   const [showModal, setShowModal] = useState(false);
   const navigation = useNavigation();
-  const [dayTimeSlots, setDayTimeSlots] = useState(new Map());
 
   useEffect(() => {
     const fetchBarbers = async () => {
@@ -69,26 +67,26 @@ export default function AgendamentoAdicional({
     fetchBarbers();
   }, []);
 
-  const fetchAppointments = async (barberId) => {
-    if (barberId) {
-      try {
-        const appointments = await getAppointments(barberId);
-        return appointments;
-      } catch (error) {
-        console.error("Erro ao obter compromissos:", error);
+
+    const fetchAppointments = async (barberId) => {
+      if (barberId) {
+        try {
+          const appointments = await getAppointments(barberId);
+          return(appointments);
+        } catch (error) {
+          console.error("Erro ao obter compromissos:", error);
+        }
       }
-    }
-  };
+    };
 
   const handleSubmit = async () => {
     if (barbeiroEscolhido && data && horario) {
       let horarioDividido = horario.split(":");
-      let hora = parseInt(horarioDividido[0]);
-      let minuto = parseInt(horarioDividido[1]);
-      let dataAgendamento = new Date(data);
-      dataAgendamento.setHours(hora, minuto, 0, 0);
+      let hora = horarioDividido[0];
+      let minuto = horarioDividido[1];
+      data.setHours(hora, minuto);
 
-      let date = Timestamp.fromDate(dataAgendamento);
+      let date = Timestamp.fromDate(new Date(data));
 
       try {
         await addDoc(collection(getFirestore(), "appointments"), {
@@ -118,23 +116,19 @@ export default function AgendamentoAdicional({
     };
 
     if (!showModal) {
-      return null;
+      return null; // Não renderiza nada se showModal for falso
     }
 
     return (
       <View style={[styles.modalContainer]}>
         <View style={styles.modalContent}>
-          <Text style={{ fontSize: 20 }}>
-            Agendamento realizado com sucesso!
-          </Text>
+          <Text style={{ fontSize: 20}}>Agendamento realizado com sucesso!</Text>
           <TouchableHighlight
             underlayColor="#d96541"
             style={styles.buttonModal}
-            onPress={handleReturnHome}
+            onPress={handleReturnHome} // Evento de pressionar para voltar para a página inicial
           >
-            <Text style={styles.buttonTextModal}>
-              Voltar para página Inicial
-            </Text>
+            <Text style={styles.buttonTextModal}>Voltar para página Inicial</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -146,62 +140,64 @@ export default function AgendamentoAdicional({
   async function escolherBarbeiro() {
     try {
       if (agendamentosPorBarbeiro.has(barbeiroEscolhido.toString())) {
-        console.log("Barbeiro com dados já salvos.");
+        console.log('Barbeiro com dados já salvos.');
       } else {
         const result = await fetchAppointments(barbeiroEscolhido);
-
+        
         result.forEach((appointment) => {
           appointment.date = appointment.date.toDate();
-          console.log("Existe um agendamento: ", appointment.date);
+          console.log("Existe um agendamento: ", appointment.date)
         });
-        console.log("Salvando no hashmap.");
+        console.log('Salvando no hashmap.');
         agendamentosPorBarbeiro.set(barbeiroEscolhido.toString(), result);
       }
       let agg = agendamentosPorBarbeiro.get(barbeiroEscolhido.toString());
-      return agg;
+      return agg
+
     } catch (error) {
-      console.error("Erro ao buscar os agendamentos:", error);
+      console.error('Erro ao buscar os agendamentos:', error);
     }
   }
 
   async function calculaHorariosDisponiveis(dayTimeSlots) {
     let objAppointments = await escolherBarbeiro(barbeiroEscolhido);
 
-    if (objAppointments == undefined || objAppointments == null) {
-      console.log("undefined");
-      return;
-    } else {
-      objAppointments.map((el) => {
-        const data = el.date;
+      if(objAppointments==undefined || objAppointments == null) {
+        console.log('undefined')
+        return;
+  
+      } else {
+  
+        objAppointments.map((el) => {
+          const data = el.date;
 
-        if (dayTimeSlots.has(data.toString())) {
-          let qntPeriodosMinimos = el.serviceDuration / 10;
+          if(dayTimeSlots.has(data.toString())) { 
+            let qntPeriodosMinimos = el.serviceDuration/10;
 
-          for (let i = 0; i < qntPeriodosMinimos; i++) {
-            var qntMinutoPorPeriodo = 0;
-            if (i != 0) qntMinutoPorPeriodo = 10;
+            for(let i=0; i<qntPeriodosMinimos; i++) { 
+              var qntMinutoPorPeriodo=0;
+              if(i!=0)
+                qntMinutoPorPeriodo = 10;
+                
+              let horaAntiga = data.getHours();
+              let minutoAntiga = data.getMinutes();
 
-            let horaAntiga = data.getHours();
-            let minutoAntiga = data.getMinutes();
+              let minutoNovo = minutoAntiga+qntMinutoPorPeriodo;
 
-            let minutoNovo = minutoAntiga + qntMinutoPorPeriodo;
+              if(minutoNovo>59) {
+                let horaNova = Math.floor(minutoNovo/60); 
+                minutoNovo = minutoNovo%60; 
+                data.setHours(horaNova+horaAntiga);
+              } 
 
-            if (minutoNovo > 59) {
-              let horaNova = Math.floor(minutoNovo / 60);
-              minutoNovo = minutoNovo % 60;
-              data.setHours(horaNova + horaAntiga);
+              data.setMinutes(minutoNovo);
+                
+              dayTimeSlots.delete(data.toString());
             }
-
-            data.setMinutes(minutoNovo);
-
-            dayTimeSlots.delete(data.toString());
           }
-        }
-      });
-      console.log(dayTimeSlots);
-      setDayTimeSlots(new Map(dayTimeSlots));
-    }
-    return dayTimeSlots;
+        })
+        console.log(dayTimeSlots)
+      }
   }
 
   const generateDayTimeSlots = (diaEscolhido) => {
@@ -210,22 +206,22 @@ export default function AgendamentoAdicional({
     let min = 0;
     let hour = startHour;
     const slots = new Map();
-    const diaEscolhidoData = new Date(diaEscolhido);
 
     for (let i = 0; i < qntHorarios; i++) {
       min = (i % 6) * 10;
       if (i !== 0 && min === 0) hour++;
-      const slot = new Date(diaEscolhidoData);
-      slot.setHours(hour, min, 0, 0);
-      slots.set(slot.toString(), slot.toString());
+      min = min < 10 ? "0" + min : min;
+      diaEscolhido.setMinutes(min)
+      diaEscolhido.setHours(hour);
+      slots.set(diaEscolhido.toString(), diaEscolhido.toString());
     }
     return slots;
   };
 
   useEffect(() => {
-    if (data != null) {
-      console.log("verifcando datas");
-      let slots = generateDayTimeSlots(data);
+    if(data!=null) {
+      console.log('verifcando datas')
+      let slots = generateDayTimeSlots(data)
       calculaHorariosDisponiveis(slots);
     }
   }, [data]);
@@ -263,7 +259,8 @@ export default function AgendamentoAdicional({
           {barbers.map((barber, index) => (
             <Pressable
               key={index}
-              onPress={() => setBarbeiroEscolhido(barber.id)}
+              onPress={() => setBarbeiroEscolhido(barber.id)
+                }
             >
               <Barber
                 name={barber.name}
