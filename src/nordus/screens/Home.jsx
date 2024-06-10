@@ -13,6 +13,7 @@ import Instagram from "../assets/icons/icon-instagram.svg";
 import Website from "../assets/icons/icon-website.svg";
 import Whatsapp from "../assets/icons/icon-whatsapp.svg";
 import Email from "../assets/icons/icon-email.svg";
+import Schedule from "../assets/icons/icon-schedule.svg";
 
 export default function Home() {
   const navigation = useNavigation();
@@ -108,6 +109,9 @@ export default function Home() {
           </Pressable>
           <Pressable onPress={ () => openURL('mailto:barbearianordus@gmail.com?subject=Marcar%20um%20hor%C3%A1rio&body=Estou%20afim%20de%20marcar%20um%20hor%C3%A1rio%20para%20dar%20um%20trato%20no%20cabelo%2Fbarba.%20Cheguei%20at%C3%A9%20voc%C3%AAs%20pelo%20app%20e%20t%C3%B4%20bem%20empolgado%20pra%20conhecer%20de%20perto!%0D%0A%0D%0A')}>
             <Email height={26} width={26}/>
+          </Pressable>
+          <Pressable onPress={ () => navigation.navigate('Barber')}>
+            <Schedule height={26} width={26}/>
           </Pressable>
         </View>
 
