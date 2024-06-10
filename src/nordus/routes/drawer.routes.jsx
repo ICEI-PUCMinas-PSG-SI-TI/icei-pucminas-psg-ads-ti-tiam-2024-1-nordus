@@ -32,6 +32,7 @@ import React from "react";
 import { StackRoutes } from "./stack.routes";
 import MeusDados from "../screens/others/MeusDados";
 import Historico from "../screens/others/Historico";
+import Barber from "../screens/Barber";
 
 const Drawer = createDrawerNavigator();
 
@@ -94,6 +95,13 @@ export function DrawerRoutes({ setIsUserLoggedIn }) {
           header: ({ navigation }) => <Header navigation={navigation} />,
         }}
       />
+
+<Drawer.Screen
+        name="Barber"
+        component={Barber}
+        options={{
+          header: ({ navigation }) => <Header navigation={navigation} />,
+        }}      />
 
       {/* 
         <Tab.Screen

@@ -5,6 +5,7 @@ import Home from "../screens/Home";
 import Patrocinadores from "../screens/others/Patrocinadores";
 import Produtos from "../screens/others/Produtos";
 import Equipe from "../screens/others/Equipe";
+import Barber from "../screens/Barber";
 
 const { Screen, Navigator } = createNativeStackNavigator();
 
@@ -33,6 +34,11 @@ export function StackRoutes({ setIsUserLoggedIn }) {
       <Screen
         name="Produtos"
         component={Produtos}
+        options={{ headerShown: false }}
+      />
+      <Screen
+        name="Barber"
+        component={Barber}
         options={{ headerShown: false }}
       />
 
