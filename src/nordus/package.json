@@ -19,6 +19,7 @@
     "expo": "~50.0.14",
     "expo-status-bar": "~1.11.1",
     "firebase": "^10.10.0",
+    "moment": "^2.30.1",
     "react": "18.2.0",
     "react-native": "0.73.6",
     "react-native-gesture-handler": "~2.14.0",
