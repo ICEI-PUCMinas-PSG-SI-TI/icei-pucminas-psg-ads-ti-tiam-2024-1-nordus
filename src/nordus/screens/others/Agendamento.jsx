@@ -17,31 +17,38 @@ export default function Agendamento() {
     }
   }
 
-  useEffect(()=> {
+  useEffect(() => {
     getUserID();
-  },[])
+  }, []);
 
-  if(serviceDuration==null) {
+  if (serviceDuration == null) {
     return (
-      <Servicos setServiceDuration={setServiceDuration} setServiceName={setServiceName}/>
+      <Servicos
+        setServiceDuration={setServiceDuration}
+        setServiceName={setServiceName}
+      />
     );
   } else {
     return (
-      <AgendamentoAdicional serviceDuration={serviceDuration} serviceName={serviceName} clientID={clientID}/>
+      <AgendamentoAdicional
+        setServiceDuration={setServiceDuration}
+        serviceDuration={serviceDuration}
+        serviceName={serviceName}
+        clientID={clientID}
+      />
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#2e2e2e',
+    backgroundColor: "#2e2e2e",
     flex: 1,
-    justifyContent: 'center',
-    alignItems: "center"
+    justifyContent: "center",
+    alignItems: "center",
   },
   text: {
     fontSize: 42,
-    color: '#fff'
-  }
-})
- 
+    color: "#fff",
+  },
+});

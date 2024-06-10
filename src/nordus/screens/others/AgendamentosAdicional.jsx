@@ -101,7 +101,6 @@ export default function AgendamentoAdicional({
           status: status,
         });
         setShowModal(true);
-        setServiceDuration(null);
         console.log("Agendamento realizado com sucesso.");
       } catch (error) {
         console.error("Erro ao agendar horário:", error);
@@ -115,6 +114,7 @@ export default function AgendamentoAdicional({
     const handleReturnHome = () => {
       setShowModal(false);
       navigation.navigate("Home");
+      setServiceDuration(null);
     };
 
     if (!showModal) {
@@ -230,6 +230,29 @@ export default function AgendamentoAdicional({
     }
   }, [data]);
 
+  const categorizeTimeSlots = (slots) => {
+    const manha = [];
+    const tarde = [];
+    const noite = [];
+
+    slots.forEach((slot) => {
+      const date = new Date(slot);
+      const hour = date.getHours();
+      if (hour < 12) {
+        manha.push(slot);
+      } else if (hour < 18) {
+        tarde.push(slot);
+      } else {
+        noite.push(slot);
+      }
+    });
+
+    return { manha, tarde, noite };
+  };
+
+  const { manha, tarde, noite } = categorizeTimeSlots(
+    Array.from(dayTimeSlots.values())
+  );
   return (
     <ScrollView style={styles.container}>
       <View style={{ gap: 12 }}>
@@ -262,13 +285,59 @@ export default function AgendamentoAdicional({
           <Text style={{ color: "#fff", fontSize: 20 }}>
             Escolha um horário:
           </Text>
-          <View style={styles.timeSlotsContainer}>
-            {Array.from(dayTimeSlots.values()).map((slot, index) => {
-              const date = new Date(slot);
-              const hour = String(date.getHours()).padStart(2, "0"); // Adiciona zero à esquerda se for menor que 10
-              const minute = String(date.getMinutes()).padStart(2, "0");
 
-              // Formatação da hora e minuto
+          <Text style={styles.turnText}>Manhã</Text>
+          <View style={styles.timeSlotsContainer}>
+            {manha.map((slot, index) => {
+              const date = new Date(slot);
+              const hour = String(date.getHours()).padStart(2, "0");
+              const minute = String(date.getMinutes()).padStart(2, "0");
+              const formattedTime = `${hour}:${minute}`;
+
+              return (
+                <Pressable
+                  key={index}
+                  onPress={() => setHorario(formattedTime)}
+                  style={[
+                    styles.timeSlot,
+                    horario === formattedTime && styles.timeSlotSelected,
+                  ]}
+                >
+                  <Text style={styles.timeSlotText}>{formattedTime}</Text>
+                </Pressable>
+              );
+            })}
+          </View>
+
+          <Text style={styles.turnText}>Tarde</Text>
+          <View style={styles.timeSlotsContainer}>
+            {tarde.map((slot, index) => {
+              const date = new Date(slot);
+              const hour = String(date.getHours()).padStart(2, "0");
+              const minute = String(date.getMinutes()).padStart(2, "0");
+              const formattedTime = `${hour}:${minute}`;
+
+              return (
+                <Pressable
+                  key={index}
+                  onPress={() => setHorario(formattedTime)}
+                  style={[
+                    styles.timeSlot,
+                    horario === formattedTime && styles.timeSlotSelected,
+                  ]}
+                >
+                  <Text style={styles.timeSlotText}>{formattedTime}</Text>
+                </Pressable>
+              );
+            })}
+          </View>
+
+          <Text style={styles.turnText}>Noite</Text>
+          <View style={styles.timeSlotsContainer}>
+            {noite.map((slot, index) => {
+              const date = new Date(slot);
+              const hour = String(date.getHours()).padStart(2, "0");
+              const minute = String(date.getMinutes()).padStart(2, "0");
               const formattedTime = `${hour}:${minute}`;
 
               return (
@@ -341,7 +410,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   button: {
-    backgroundColor: Colors.TANGERINE,
+    backgroundColor: "#d96541",
     height: 50,
     width: "50%",
     borderRadius: 20,
@@ -352,14 +421,13 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     fontSize: 20,
     textAlign: "center",
-    color: Colors.BLACK,
+    color: "#000",
   },
   handleButton: {
     paddingBottom: 50,
     alignItems: "center",
   },
   modalContainer: {
-    // backgroundColor: "rgba(0, 0, 0, 0.2)",
     alignItems: "center",
     justifyContent: "center",
     position: "absolute",
@@ -375,7 +443,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonModal: {
-    backgroundColor: Colors.TANGERINE,
+    backgroundColor: "#d96541",
     height: 50,
     width: 200,
     borderRadius: 20,
@@ -386,6 +454,12 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     fontSize: 16,
     textAlign: "center",
-    color: Colors.BLACK,
+    color: "#000",
+  },
+  turnText: {
+    color: "#fff",
+    fontSize: 20,
+    marginTop: 20,
+    marginBottom: 10,
   },
 });
