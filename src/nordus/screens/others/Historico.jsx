@@ -7,6 +7,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { getUserLoggedID } from "../../utils/UserService";
 import moment from "moment";
 import "moment/locale/pt-br";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function Historico() {
   /** TODO
@@ -55,7 +56,7 @@ export default function Historico() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.title}>Histórico</Text>
       <View style={styles.cards}>
         {agendamentos.map((agendamento, index) => (
@@ -70,7 +71,7 @@ export default function Historico() {
           />
         ))}
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 }
 
