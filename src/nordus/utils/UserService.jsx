@@ -1,7 +1,9 @@
-import { query, where, collection, getDocs } from "firebase/firestore";
+import { query, where, collection, getDocs, getFirestore, doc, updateDoc } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { FIREBASE_DB } from "../FirebaseConfig";
+import { FIREBASE_APP, FIREBASE_DB } from "../FirebaseConfig";
 import { auth } from "../FirebaseConfig";
+import { useId } from "react";
+
 
 export const getUser = async () => {
   try {
@@ -50,3 +52,43 @@ export const logoutUser = async (setIsUserLoggedIn) => {
 const getUserLoggedID = async () => {
   return await AsyncStorage.getItem("userToken");
 };
+
+export async function getDocID(userId){
+  try {
+    const querySnapshot = await getDocs(collection(FIREBASE_DB, 'users'));
+
+    const userDoc = querySnapshot.docs.find((doc) => doc.data().id === userId);
+
+    if (userDoc) {
+      console.log("Documento encontrado:", userDoc.id);
+      return userDoc.id;
+    } else {
+      console.log("Documento não encontrado");
+      return null; // Retorna null se o documento não for encontrado
+    }
+  } catch (error) {
+    console.error('Erro ao buscar documentos:', error);
+    return null;
+  }
+}
+
+export async function updateUsers(body, userId){
+  const DocID =  await getDocID(userId)
+  if(DocID != null){
+const userDocRef = doc(FIREBASE_DB, 'users', DocID);
+const update = async () => {
+  try {
+    await updateDoc(userDocRef, body);
+    console.log('Documento do usuário atualizado com sucesso');
+  } catch (error) {
+    console.error('Erro ao atualizar documento do usuário:', error);
+  }
+};
+
+update();
+console.log("funcionei")
+return true
+}
+return false
+}
+

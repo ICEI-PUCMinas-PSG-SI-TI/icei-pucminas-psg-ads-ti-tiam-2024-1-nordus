@@ -1,8 +1,54 @@
 import React from "react";
 import Colors from "../../assets/util/Colors";
-import { View, TextInput, SafeAreaView, Text, TouchableOpacity, StyleSheet, } from "react-native";
+import { useState, useEffect } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import { View, TextInput, SafeAreaView, Text, TouchableOpacity, StyleSheet, } from "react-native";4
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {getUser, logoutUser, getUserLoggedID, updateUsers} from '../../utils/UserService';
+import { FIREBASE_DB } from "../../FirebaseConfig";
+
+
+
+
 
 export default function MeusDados() {
+  
+  const [user, setUser] = useState("");
+  const [password, setNewPassword] = useState(user.password);
+  const [email, setNewEmail] = useState(user.email);
+  const [name, setNewName] = useState(user.name);
+  const [phoneNumber, setNewPhoneNumber] = useState(user.phoneNumber);
+
+
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const userData = await getUser();
+        setUser(userData);
+      } catch (err) {
+        console.log(err);
+      }
+     
+    };
+
+    fetchUser();
+  }, []);
+
+  const Save = async () => {
+    var userId= user.id;
+    console.log("User:"+ userId);
+    const response = updateUsers({phoneNumber: phoneNumber, password: password}, userId)
+    if(response){
+      alert("Alterações realizadas com sucesso")
+    }else{
+      alert("Falha ao alterar informações, tente novamente mais tarde")
+    }
+    
+  
+  }
+
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>Meus Dados</Text>
@@ -12,7 +58,7 @@ export default function MeusDados() {
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          placeholder="Felipe Champs"
+          placeholder={user.name} 
           placeholderTextColor={Colors.SILVER}
         ></TextInput>
       </View>
@@ -22,7 +68,8 @@ export default function MeusDados() {
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          placeholder="(31) 98451-1512"
+          placeholder={user.phoneNumber}
+          onChangeText={setNewPhoneNumber}
           placeholderTextColor={Colors.SILVER}
         ></TextInput>
       </View>
@@ -32,7 +79,8 @@ export default function MeusDados() {
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          placeholder="felipechamp@gmail.com"
+          placeholder={user.email}
+          onChangeText={setNewEmail}
           placeholderTextColor={Colors.SILVER}
         ></TextInput>
       </View>
@@ -42,13 +90,14 @@ export default function MeusDados() {
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          placeholder="21/11/1998"
+          placeholder="***********"
+          onChangeText={setNewPassword}
           placeholderTextColor={Colors.SILVER}
         ></TextInput>
       </View>
 
       <View style={styles.containerButton}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={Save}>
           <Text style={styles.textButton}>Salvar</Text>
         </TouchableOpacity>
       </View>
