@@ -25,18 +25,16 @@ export default function Barber() {
         const limiteDias = 30;
         const slots = [];
 
-        for (let i = 0; i < limiteDias; i++) {
-            console.log(data);
+        for (let i = data.getDate(); i <= 30; i++) {
             slots.push(new Date(data.setDate(i)));
         }
-        console.log(slots[1])
         return slots;
     };
 
     useEffect(() => {
         receberAppointments();
         const data = new Date();
-        console.log(data);
+        console.log(data)
         setDias(generateDays(data));
     }, [])
 
@@ -46,7 +44,7 @@ export default function Barber() {
         try {
             const STATICBARBERID = await getUserLoggedID() ; 
 
-            let appointments = await getAppointments('QZcAbsueFGNLI93VNWOcG72ctbC2');
+            let appointments = await getAppointments(STATICBARBERID);
             appointments.forEach((appointment) => {
                 console.log("Existe um agendamento: ", appointment.date.toDate())
               });
@@ -58,7 +56,7 @@ export default function Barber() {
 
     const verificaData = (data1, data2) => {
         const sameDate = data1.getDate() === data2.getDate();
-        const sameMonth = data1.getMonth() === data2.getMonth()+1;
+        const sameMonth = data1.getMonth() === data2.getMonth();
         return sameDate && sameMonth;
     };
     
@@ -72,10 +70,10 @@ export default function Barber() {
                 resp.push(agendamento);
             }
         });
-
-        console.log(resp);
+        console.log(resp)
         return resp;
     };
+
     const formataData = (data) => {
         const dia = data.getDate();
         const mes = data.getMonth() + 1;
