@@ -46,7 +46,7 @@ export default function Barber() {
         try {
             const STATICBARBERID = await getUserLoggedID() ; 
 
-            let appointments = await getAppointments('QZcAbsueFGNLI93VNWOcG72ctbC2');
+            let appointments = await getAppointments(STATICBARBERID);
             appointments.forEach((appointment) => {
                 console.log("Existe um agendamento: ", appointment.date.toDate())
               });
