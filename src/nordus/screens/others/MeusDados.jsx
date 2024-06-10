@@ -80,7 +80,6 @@ export default function MeusDados() {
         <TextInput
           style={styles.input}
           placeholder={user.email}
-          onChangeText={setNewEmail}
           placeholderTextColor={Colors.SILVER}
         ></TextInput>
       </View>
