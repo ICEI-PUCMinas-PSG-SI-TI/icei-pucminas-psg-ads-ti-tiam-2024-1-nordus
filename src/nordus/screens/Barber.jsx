@@ -26,8 +26,10 @@ export default function Barber() {
         const slots = [];
 
         for (let i = 0; i < limiteDias; i++) {
-            console.log(data);
-            slots.push(new Date(data.setDate(i)));
+            let newDate = new Date(data);
+            newDate.setDate(data.getDate() + i);
+            slots.push(newDate);
+            console.log(newDate.toDateString())
         }
         console.log(slots[1])
         return slots;
@@ -35,10 +37,9 @@ export default function Barber() {
 
     useEffect(() => {
         receberAppointments();
-        const data = new Date();
-        console.log(data);
+        const data = new Date(); //data normal
         setDias(generateDays(data));
-    }, [])
+    }, []) 
 
 
     async function receberAppointments() {
@@ -58,16 +59,17 @@ export default function Barber() {
 
     const verificaData = (data1, data2) => {
         const sameDate = data1.getDate() === data2.getDate();
-        const sameMonth = data1.getMonth() === data2.getMonth()+1;
+        const sameMonth = data1.getMonth() === data2.getMonth();
         return sameDate && sameMonth;
     };
     
 
     const filtrarAgendamentos = (agendamentos, diaSelecionado) => {
+        console.log("dia selecionado -"+diaSelecionado)
         const resp = [];
+
         agendamentos.forEach(agendamento => {
             let agendamentoTemp = agendamento.date.toDate();
-
             if(verificaData(agendamentoTemp, diaSelecionado)) {
                 resp.push(agendamento);
             }

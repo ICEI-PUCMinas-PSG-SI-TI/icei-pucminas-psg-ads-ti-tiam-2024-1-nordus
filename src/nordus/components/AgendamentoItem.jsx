@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Pressable, Image } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CircleCheck from '../assets/icons/circleCheck.svg'
 import CircleChecked from '../assets/icons/circleChecked.svg'
 
@@ -11,15 +11,21 @@ export default function AgendamentoItem({item}) {
     const dia = data.substring(4,15);
     const horario = data.substring(16,21);
 
+   useEffect(() => {
+    if(item.status == 'concluido') {
+        setPressed(true);
+    }
+   })
+
     function handlePress() {
         setPressed(true)
     }
     
 
     return (
-        <View style={item.status=='valid'? styles.container: [styles.containerValid, styles.invalid]}>
+        <View style={item.status=='agendado'? styles.containerValid : [styles.containerValid, styles.invalid]}>
         <View style={{gap:4}}>
-            <Text style={{color: '#fff', fontSize: 18}}>Cliente: {item.clientID.substring(0, 10)}...</Text>
+            <Text style={{color: '#fff', fontSize: 20, fontWeight: '500'}}>{item.clientName.substring(0, 20)}</Text>
             <View >
                 <Text style={{color: '#fff'}}>Serviço: {item.serviceName}</Text>
                 <Text style={{color: '#fff'}}>Data: {dia}</Text>
@@ -40,7 +46,7 @@ export default function AgendamentoItem({item}) {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    containerValid: {
         backgroundColor:Colors.DARKER_GRAY,
          flexDirection: 'row',
          padding: 20,
