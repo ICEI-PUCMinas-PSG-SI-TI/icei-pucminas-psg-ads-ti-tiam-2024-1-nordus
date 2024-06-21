@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Pressable, Image } from "react-native";
+import { View, Text, StyleSheet, Pressable, Image, ActivityIndicator, RefreshControl } from "react-native";
 import {
     collection,
     getDocs,
@@ -29,9 +29,7 @@ export default function Barber() {
             let newDate = new Date(data);
             newDate.setDate(data.getDate() + i);
             slots.push(newDate);
-            console.log(newDate.toDateString())
         }
-        console.log(slots[1])
         return slots;
     };
 
@@ -65,7 +63,6 @@ export default function Barber() {
     
 
     const filtrarAgendamentos = (agendamentos, diaSelecionado) => {
-        console.log("dia selecionado -"+diaSelecionado)
         const resp = [];
 
         agendamentos.forEach(agendamento => {
@@ -75,7 +72,6 @@ export default function Barber() {
             }
         });
 
-        console.log(resp);
         return resp;
     };
     const formataData = (data) => {
@@ -85,6 +81,7 @@ export default function Barber() {
         
         return `${dia<10?'0'+dia:dia}/${mes<10?'0'+mes:mes}/${ano}`;
     };
+    const [refreshing, setRefreshing] = useState(true);
 
     return (
         <View style={{ flex: 1, backgroundColor: Colors.BLACK, padding: 20 }} >
@@ -107,7 +104,7 @@ export default function Barber() {
             <View style={{flex:1}}>
                 {diaSelecionado? <Text style={{color:'#fff', fontSize: 22}} >{formataData(diaSelecionado)}</Text> : <></>}
                 
-                <ScrollView style={{ height:'auto', marginVertical: 20 }}>
+                <ScrollView style={{ height:'auto', marginVertical: 20}}>
                 {(agendamentos !== null && diaSelecionado!= null)  ? 
                         filtrarAgendamentos(agendamentos, diaSelecionado).map((item, index) => (
                             <Pressable key={index} style={{marginVertical: 4}} >
@@ -121,7 +118,6 @@ export default function Barber() {
 
                     
             </View>
-
         </View>
     )
 }

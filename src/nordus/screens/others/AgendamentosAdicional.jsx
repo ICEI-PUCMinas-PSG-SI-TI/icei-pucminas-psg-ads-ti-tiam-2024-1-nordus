@@ -94,6 +94,7 @@ export default function AgendamentoAdicional({
         await addDoc(collection(getFirestore(), "appointments"), {
           barberID: barbeiroEscolhido,
           clientID,
+          clientName: "temporario",
           date: date,
           hour: horario,
           serviceDuration,

@@ -1,5 +1,4 @@
-import { query, where, collection, getDocs, Timestamp } from "firebase/firestore";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { query, where, collection, getDocs, Timestamp, updateDoc } from "firebase/firestore";
 import { FIREBASE_DB } from "../FirebaseConfig";
 
 // [ ] saber quais horarios estao disponiveis:
@@ -36,6 +35,24 @@ export const getAppointments = async (barberID) => {
     }
   } catch (error) {
     console.log("Erro ao obter agendamentos:", error);
+    throw error;
+  }
+};
+
+export const finishAppointment = async (date) => {
+  try {
+    const appointmentsCollection = collection(FIREBASE_DB, "appointments");
+    const q = query(appointmentsCollection, where("date", "==", date));
+    const queryResponse = await getDocs(q);
+
+    queryResponse.forEach((doc) => {
+      const docRef = doc.ref;
+      updateDoc(docRef, { status: "concluido" });
+    });
+
+    console.log("Agendamento concluído com sucesso.");
+  } catch (error) {
+    console.log("Erro ao concluir agendamento:", error);
     throw error;
   }
 };

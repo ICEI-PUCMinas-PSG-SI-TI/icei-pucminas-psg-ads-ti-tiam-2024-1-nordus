@@ -2,23 +2,26 @@ import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 import { useEffect, useState } from "react";
 import CircleCheck from '../assets/icons/circleCheck.svg'
 import CircleChecked from '../assets/icons/circleChecked.svg'
-
+import { finishAppointment } from "../utils/AppointmentService";
 export default function AgendamentoItem({item}) {
 
     const data = item.date.toDate().toString();
-    const [pressed, setPressed] = useState(false);
+    const [pressed, setPressed] = useState(true);
     
     const dia = data.substring(4,15);
     const horario = data.substring(16,21);
 
    useEffect(() => {
-    if(item.status == 'concluido') {
-        setPressed(true);
+    if(item.status == 'agendado') {
+        setPressed(false);
     }
    })
 
     function handlePress() {
-        setPressed(true)
+        if(pressed==false) {
+            setPressed(true)
+            finishAppointment(item.date);
+        }
     }
     
 
