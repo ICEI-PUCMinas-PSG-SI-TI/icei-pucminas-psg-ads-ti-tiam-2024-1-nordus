@@ -53,6 +53,12 @@ export const getUserLoggedID = async () => {
   return await AsyncStorage.getItem("userToken");
 };
 
+export const getUserName = async () => {
+  let user = await getUser();
+  return user.name;
+};
+
+
 export async function getDocID(userId){
   try {
     const querySnapshot = await getDocs(collection(FIREBASE_DB, 'users'));
