@@ -8,7 +8,6 @@ const ServicoItem = ({ image, name, price, duration }) => {
       <View style={styles.info}>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.price}>{price}</Text>
-        {/* TODO: a duration não está aparecendo na estilização atual :( */}
         <Text style={styles.duration}>{duration}</Text>
       </View>
     </View>
@@ -50,6 +49,9 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   duration: {
+    position: "absolute",
+    top: 25,
+    right: 10,
     textAlign: "right",
     fontSize: 10,
     color: "#666",

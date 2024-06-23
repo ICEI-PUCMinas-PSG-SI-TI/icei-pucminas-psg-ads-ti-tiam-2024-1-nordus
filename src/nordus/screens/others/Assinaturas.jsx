@@ -1,24 +1,43 @@
 import React from "react";
-import { SafeAreaView, Text, StyleSheet } from "react-native";
+import { ScrollView, View, Text, StyleSheet } from "react-native";
+import PlanoAssinatura from "../../components/PlanoAssinatura";
 
-export default function Assinaturas() {
+const Assinaturas = () => {
   return (
-    <SafeAreaView style={styles.container} >
-      <Text style={styles.text}>Assinatura</Text>
-    </SafeAreaView>
+    <ScrollView style={styles.container}>
+      <Text style={styles.header}>Clube Nordus</Text>
+      <PlanoAssinatura
+        title="CORTE"
+        price="R$ 119,90 / MÊS"
+        description="Corte ilimitado"
+      />
+      <PlanoAssinatura
+        title="BARBA"
+        price="R$ 119,90 / MÊS"
+        description="Barba ilimitado"
+      />
+      <PlanoAssinatura
+        title="CORTE + BARBA"
+        price="R$ 199,90 / MÊS"
+        description="Cortes e barba ilimitados"
+        isBestSeller={true}
+      />
+    </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#2e2e2e',
+    backgroundColor: "#2e2e2e",
     flex: 1,
-    justifyContent: 'center',
-    alignItems: "center"
+    padding: 10,
   },
-  text: {
-    fontSize: 42,
-    color: '#fff'
-  }
-})
- 
+  header: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#fff",
+    marginVertical: 20,
+  },
+});
+
+export default Assinaturas;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Pressable, Image } from "react-native";
+import { View, Text, StyleSheet, Pressable, Image, ActivityIndicator, RefreshControl } from "react-native";
 import {
     collection,
     getDocs,
@@ -26,19 +26,18 @@ export default function Barber() {
         const slots = [];
 
         for (let i = 0; i < limiteDias; i++) {
-            console.log(data);
-            slots.push(new Date(data.setDate(i)));
+            let newDate = new Date(data);
+            newDate.setDate(data.getDate() + i);
+            slots.push(newDate);
         }
-        console.log(slots[1])
         return slots;
     };
 
     useEffect(() => {
         receberAppointments();
-        const data = new Date();
-        console.log(data);
+        const data = new Date(); //data normal
         setDias(generateDays(data));
-    }, [])
+    }, []) 
 
 
     async function receberAppointments() {
@@ -58,22 +57,21 @@ export default function Barber() {
 
     const verificaData = (data1, data2) => {
         const sameDate = data1.getDate() === data2.getDate();
-        const sameMonth = data1.getMonth() === data2.getMonth()+1;
+        const sameMonth = data1.getMonth() === data2.getMonth();
         return sameDate && sameMonth;
     };
     
 
     const filtrarAgendamentos = (agendamentos, diaSelecionado) => {
         const resp = [];
+
         agendamentos.forEach(agendamento => {
             let agendamentoTemp = agendamento.date.toDate();
-
             if(verificaData(agendamentoTemp, diaSelecionado)) {
                 resp.push(agendamento);
             }
         });
 
-        console.log(resp);
         return resp;
     };
     const formataData = (data) => {
@@ -83,6 +81,7 @@ export default function Barber() {
         
         return `${dia<10?'0'+dia:dia}/${mes<10?'0'+mes:mes}/${ano}`;
     };
+    const [refreshing, setRefreshing] = useState(true);
 
     return (
         <View style={{ flex: 1, backgroundColor: Colors.BLACK, padding: 20 }} >
@@ -105,7 +104,7 @@ export default function Barber() {
             <View style={{flex:1}}>
                 {diaSelecionado? <Text style={{color:'#fff', fontSize: 22}} >{formataData(diaSelecionado)}</Text> : <></>}
                 
-                <ScrollView style={{ height:'auto', marginVertical: 20 }}>
+                <ScrollView style={{ height:'auto', marginVertical: 20}}>
                 {(agendamentos !== null && diaSelecionado!= null)  ? 
                         filtrarAgendamentos(agendamentos, diaSelecionado).map((item, index) => (
                             <Pressable key={index} style={{marginVertical: 4}} >
@@ -119,7 +118,6 @@ export default function Barber() {
 
                     
             </View>
-
         </View>
     )
 }

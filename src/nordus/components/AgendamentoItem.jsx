@@ -1,25 +1,34 @@
 import { View, Text, StyleSheet, Pressable, Image } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CircleCheck from '../assets/icons/circleCheck.svg'
 import CircleChecked from '../assets/icons/circleChecked.svg'
-
+import { finishAppointment } from "../utils/AppointmentService";
 export default function AgendamentoItem({item}) {
 
     const data = item.date.toDate().toString();
-    const [pressed, setPressed] = useState(false);
+    const [pressed, setPressed] = useState(true);
     
     const dia = data.substring(4,15);
     const horario = data.substring(16,21);
 
+   useEffect(() => {
+    if(item.status == 'agendado') {
+        setPressed(false);
+    }
+   })
+
     function handlePress() {
-        setPressed(true)
+        if(pressed==false) {
+            setPressed(true)
+            finishAppointment(item.date);
+        }
     }
     
 
     return (
-        <View style={item.status=='valid'? styles.container: [styles.containerValid, styles.invalid]}>
+        <View style={item.status=='agendado'? styles.containerValid : [styles.containerValid, styles.invalid]}>
         <View style={{gap:4}}>
-            <Text style={{color: '#fff', fontSize: 18}}>Cliente: {item.clientID.substring(0, 10)}...</Text>
+            <Text style={{color: '#fff', fontSize: 20, fontWeight: '500'}}>{item.clientName.substring(0, 20)}</Text>
             <View >
                 <Text style={{color: '#fff'}}>Serviço: {item.serviceName}</Text>
                 <Text style={{color: '#fff'}}>Data: {dia}</Text>
@@ -40,7 +49,7 @@ export default function AgendamentoItem({item}) {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    containerValid: {
         backgroundColor:Colors.DARKER_GRAY,
          flexDirection: 'row',
          padding: 20,

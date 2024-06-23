@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useCallback } from "react";
 import { SafeAreaView, Text, StyleSheet, View } from "react-native";
 import Colors from "../../assets/util/Colors";
 import HistoryCard from "../../components/HistoryCard";
@@ -8,52 +8,48 @@ import { getUserLoggedID } from "../../utils/UserService";
 import moment from "moment";
 import "moment/locale/pt-br";
 import { ScrollView } from "react-native-gesture-handler";
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function Historico() {
-  /** TODO
-   * [ ] Fazer o fetch de agendamento do usuário
-   * [ ] Fazer a iteração para mostrar os cards com os agendamentos
-   *
-   */
-
   moment.locale("pt-br");
-
   const [agendamentos, setAgendamentos] = useState([]);
 
-  useEffect(() => {
-    const fetchAgendamentos = async () => {
-      try {
-        console.log("Buscando agendamentos do usuário.");
-        const userID = await getUserLoggedID();
-        if (userID) {
-          const appointments = collection(FIREBASE_DB, "appointments");
-          const q = query(appointments, where("clientID", "==", userID));
-          const querySnapshot = await getDocs(q);
+  const fetchAgendamentos = async () => {
+    try {
+      console.log("Buscando agendamentos do usuário.");
+      const userID = await getUserLoggedID();
+      if (userID) {
+        const appointments = collection(FIREBASE_DB, "appointments");
+        const q = query(appointments, where("clientID", "==", userID));
+        const querySnapshot = await getDocs(q);
 
-          const agendamentosData = [];
-          querySnapshot.forEach((doc) => {
-            const agendamento = doc.data();
+        const agendamentosData = [];
+        querySnapshot.forEach((doc) => {
+          const agendamento = doc.data();
 
-            const formattedDate = moment(agendamento.date.toDate()).format(
-              "DD [de] MMMM"
-            );
+          const formattedDate = moment(agendamento.date.toDate()).format(
+            "DD [de] MMMM"
+          );
 
-            agendamento.date = formattedDate;
-            agendamentosData.push(agendamento);
-          });
+          agendamento.date = formattedDate;
+          agendamentosData.push(agendamento);
+        });
 
-          setAgendamentos(agendamentosData);
-          console.log("Agendamentos encontrados:", agendamentosData);
-        } else {
-          console.log("Usuário não encontrado.");
-        }
-      } catch (error) {
-        console.error("Erro ao buscar agendamentos:", error);
+        setAgendamentos(agendamentosData);
+        console.log("Agendamentos encontrados:", agendamentosData);
+      } else {
+        console.log("Usuário não encontrado.");
       }
-    };
+    } catch (error) {
+      console.error("Erro ao buscar agendamentos:", error);
+    }
+  };
 
-    fetchAgendamentos();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchAgendamentos();
+    }, [])
+  );
 
   return (
     <ScrollView style={styles.container}>
