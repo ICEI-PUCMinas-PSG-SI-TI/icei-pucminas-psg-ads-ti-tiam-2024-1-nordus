@@ -8,7 +8,6 @@ const ServicoItem = ({ image, name, price, duration }) => {
       <View style={styles.info}>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.price}>{price}</Text>
-        {/* TODO: a duration não está aparecendo na estilização atual :( */}
         <Text style={styles.duration}>{duration}</Text>
       </View>
     </View>
