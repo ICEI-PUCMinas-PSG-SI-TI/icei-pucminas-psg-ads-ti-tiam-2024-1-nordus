@@ -50,6 +50,9 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   duration: {
+    position: "absolute",
+    top: 25,
+    right: 10,
     textAlign: "right",
     fontSize: 10,
     color: "#666",
