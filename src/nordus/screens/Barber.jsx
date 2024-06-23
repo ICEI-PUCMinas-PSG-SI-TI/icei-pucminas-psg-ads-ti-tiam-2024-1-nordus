@@ -14,6 +14,7 @@ import AgendamentoItem from '../components/AgendamentoItem'
 import { ScrollView } from "react-native-gesture-handler";
 import {getAppointments} from '../utils/AppointmentService'
 import {getUserLoggedID} from '../utils/UserService'
+import {GestureHandlerRootView} from "react-native-gesture-handler";
 
 export default function Barber() {
 
@@ -88,6 +89,7 @@ export default function Barber() {
             <Text style={{ fontSize: 28, color: '#fff' }}>Meus agendamentos</Text>
             
             <View style={{}}>
+                <GestureHandlerRootView>
                 <ScrollView horizontal={true} style={{ height:'auto', marginVertical: 20 }}>
                 {dias !== null ? 
                         dias.map((dia, index) => (
@@ -99,11 +101,12 @@ export default function Barber() {
                         <></>
                     }
                 </ScrollView>
+                </GestureHandlerRootView>
             </View>
 
             <View style={{flex:1}}>
                 {diaSelecionado? <Text style={{color:'#fff', fontSize: 22}} >{formataData(diaSelecionado)}</Text> : <></>}
-                
+                <GestureHandlerRootView>
                 <ScrollView style={{ height:'auto', marginVertical: 20}}>
                 {(agendamentos !== null && diaSelecionado!= null)  ? 
                         filtrarAgendamentos(agendamentos, diaSelecionado).map((item, index) => (
@@ -115,7 +118,7 @@ export default function Barber() {
                         <></>
                     }
                 </ScrollView>
-
+                </GestureHandlerRootView>
                     
             </View>
         </View>
