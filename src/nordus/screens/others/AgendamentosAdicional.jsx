@@ -22,6 +22,7 @@ import {
   Timestamp,
 } from "firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
+import Colors from "../../assets/util/Colors";
 
 export default function AgendamentoAdicional({
   serviceDuration,
@@ -38,6 +39,7 @@ export default function AgendamentoAdicional({
   const [showModal, setShowModal] = useState(false);
   const [barberName, setBarberName] = useState("");
   const [dayTimeSlots, setDayTimeSlots] = useState(new Map());
+  const [selectedTurno, setSelectedTurno] = useState("Manhã"); // Estado para o turno selecionado
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -48,7 +50,7 @@ export default function AgendamentoAdicional({
 
         if (!barberArray) {
           console.log("Buscando barbeiros do Firebase.");
-          const usersCollection = collection(FIREBASE_DB, "users");
+          const usersCollection = collection(getFirestore(), "users");
           const q = query(usersCollection, where("barber", "==", true));
           const querySnapshot = await getDocs(q);
 
@@ -210,35 +212,75 @@ export default function AgendamentoAdicional({
   const generateDayTimeSlots = (diaEscolhido) => {
     const qntHorarios = 66;
     const startHour = 9;
-    let min = 0;
-    let hour = startHour;
-    const slots = new Map();
+    const startMinute = 0;
+    const timeSlots = new Map();
+
+    let date = new Date(diaEscolhido);
+    date.setHours(startHour, startMinute, 0, 0);
 
     for (let i = 0; i < qntHorarios; i++) {
-      min = (i % 6) * 10;
-      if (i !== 0 && min === 0) hour++;
-      min = min < 10 ? "0" + min : min;
-      diaEscolhido.setMinutes(min);
-      diaEscolhido.setHours(hour);
-      slots.set(diaEscolhido.toString(), diaEscolhido.toString());
+      const slot = new Date(date.getTime() + i * 10 * 60000);
+      timeSlots.set(slot.toString(), slot);
     }
-    return slots;
+
+    calculaHorariosDisponiveis(timeSlots);
+    return timeSlots;
   };
 
   useEffect(() => {
-    if (data != null) {
-      console.log("verifcando datas");
-      let slots = generateDayTimeSlots(data);
-      calculaHorariosDisponiveis(slots);
+    if (data && barbeiroEscolhido) {
+      generateDayTimeSlots(data);
     }
-  }, [data]);
+  }, [data, barbeiroEscolhido]);
+
+  const filterPastTimeSlots = (slots, currentDate) => {
+    return slots.filter((slot) => {
+      const slotDate = new Date(slot);
+      return slotDate >= currentDate;
+    });
+  };
+
+  const renderTimeSlots = (slots) => {
+    const currentDate = new Date();
+    const filteredSlots = filterPastTimeSlots(slots, currentDate);
+
+    return (
+      <View style={styles.timeSlotsContainer}>
+        {filteredSlots.length > 0 ? (
+          filteredSlots.map((slot, index) => {
+            const date = new Date(slot);
+            const hour = String(date.getHours()).padStart(2, "0");
+            const minute = String(date.getMinutes()).padStart(2, "0");
+            const formattedTime = `${hour}:${minute}`;
+            return (
+              <Pressable
+                key={index}
+                onPress={() => setHorario(formattedTime)}
+                style={[
+                  styles.timeSlot,
+                  horario === formattedTime && styles.timeSlotSelected,
+                ]}
+              >
+                <Text style={styles.timeSlotText}>{formattedTime}</Text>
+              </Pressable>
+            );
+          })
+        ) : (
+          <Text style={styles.noAvailableSlotsText}>Nenhum horário disponível</Text>
+        )}
+      </View>
+    );
+  };
 
   const categorizeTimeSlots = (slots) => {
+    const currentDate = new Date();
+    const filteredSlots = filterPastTimeSlots(slots, currentDate);
+    
     const manha = [];
     const tarde = [];
     const noite = [];
 
-    slots.forEach((slot) => {
+    filteredSlots.forEach((slot) => {
       const date = new Date(slot);
       const hour = date.getHours();
       if (hour < 12) {
@@ -256,6 +298,7 @@ export default function AgendamentoAdicional({
   const { manha, tarde, noite } = categorizeTimeSlots(
     Array.from(dayTimeSlots.values())
   );
+
   return (
     <ScrollView style={styles.container}>
       <View style={{ gap: 12 }}>
@@ -281,7 +324,7 @@ export default function AgendamentoAdicional({
         </View>
       </View>
 
-      <View style={{ gap: 24 }}>
+      <View>
         {barbeiroEscolhido ? (
           <View style={styles.calendarContainer}>
             <Text style={{ color: "#fff", fontSize: 20 }}>
@@ -294,83 +337,48 @@ export default function AgendamentoAdicional({
         )}
 
         {data ? (
-          <View style={{ gap: 12 }}>
+          <View style={{ gap: 8 }}>
             <Text style={{ color: "#fff", fontSize: 20 }}>
               Escolha um horário:
             </Text>
-            <Text style={styles.turnText}>Manhã</Text>
-            <View style={styles.timeSlotsContainer}>
-              {manha.map((slot, index) => {
-                const date = new Date(slot);
-                const hour = String(date.getHours()).padStart(2, "0");
-                const minute = String(date.getMinutes()).padStart(2, "0");
-                const formattedTime = `${hour}:${minute}`;
-                return (
-                  <Pressable
-                    key={index}
-                    onPress={() => setHorario(formattedTime)}
-                    style={[
-                      styles.timeSlot,
-                      horario === formattedTime && styles.timeSlotSelected,
-                    ]}
-                  >
-                    <Text style={styles.timeSlotText}>{formattedTime}</Text>
-                  </Pressable>
-                );
-              })}
+            <View style={styles.turnosContainer}>
+              <Pressable
+                onPress={() => setSelectedTurno("Manhã")}
+                style={[
+                  styles.turnoButton,
+                  selectedTurno === "Manhã" && styles.turnoButtonSelected,
+                ]}
+              >
+                <Text style={styles.turnoButtonText}>Manhã</Text>
+              </Pressable>
+              <Pressable
+                onPress={() => setSelectedTurno("Tarde")}
+                style={[
+                  styles.turnoButton,
+                  selectedTurno === "Tarde" && styles.turnoButtonSelected,
+                ]}
+              >
+                <Text style={styles.turnoButtonText}>Tarde</Text>
+              </Pressable>
+              <Pressable
+                onPress={() => setSelectedTurno("Noite")}
+                style={[
+                  styles.turnoButton,
+                  selectedTurno === "Noite" && styles.turnoButtonSelected,
+                ]}
+              >
+                <Text style={styles.turnoButtonText}>Noite</Text>
+              </Pressable>
             </View>
-
-            <Text style={styles.turnText}>Tarde</Text>
-            <View style={styles.timeSlotsContainer}>
-              {tarde.map((slot, index) => {
-                const date = new Date(slot);
-                const hour = String(date.getHours()).padStart(2, "0");
-                const minute = String(date.getMinutes()).padStart(2, "0");
-                const formattedTime = `${hour}:${minute}`;
-
-                return (
-                  <Pressable
-                    key={index}
-                    onPress={() => setHorario(formattedTime)}
-                    style={[
-                      styles.timeSlot,
-                      horario === formattedTime && styles.timeSlotSelected,
-                    ]}
-                  >
-                    <Text style={styles.timeSlotText}>{formattedTime}</Text>
-                  </Pressable>
-                );
-              })}
-            </View>
-
-            <Text style={styles.turnText}>Noite</Text>
-            <View style={styles.timeSlotsContainer}>
-              {noite.map((slot, index) => {
-                const date = new Date(slot);
-                const hour = String(date.getHours()).padStart(2, "0");
-                const minute = String(date.getMinutes()).padStart(2, "0");
-                const formattedTime = `${hour}:${minute}`;
-
-                return (
-                  <Pressable
-                    key={index}
-                    onPress={() => setHorario(formattedTime)}
-                    style={[
-                      styles.timeSlot,
-                      horario === formattedTime && styles.timeSlotSelected,
-                    ]}
-                  >
-                    <Text style={styles.timeSlotText}>{formattedTime}</Text>
-                  </Pressable>
-                );
-              })}
-            </View>
+            {selectedTurno === "Manhã" && renderTimeSlots(manha)}
+            {selectedTurno === "Tarde" && renderTimeSlots(tarde)}
+            {selectedTurno === "Noite" && renderTimeSlots(noite)}
           </View>
         ) : (
           <></>
         )}
 
-        {horario ? (
+        {data ? (
           <View style={styles.handleButton}>
             <TouchableHighlight
               underlayColor="#d96541"
@@ -388,14 +396,13 @@ export default function AgendamentoAdicional({
     </ScrollView>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#1A1E21",
     flex: 1,
     paddingTop: 20,
     paddingHorizontal: 30,
-    gap: 18,
+    gap: 10,
   },
   text: {
     fontSize: 42,
@@ -403,7 +410,7 @@ const styles = StyleSheet.create({
   },
   calendarContainer: {
     gap: 12,
-    height: 400,
+    height: 320,
     overflow: "hidden",
     borderRadius: 20,
   },
@@ -413,15 +420,15 @@ const styles = StyleSheet.create({
   },
   timeSlot: {
     backgroundColor: "#333",
-    borderRadius: 8,
-    padding: 10,
+    borderRadius: 5,
+    padding: 7,
     alignItems: "center",
     justifyContent: "center",
     width: "22%",
     margin: "1%",
   },
   timeSlotSelected: {
-    backgroundColor: "#555",
+    backgroundColor: Colors.TANGERINE,
   },
   timeSlotText: {
     color: "#fff",
@@ -456,7 +463,7 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: "#fff",
-    padding: 20,
+    padding: 10,
     borderRadius: 10,
     alignItems: "center",
   },
@@ -474,10 +481,33 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#000",
   },
-  turnText: {
-    color: "#fff",
-    fontSize: 20,
-    marginTop: 20,
+  turnosContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginBottom: 10,
+  },
+  turnoButton: {
+    backgroundColor: "#333",
+    borderRadius: 8,
+    padding: 8,
+    alignItems: "center",
+    justifyContent: "center",
+    width: "30%",
+  },
+  turnoButtonSelected: {
+    backgroundColor: Colors.TANGERINE,
+  },
+  turnoButtonText: {
+    color: "#fff",
+    fontSize: 16,
+  },
+  noAvailableSlotsText: {
+    display: 'flex',
+    color: "#d96541",
+    fontSize: 16,
+    textAlign: "center",
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: 68
   },
 });
