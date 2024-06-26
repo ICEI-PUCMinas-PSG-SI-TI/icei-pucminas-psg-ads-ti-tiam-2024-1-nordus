@@ -87,9 +87,9 @@ export default function Barber() {
     return (
         <View style={{ flex: 1, backgroundColor: Colors.BLACK, padding: 20 }} >
             <Text style={{ fontSize: 28, color: '#fff' }}>Meus agendamentos</Text>
-            
+            <GestureHandlerRootView style={{}}>
             <View style={{}}>
-                <GestureHandlerRootView>
+                
                 <ScrollView horizontal={true} style={{ height:'auto', marginVertical: 20 }}>
                 {dias !== null ? 
                         dias.map((dia, index) => (
@@ -101,12 +101,13 @@ export default function Barber() {
                         <></>
                     }
                 </ScrollView>
-                </GestureHandlerRootView>
+                
             </View>
-
+            </GestureHandlerRootView>
+            <GestureHandlerRootView style={{flex:1}}>
             <View style={{flex:1}}>
                 {diaSelecionado? <Text style={{color:'#fff', fontSize: 22}} >{formataData(diaSelecionado)}</Text> : <></>}
-                <GestureHandlerRootView>
+                
                 <ScrollView style={{ height:'auto', marginVertical: 20}}>
                 {(agendamentos !== null && diaSelecionado!= null)  ? 
                         filtrarAgendamentos(agendamentos, diaSelecionado).map((item, index) => (
@@ -118,9 +119,10 @@ export default function Barber() {
                         <></>
                     }
                 </ScrollView>
-                </GestureHandlerRootView>
+                
                     
             </View>
+            </GestureHandlerRootView>
         </View>
     )
 }
