@@ -262,7 +262,7 @@ export default function AgendamentoAdicional({
         <Text style={{ color: "#fff", fontSize: 24 }}>
           Escolha um profissional:
         </Text>
-        <View style={{ flexDirection: "row", gap: 20, paddingBottom:18 }}>
+        <View style={{ flexDirection: "row", gap: 20, paddingBottom: 18 }}>
           {barbers.map((barber, index) => (
             <Pressable
               key={index}
@@ -282,106 +282,107 @@ export default function AgendamentoAdicional({
       </View>
 
       <View style={{ gap: 24 }}>
+        {barbeiroEscolhido ? (
+          <View style={styles.calendarContainer}>
+            <Text style={{ color: "#fff", fontSize: 20 }}>
+              Escolha uma data:
+            </Text>
+            <Calendar setData={setData} barberId={barbeiroEscolhido} />
+          </View>
+        ) : (
+          <></>
+        )}
 
-          {
-            barbeiroEscolhido?
-            <View style={styles.calendarContainer}>
-              <Text style={{ color: "#fff", fontSize: 20 }}>Escolha uma data:</Text>
-              <Calendar setData={setData} />
-            </View> : <></>
-          }
+        {data ? (
+          <View style={{ gap: 12 }}>
+            <Text style={{ color: "#fff", fontSize: 20 }}>
+              Escolha um horário:
+            </Text>
+            <Text style={styles.turnText}>Manhã</Text>
+            <View style={styles.timeSlotsContainer}>
+              {manha.map((slot, index) => {
+                const date = new Date(slot);
+                const hour = String(date.getHours()).padStart(2, "0");
+                const minute = String(date.getMinutes()).padStart(2, "0");
+                const formattedTime = `${hour}:${minute}`;
+                return (
+                  <Pressable
+                    key={index}
+                    onPress={() => setHorario(formattedTime)}
+                    style={[
+                      styles.timeSlot,
+                      horario === formattedTime && styles.timeSlotSelected,
+                    ]}
+                  >
+                    <Text style={styles.timeSlotText}>{formattedTime}</Text>
+                  </Pressable>
+                );
+              })}
+            </View>
 
-          {
-            data? 
-            <View style={{ gap: 12 }}>
-              <Text style={{ color: "#fff", fontSize: 20 }}>
-                Escolha um horário:
-              </Text>
-              <Text style={styles.turnText}>Manhã</Text>
-              <View style={styles.timeSlotsContainer}>
-                {manha.map((slot, index) => {
-                  const date = new Date(slot);
-                  const hour = String(date.getHours()).padStart(2, "0");
-                  const minute = String(date.getMinutes()).padStart(2, "0");
-                  const formattedTime = `${hour}:${minute}`;
-                  return (
-                    <Pressable
-                      key={index}
-                      onPress={() => setHorario(formattedTime)}
-                      style={[
-                        styles.timeSlot,
-                        horario === formattedTime && styles.timeSlotSelected,
-                      ]}
-                    >
-                      <Text style={styles.timeSlotText}>{formattedTime}</Text>
-                    </Pressable>
-                  );
-                })}
-              </View>
+            <Text style={styles.turnText}>Tarde</Text>
+            <View style={styles.timeSlotsContainer}>
+              {tarde.map((slot, index) => {
+                const date = new Date(slot);
+                const hour = String(date.getHours()).padStart(2, "0");
+                const minute = String(date.getMinutes()).padStart(2, "0");
+                const formattedTime = `${hour}:${minute}`;
 
-              <Text style={styles.turnText}>Tarde</Text>
-              <View style={styles.timeSlotsContainer}>
-                {tarde.map((slot, index) => {
-                  const date = new Date(slot);
-                  const hour = String(date.getHours()).padStart(2, "0");
-                  const minute = String(date.getMinutes()).padStart(2, "0");
-                  const formattedTime = `${hour}:${minute}`;
+                return (
+                  <Pressable
+                    key={index}
+                    onPress={() => setHorario(formattedTime)}
+                    style={[
+                      styles.timeSlot,
+                      horario === formattedTime && styles.timeSlotSelected,
+                    ]}
+                  >
+                    <Text style={styles.timeSlotText}>{formattedTime}</Text>
+                  </Pressable>
+                );
+              })}
+            </View>
 
-                  return (
-                    <Pressable
-                      key={index}
-                      onPress={() => setHorario(formattedTime)}
-                      style={[
-                        styles.timeSlot,
-                        horario === formattedTime && styles.timeSlotSelected,
-                      ]}
-                    >
-                      <Text style={styles.timeSlotText}>{formattedTime}</Text>
-                    </Pressable>
-                  );
-                })}
-              </View>
+            <Text style={styles.turnText}>Noite</Text>
+            <View style={styles.timeSlotsContainer}>
+              {noite.map((slot, index) => {
+                const date = new Date(slot);
+                const hour = String(date.getHours()).padStart(2, "0");
+                const minute = String(date.getMinutes()).padStart(2, "0");
+                const formattedTime = `${hour}:${minute}`;
 
-              <Text style={styles.turnText}>Noite</Text>
-              <View style={styles.timeSlotsContainer}>
-                {noite.map((slot, index) => {
-                  const date = new Date(slot);
-                  const hour = String(date.getHours()).padStart(2, "0");
-                  const minute = String(date.getMinutes()).padStart(2, "0");
-                  const formattedTime = `${hour}:${minute}`;
+                return (
+                  <Pressable
+                    key={index}
+                    onPress={() => setHorario(formattedTime)}
+                    style={[
+                      styles.timeSlot,
+                      horario === formattedTime && styles.timeSlotSelected,
+                    ]}
+                  >
+                    <Text style={styles.timeSlotText}>{formattedTime}</Text>
+                  </Pressable>
+                );
+              })}
+            </View>
+          </View>
+        ) : (
+          <></>
+        )}
 
-                  return (
-                    <Pressable
-                      key={index}
-                      onPress={() => setHorario(formattedTime)}
-                      style={[
-                        styles.timeSlot,
-                        horario === formattedTime && styles.timeSlotSelected,
-                      ]}
-                    >
-                      <Text style={styles.timeSlotText}>{formattedTime}</Text>
-                    </Pressable>
-                  );
-                })}
-              </View>
-            </View>: <></>
-          }
-        
-          {
-            horario? 
-            <View style={styles.handleButton}>
-              <TouchableHighlight
-                underlayColor="#d96541"
-                style={styles.button}
-                onPress={handleSubmit}
-              >
-                <Text style={styles.buttonText}>Agendar</Text>
-              </TouchableHighlight>
-            </View>:<></>
-            }
-        
-        
-         
+        {horario ? (
+          <View style={styles.handleButton}>
+            <TouchableHighlight
+              underlayColor="#d96541"
+              style={styles.button}
+              onPress={handleSubmit}
+            >
+              <Text style={styles.buttonText}>Agendar</Text>
+            </TouchableHighlight>
+          </View>
+        ) : (
+          <></>
+        )}
       </View>
       {showModal && <ConfirmationModal />}
     </ScrollView>
@@ -400,12 +401,21 @@ const styles = StyleSheet.create({
     fontSize: 42,
     color: "#fff",
   },
+  // TODO: O que está quebrando a estilização do calendário é o container que está na view acima da view do componente em si,
+  // que está com o estilo de container, quando tirei o padding dele deu certo, mas não vou subir assim pois tudo utiliza a
+  // estilização dele.
+  //
+  // calendarContainerSuperior: {
+  //   gap: 12,
+  //   height: 400,
+  //   overflow: "hidden",
+  //   borderRadius: 20,
+  // },
   calendarContainer: {
     gap: 12,
     height: 400,
     overflow: "hidden",
-    borderBottomEndRadius: 20,
-    borderBottomLeftRadius: 20,
+    borderRadius: 20,
   },
   timeSlotsContainer: {
     flexDirection: "row",
