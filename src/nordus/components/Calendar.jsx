@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, useWindowDimensions } from "react-native";
 import CalendarPicker from "react-native-calendar-picker";
 import moment from "moment";
 import { FIREBASE_DB } from "../FirebaseConfig";
@@ -13,6 +13,7 @@ import {
 
 export default function Calendar({ setData, barberId }) {
   const [disabledDates, setDisabledDates] = useState([]);
+  const {width} = useWindowDimensions();
 
   useEffect(() => {
     const fetchDisabledDates = async () => {
@@ -57,6 +58,7 @@ export default function Calendar({ setData, barberId }) {
   return (
     <View style={styles.container}>
       <CalendarPicker
+        width={width-52}
         startFromMonday={true}
         allowRangeSelection={false}
         minDate={minimumDate}
@@ -92,7 +94,6 @@ export default function Calendar({ setData, barberId }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#353535",
   },
 });
