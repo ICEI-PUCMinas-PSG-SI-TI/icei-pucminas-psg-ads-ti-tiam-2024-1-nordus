@@ -105,7 +105,7 @@ export default function Barber() {
       };
   
     return (
-        <View style={{ flex: 1, backgroundColor: Colors.BLACK, padding: 20 }} >
+        <View style={{ flex: 1, backgroundColor: Colors.BLACK, paddingTop: "12%", paddingLeft:"5%", paddingRight:"5%" }} >
             <Text style={{ fontSize: 28, color: '#fff' }}>Meus agendamentos</Text>
             <GestureHandlerRootView style={{}}>
             <View style={{}}>
@@ -136,14 +136,15 @@ export default function Barber() {
                             </Pressable>
                         ))
                         : 
-                        <View style={{paddingTop: '5%', marginVertical: 20, paddingLeft:'5%'}}>
+                        <View>
                             <Text style={styles.title}>Não há agendamentos para o dia selecionado</Text>
                             <Text style={styles.title}></Text>
-                            <View style={{ marginVertical: 20,alignItems:'center', paddingLeft:'%'}} ></View>
+                            <View style={{alignItems: "center"}} >
                      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
 
-          <Text style={styles.textButton}>Folgar no dia selecionado</Text>
+          <Text style={styles.textButton}>Folgar em no dia selecionado</Text>
         </TouchableOpacity>
+        </View>
                         </View>
                     }
                 </ScrollView>
