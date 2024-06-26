@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Pressable, Image, ActivityIndicator, RefreshControl } from "react-native";
+import { View, Text, StyleSheet, Pressable, Image, ActivityIndicator, RefreshControl,TouchableOpacity } from "react-native";
 import {
     collection,
     getDocs,
@@ -44,8 +44,7 @@ export default function Barber() {
     async function receberAppointments() {
 
         try {
-            const STATICBARBERID = await getUserLoggedID() ; 
-
+            const STATICBARBERID = await getUserLoggedID(); 
             let appointments = await getAppointments(STATICBARBERID);
             appointments.forEach((appointment) => {
                 console.log("Existe um agendamento: ", appointment.date.toDate())
@@ -84,6 +83,27 @@ export default function Barber() {
     };
     const [refreshing, setRefreshing] = useState(true);
 
+    const handleSubmit = async () => {
+        const barberId = await getUserLoggedID(); 
+        console.log("Id Barbeiro"+ barberId)
+        if (diaSelecionado && barberId) {
+          
+    
+          let dayOff = Timestamp.fromDate(new Date(diaSelecionado));
+    
+          try {
+            await addDoc(collection(getFirestore(), "daysOff"), {
+              barberID: barberId,
+              date: dayOff,
+            });
+          } catch (error) {
+            console.error("Erro adicionar folga:", error);
+          }
+        } else {
+          console.log("Selecione um dia.");
+        }
+      };
+  
     return (
         <View style={{ flex: 1, backgroundColor: Colors.BLACK, padding: 20 }} >
             <Text style={{ fontSize: 28, color: '#fff' }}>Meus agendamentos</Text>
@@ -109,14 +129,22 @@ export default function Barber() {
                 {diaSelecionado? <Text style={{color:'#fff', fontSize: 22}} >{formataData(diaSelecionado)}</Text> : <></>}
                 
                 <ScrollView style={{ height:'auto', marginVertical: 20}}>
-                {(agendamentos !== null && diaSelecionado!= null)  ? 
+                {(diaSelecionado && filtrarAgendamentos(agendamentos, diaSelecionado).length > 0  )  ? 
                         filtrarAgendamentos(agendamentos, diaSelecionado).map((item, index) => (
                             <Pressable key={index} style={{marginVertical: 4}} >
                                 <AgendamentoItem item={item}></AgendamentoItem>
                             </Pressable>
                         ))
                         : 
-                        <></>
+                        <View style={{paddingTop: '5%', marginVertical: 20, paddingLeft:'5%'}}>
+                            <Text style={styles.title}>Não há agendamentos para o dia selecionado</Text>
+                            <Text style={styles.title}></Text>
+                            <View style={{ marginVertical: 20,alignItems:'center', paddingLeft:'%'}} ></View>
+                     <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+
+          <Text style={styles.textButton}>Folgar no dia selecionado</Text>
+        </TouchableOpacity>
+                        </View>
                     }
                 </ScrollView>
                 
@@ -132,4 +160,21 @@ const styles = StyleSheet.create({
         flex: 1,
 
     },
+    textButton: {
+        color: "white",
+        textAlign: "center",
+        fontSize: 18,
+        fontWeight: "500",
+      },
+       button: {
+        backgroundColor: Colors.TANGERINE,
+        width: "50%",
+        padding: 20,
+        borderRadius: 25,
+      }, title: {
+        fontSize: 24,
+        fontWeight: "300",
+        color: "#fff",
+        marginBottom: 10,
+      }
 });
