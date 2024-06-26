@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useCallback } from "react";
 import { View, Text, StyleSheet, Pressable, Image, ActivityIndicator, RefreshControl,TouchableOpacity } from "react-native";
 import {
     collection,
@@ -15,12 +15,23 @@ import { ScrollView } from "react-native-gesture-handler";
 import {getAppointments} from '../utils/AppointmentService'
 import {getUserLoggedID} from '../utils/UserService'
 import {GestureHandlerRootView} from "react-native-gesture-handler";
+import { logoutUser } from "../utils/UserService";
+import Exit from "../assets/icons/exit-icon.svg";
+import { StackRouter, useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function Barber() {
 
+export default function Barber({setIsUserLoggedIn}) {
+
+    console.log("Props recebidas em Barber:", setIsUserLoggedIn);
     const [dias, setDias] = useState(null);
     const [diaSelecionado, setDiaSelecionado] = useState(null);
     const [agendamentos, setAgendamentos] = useState(null);
+    const navigation = useNavigation();
+
+    useEffect(() => {
+        console.log("Atualização de setIsUserLoggedIn:", setIsUserLoggedIn);
+      }, [setIsUserLoggedIn]);
 
     const generateDays = (data) => {
         const limiteDias = 30;
@@ -103,6 +114,13 @@ export default function Barber() {
           console.log("Selecione um dia.");
         }
       };
+      const handleLogout = useCallback(async () => {
+        console.log("Iniciando o logout");
+        console.log("Tipo de setIsUserLoggedIn:", typeof setIsUserLoggedIn);
+        await logoutUser(setIsUserLoggedIn);
+        console.log("Logout concluído");
+        navigation.navigate("Login");
+    }, [setIsUserLoggedIn]);
   
     return (
         <View style={{ flex: 1, backgroundColor: Colors.BLACK, paddingTop: "12%", paddingLeft:"5%", paddingRight:"5%" }} >
@@ -152,6 +170,9 @@ export default function Barber() {
                     
             </View>
             </GestureHandlerRootView>
+            <Pressable style={{paddingBottom:"15%", paddingLeft:"80%"}} onPressIn={() => handleLogout()}>
+              <Exit />
+            </Pressable>
         </View>
     )
 }
