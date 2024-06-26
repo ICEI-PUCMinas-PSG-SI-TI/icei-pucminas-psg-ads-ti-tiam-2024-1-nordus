@@ -401,16 +401,6 @@ const styles = StyleSheet.create({
     fontSize: 42,
     color: "#fff",
   },
-  // TODO: O que está quebrando a estilização do calendário é o container que está na view acima da view do componente em si,
-  // que está com o estilo de container, quando tirei o padding dele deu certo, mas não vou subir assim pois tudo utiliza a
-  // estilização dele.
-  //
-  // calendarContainerSuperior: {
-  //   gap: 12,
-  //   height: 400,
-  //   overflow: "hidden",
-  //   borderRadius: 20,
-  // },
   calendarContainer: {
     gap: 12,
     height: 400,
