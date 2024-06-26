@@ -160,7 +160,7 @@ export default function Barber({setIsUserLoggedIn}) {
                             <View style={{alignItems: "center"}} >
                      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
 
-          <Text style={styles.textButton}>Folgar em no dia selecionado</Text>
+          <Text style={styles.textButton}>Folgar no dia selecionado</Text>
         </TouchableOpacity>
         </View>
                         </View>
