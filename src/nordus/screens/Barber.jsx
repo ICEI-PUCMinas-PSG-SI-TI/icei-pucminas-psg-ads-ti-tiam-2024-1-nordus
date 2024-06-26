@@ -170,7 +170,7 @@ export default function Barber({setIsUserLoggedIn}) {
                     
             </View>
             </GestureHandlerRootView>
-            <Pressable style={{paddingBottom:"15%", paddingLeft:"80%"}} onPressIn={() => handleLogout()}>
+            <Pressable style={{paddingBottom:"15%", paddingLeft:"85%"}} onPressIn={() => handleLogout()}>
               <Exit />
             </Pressable>
         </View>
