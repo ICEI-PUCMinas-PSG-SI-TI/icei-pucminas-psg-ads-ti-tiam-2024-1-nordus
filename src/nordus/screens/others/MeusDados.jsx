@@ -110,10 +110,11 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.BLACK,
   },
   text: {
-    fontSize: 32,
+    fontSize:24 ,
     textAlign: "left",
     paddingLeft: 18,
-    fontWeight: "400",
+    paddingTop: 18,
+    fontWeight: "300",
     color: Colors.WHITE,
   },
   textInput: {
