@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.BLACK,
     flex: 1,
-    paddingHorizontal: 30,
+    paddingHorizontal: 16,
     justifyContent: 'center'
   },
   title: {
@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginTop: 10,
     paddingVertical: 20,
-    paddingLeft:12,
   },
   productsList: {
     flexDirection: 'row',

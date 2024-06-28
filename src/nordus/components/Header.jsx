@@ -15,7 +15,9 @@ const Header = ({ navigation }) => {
         <Menu height={14} width={22}/>
       </TouchableOpacity>
       <View style={styles.headerImage}>
-        <Logo style={{width: 120, height: 40}}/>
+        <TouchableOpacity onPress={()=> navigation.navigate("Home")}>
+          <Logo style={{width: 120, height: 40}}/>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -23,7 +25,6 @@ const Header = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   header: {
-    marginTop: 18,
     height: 60,
     flexDirection: "row",
     justifyContent: "center",

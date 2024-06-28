@@ -49,8 +49,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.BLACK,
     flex: 1,
-    paddingHorizontal: 30,
     justifyContent: "center",
+    paddingHorizontal: 16,
   },
   title: {
     fontSize: 24,
@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
     color: "#fff",
     marginTop: 10,
     paddingVertical: 20,
-    paddingLeft: 12,
   },
   sponsorsList: {
     flexDirection: "row",

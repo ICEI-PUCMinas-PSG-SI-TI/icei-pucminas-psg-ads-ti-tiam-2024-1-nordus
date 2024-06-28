@@ -63,14 +63,10 @@ export default function Home() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-    <StatusBar
-      barStyle="dark-content"
-      backgroundColor="#f5f5f5"
-      />
       <Slide arr={slider}/>
 
       <View style={styles.contentInformation}>
-        <Text style={styles.title}>Sobre Nós</Text>
+        <Text style={styles.title}>Sobre a Nordus</Text>
         <Text style={styles.text}>
           A Barbearia Nordus oferece cortes excepcionais, constrói conexões
           genuínas com clientes e se destaca como um local icônico no bairro,
