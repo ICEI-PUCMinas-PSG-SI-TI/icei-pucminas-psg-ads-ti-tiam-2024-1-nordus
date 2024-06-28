@@ -96,29 +96,13 @@ export function DrawerRoutes({ setIsUserLoggedIn }) {
         }}
       />
 
-<Drawer.Screen
+      <Drawer.Screen
         name="Barber"
         component={Barber}
         options={{
           header: ({ navigation }) => <Header navigation={navigation} />,
-        }}      />
+        }} />
 
-      {/* 
-        <Tab.Screen
-                name="Profile"
-                options={{
-                tabBarIcon: ({ focused }) => {
-                    if (focused) {
-                    return <IconProfilePressed />;
-                    }
-                    return <IconProfile />;
-                },
-                }}
-            >
-            {() => <Profile setIsUserLoggedIn={setIsUserLoggedIn} />}
-            </Tab.Screen>
-
-*/}
     </Drawer.Navigator>
   );
 }
@@ -220,22 +204,12 @@ const CustomDrawer = ({ navigation, screenAtual, setScreenAtual }) => {
       <View style={styles.contactGroup}>
         <Pressable
           style={styles.contactItem}
-          onPress={() =>
-            openURL(
-              "https://open.spotify.com/playlist/0V5h0aQrVEJ6AGmsmdDZLy?si=5bebf95ec53448f3&nd=1&dlsi=546065a093d847a1"
-            )
-          }
-        >
-          <Spotify height={22} width={22} />
-          <Text style={styles.contactText}>NordusPlay</Text>
-        </Pressable>
-        <Pressable
-          style={styles.contactItem}
           onPress={() => openURL("https://www.instagram.com/barbearianordus/")}
         >
           <Instagram height={22} width={22} />
           <Text style={styles.contactText}>@barbearianordus</Text>
         </Pressable>
+
         <Pressable
           style={styles.contactItem}
           onPress={() => openURL("https://barbearianordus.com.br/")}
@@ -243,17 +217,15 @@ const CustomDrawer = ({ navigation, screenAtual, setScreenAtual }) => {
           <Website height={22} width={22} />
           <Text style={styles.contactText}>barbearianordus.com.br</Text>
         </Pressable>
+
         <Pressable
           style={styles.contactItem}
-          onPress={() =>
-            openURL(
-              "https://wa.me/553131916557?text=Estou+afim+de+marcar+um+hor%C3%A1rio+para+dar+um+trato+no+cabelo%2Fbarba.+Cheguei+at%C3%A9+voc%C3%AAs+pelo+app+e+t%C3%B4+bem+empolgado+pra+conhecer+de+perto%21"
-            )
-          }
+          onPress={() => openURL("https://wa.me/553131916557?text=Estou+afim+de+marcar+um+hor%C3%A1rio+para+dar+um+trato+no+cabelo%2Fbarba.+Cheguei+at%C3%A9+voc%C3%AAs+pelo+app+e+t%C3%B4+bem+empolgado+pra+conhecer+de+perto%21")}
         >
           <Whatsapp height={22} width={22} />
           <Text style={styles.contactText}>(31) 3191-6557</Text>
         </Pressable>
+
         <Pressable
           style={styles.contactItem}
           onPress={() =>
@@ -266,6 +238,7 @@ const CustomDrawer = ({ navigation, screenAtual, setScreenAtual }) => {
           <Text style={styles.contactText}>barbearianordus@gmail.com</Text>
         </Pressable>
       </View>
+      
     </DrawerContentScrollView>
   );
 };
@@ -276,6 +249,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 20,
+    marginTop: 20
   },
   drawerCloseIcon: {
     position: "absolute",

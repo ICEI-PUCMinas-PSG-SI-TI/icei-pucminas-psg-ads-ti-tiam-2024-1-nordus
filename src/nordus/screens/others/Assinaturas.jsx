@@ -1,7 +1,7 @@
 import React from "react";
 import { ScrollView, View, Text, StyleSheet } from "react-native";
 import PlanoAssinatura from "../../components/PlanoAssinatura";
-
+import Colors from "../../assets/util/Colors";
 const Assinaturas = () => {
   return (
     <ScrollView style={styles.container}>
@@ -28,15 +28,17 @@ const Assinaturas = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#2e2e2e",
+    backgroundColor: Colors.BLACK,
     flex: 1,
-    padding: 10,
+    paddingHorizontal: 16,
   },
   header: {
     fontSize: 24,
-    fontWeight: "bold",
     color: "#fff",
     marginVertical: 20,
+    paddingTop: 16,
+    fontWeight: '300',
+
   },
 });
 

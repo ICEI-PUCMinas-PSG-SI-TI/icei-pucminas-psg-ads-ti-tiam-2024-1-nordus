@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     },
     descriptions: {
         fontSize: 14,
-        paddingHorizontal: 16,
+        paddingHorizontal: 8,
         textAlign: 'justify',
     },
     button: {

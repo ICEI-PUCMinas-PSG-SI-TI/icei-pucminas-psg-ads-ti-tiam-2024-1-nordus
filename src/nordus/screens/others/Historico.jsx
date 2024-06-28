@@ -75,17 +75,17 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.BLACK,
     flex: 1,
-    paddingHorizontal: 15,
+    paddingHorizontal: 16,
   },
   title: {
     fontSize: 24,
-    fontWeight: "400",
+    fontWeight: "300",
     color: "#fff",
     marginTop: 10,
     paddingVertical: 20,
-    paddingLeft: 12,
   },
   cards: {
     gap: 12,
+    alignItems: 'center'
   },
 });

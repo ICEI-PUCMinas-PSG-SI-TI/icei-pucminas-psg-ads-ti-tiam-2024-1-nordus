@@ -11,7 +11,6 @@ import Barber from "../../components/Barber";
 import Calendar from "../../components/Calendar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAppointments } from "../../utils/AppointmentService";
-import { FIREBASE_DB } from "../../FirebaseConfig";
 import {
   collection,
   getDocs,
@@ -302,10 +301,10 @@ export default function AgendamentoAdicional({
   return (
     <ScrollView style={styles.container}>
       <View style={{ gap: 12 }}>
-        <Text style={{ color: "#fff", fontSize: 24 }}>
+        <Text style={styles.title}>
           Escolha um profissional:
         </Text>
-        <View style={{ flexDirection: "row", gap: 20, paddingBottom: 18 }}>
+        <View style={styles.barberList}>
           {barbers.map((barber, index) => (
             <Pressable
               key={index}
@@ -327,7 +326,7 @@ export default function AgendamentoAdicional({
       <View>
         {barbeiroEscolhido ? (
           <View style={styles.calendarContainer}>
-            <Text style={{ color: "#fff", fontSize: 20 }}>
+            <Text style={styles.title}>
               Escolha uma data:
             </Text>
             <Calendar setData={setData} barberId={barbeiroEscolhido} />
@@ -337,8 +336,8 @@ export default function AgendamentoAdicional({
         )}
 
         {data ? (
-          <View style={{ gap: 8 }}>
-            <Text style={{ color: "#fff", fontSize: 20 }}>
+          <View style={{ gap: 12 }}>
+            <Text style={styles.title}>
               Escolha um horário:
             </Text>
             <View style={styles.turnosContainer}>
@@ -401,8 +400,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#1A1E21",
     flex: 1,
     paddingTop: 20,
-    paddingHorizontal: 30,
+    paddingHorizontal: 20,
     gap: 10,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: '300',
+    color: '#fff',
+    marginTop: 10,
+  },
+  barberList: {
+    flexDirection: "row",
+     gap: 20,
   },
   text: {
     fontSize: 42,

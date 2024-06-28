@@ -3,20 +3,16 @@ import Colors from "../assets/util/Colors";
 import Divider from "../components/Divider";
 import Ads from "../components/Ads";
 
-import { getUser, logoutUser, getUserLoggedID } from "../utils/UserService";
+import { getUser, logoutUser } from "../utils/UserService";
 import { useState } from "react";
 import {
   View,
-  TextInput,
   SafeAreaView,
   Text,
-  TouchableHighlight,
   StyleSheet,
-  Touchable,
   Pressable,
 } from "react-native";
 import Exit from "../assets/icons/exit-icon.svg";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Profile({ navigation, setIsUserLoggedIn }) {
   const [user, setUser] = useState("");
@@ -105,7 +101,6 @@ const styles = StyleSheet.create({
   },
   options: {
     gap: 16,
-    paddingHorizontal: 20,
   },
   aboutApp: {
     color: "#fff",
