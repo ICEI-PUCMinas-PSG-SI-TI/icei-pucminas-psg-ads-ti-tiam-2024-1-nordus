@@ -14,23 +14,20 @@ Os Layouts foram implementados utilizando React Native e o código fonte pode se
 
 - Atribuição de Responsabilidades - Anna Carla
 
-![Atribuição de Responsabilidades - Anna Carla](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/115251355/daf3416f-843e-4b48-b6f0-4e119a2eaf6d)
-*Link da imagem: https://imgur.com/a/4BAH2oA* 
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/115251355/f2911c82-86b3-4015-ad13-0292ff514546)
 
 - Atribuição de Responsabilidades - Alex Gonçalves
   
-![Atribuição de Responsabilidades - Alex Gonçalves](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/115251355/dde4299e-c07f-4430-8bbb-910f52b25415)
-*Link da imagem: https://imgur.com/a/N4dntDz*
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/115251355/e795daec-277b-4e19-83d2-3114f8121598)
 
 - Atribuição de Responsabilidades - Artur Marcos
   
-![Atribuição de Responsabilidades - Artur Marcos](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/115251355/c51addd7-613a-4592-9bcd-8da0a726d3e4)
-*Link da imagem: https://imgur.com/a/U3LbzbX* 
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/115251355/a40ed6bf-ba08-4845-a7f9-33927ff4bb6f)
 
 - Atribuição de Responsabilidades - Davi Ribeiro
   
-![Atribuição de Responsabilidades - Davi Ribeiro](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/115251355/46502492-339a-468f-8734-d9a67541d236)
-*Link da imagem: https://imgur.com/a/zoyWrEl* 
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/115251355/532d738c-6ff9-4d0b-91f1-cf592b6314ef)
+
 
 ## Status Atual das Contribuições dos Membros do Time no GitHub
 <!---
