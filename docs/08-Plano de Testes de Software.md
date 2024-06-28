@@ -56,7 +56,7 @@ Passos:<br>
 ## Teste de Agendamento em dias anteriores a data atual
 ### Objetivo: Verificar se o aplicativo permite o agendamento de dias anteriores
 Passos:<br>
-1° Acessar a Tela de Agendamento
-2° Realizar a marcação para um dia anterior ao da data atual
+1° Acessar a Tela de Agendamento.<br>
+2° Realizar a marcação para um dia anterior ao da data atual.<br>
 
 ### Resultado Esperado: O aplicativo exibir uma mensagem ou não permitir a marcação
