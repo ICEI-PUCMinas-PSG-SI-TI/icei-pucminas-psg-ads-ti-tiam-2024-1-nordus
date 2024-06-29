@@ -75,3 +75,12 @@ Após realizar o teste, foi concluido que o aplicativo não permitiu agendar uma
 Após seguir todos os passos propostos no teste, o cliente conseguiu com sucesso marcar seu agendamento e também foi possivel visualizar o agendamento que ele fez pelo acesso do barbeiro que foi selecionado
 
 
+## Teste de alteração de cadastro
+### Objetivo alterar os dados do usuário
+
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/3b9ff339-d79f-449e-8f51-e8255ee74da4)
+
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/503fcbd6-79b3-4ac3-8fe6-e33d0cf89bea)
+
+### Conclusão
+Após a conclusão do teste, foi constatado a alteração da senha do usuário cliente.
