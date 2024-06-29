@@ -38,9 +38,8 @@ Revisão e aprovação de pull requests submetidos pelos membros da equipe.
 ### Integração Contínua
 Garantia de que as contribuições são integradas ao código principal de forma contínua e segura.
 
-![Merge-request](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/115251355/62516a1d-e141-4960-ae16-cd3721ba68a5)
-
-*Link da imagem: https://imgur.com/a/WIP90Me* 
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/115251355/9273fa78-8fbf-408f-b2ab-393fd66843db)
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/115251355/cffd8586-a5dc-4d9d-b17f-c9a86b9fbfbc)
 
 
 ### Feedback e Melhorias
