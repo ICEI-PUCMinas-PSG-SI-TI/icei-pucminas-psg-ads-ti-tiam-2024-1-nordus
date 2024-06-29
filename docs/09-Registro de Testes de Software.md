@@ -84,3 +84,11 @@ Após seguir todos os passos propostos no teste, o cliente conseguiu com sucesso
 
 ### Conclusão
 Após a conclusão do teste, foi constatado a alteração dos dados do cliente.
+
+## Teste definindo folga do barbeiro.
+### Objetivo: Conseguir definir uma data para folgar.
+
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/f63af161-040e-4d81-aebc-6c883430b8f0)
+
+### Conclusão
+Após a realização do teste, foi identificado que a folga é definida, impossibilitando a marcação do horário mas não retorna nada ao barbeiro quando é definida a folga
