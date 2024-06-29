@@ -69,3 +69,13 @@ Passos:<br>
 3° Escolher o horário.<br>
 
 ### Resultado Esperado: O aplicativo retornar uma mensagem mostrando ou sucesso ou fracasso no agendamento do cliente.
+
+
+## Teste de alteração de cadastro
+### Objetivo alterar os dados do usuário
+Passos:<br>
+1° Acessar a tela dos dados do usuário<br>
+2° Alterar os dados<br>
+3° Salvar<br>
+
+### Resultado Esperado: O aplicativo volta uma mensagem informando que os dados foram ou não alterados. 
