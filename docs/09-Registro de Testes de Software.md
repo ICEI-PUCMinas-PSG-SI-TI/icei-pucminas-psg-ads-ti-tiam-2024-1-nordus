@@ -83,4 +83,4 @@ Após seguir todos os passos propostos no teste, o cliente conseguiu com sucesso
 ![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/503fcbd6-79b3-4ac3-8fe6-e33d0cf89bea)
 
 ### Conclusão
-Após a conclusão do teste, foi constatado a alteração da senha do usuário cliente.
+Após a conclusão do teste, foi constatado a alteração dos dados do cliente.
