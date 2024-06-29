@@ -61,3 +61,17 @@ Após a realização do teste, ao inserir a senha incorreta, o aplicativo demons
 ### Conclusão 
 Após realizar o teste, foi concluido que o aplicativo não permitiu agendar uma data retroativa nem horários anteriores ao atual na data presente.
 
+
+## Teste de Agendamento
+### Objetivo: Permitir que o cliente realize um agendamento na barbearia direto pelo aplicativo
+### Resultado Esperado: O aplicativo retornar uma mensagem mostrando ou sucesso ou fracasso no agendamento do cliente.
+
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/b879f29e-19ec-47e6-93e6-6f66542f46db)
+
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/dca8d936-87e7-4f50-abea-82493d2438ae)
+
+
+### Conclusão
+Após seguir todos os passos propostos no teste, o cliente conseguiu com sucesso marcar seu agendamento e também foi possivel visualizar o agendamento que ele fez pelo acesso do barbeiro que foi selecionado
+
+
