@@ -29,3 +29,12 @@ Durante o teste de usabilidade do processo de login em nosso aplicativo, os part
 ### Conclusão
 Durante o teste de usabilidade, os participantes conseguiram identificar claramente os passos para realizar o agendamento, um dos pontos bem avaliados foi o caminho para agendar direto na tela inicial.
 
+## Teste de definir folga dos barbeiros
+### Objetivo: Verificar a capacidade de um barbeiro definir sua folga
+
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/e65f8447-5793-4ad9-bcfa-78a75b824f6e)
+
+### Conclusão
+Durante o teste, os barbeiros não tiveram dificuldade onde seria gerada a folga, porém notaram certa dificuldade para identificar dias que não possuiam nenhum agendamento.
+
+
