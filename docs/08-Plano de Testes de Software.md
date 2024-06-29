@@ -59,4 +59,13 @@ Passos:<br>
 1° Acessar a Tela de Agendamento.<br>
 2° Realizar a marcação para um dia anterior ao da data atual.<br>
 
-### Resultado Esperado: O aplicativo exibir uma mensagem ou não permitir a marcação
+### Resultado Esperado: O aplicativo exibir uma mensagem ou não permitir a marcação.
+
+## Teste de Agendamento
+### Objetivo: Permitir que o cliente realize um agendamento na barbearia direto pelo aplicativo
+Passos:<br>
+1° Acessar a tela de agendamento.<br>
+2° Escolher o barbeiro.<br>
+3° Escolher o horário.<br>
+
+### Resultado Esperado: O aplicativo retornar uma mensagem mostrando ou sucesso ou fracasso no agendamento do cliente.
