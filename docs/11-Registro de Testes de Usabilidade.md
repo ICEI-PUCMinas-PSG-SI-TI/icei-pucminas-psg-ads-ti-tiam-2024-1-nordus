@@ -18,3 +18,14 @@ Durante o teste de usabilidade do processo de registro em nosso aplicativo, obse
 
 ### Conclusão
 Durante o teste de usabilidade do processo de login em nosso aplicativo, os participantes conseguiram acessar suas contas com extrema facilidade. A simplicidade e eficiência do processo refletiram-se na rápida conclusão, destacando uma experiência de usuário altamente satisfatória. Esses resultados indicam que o processo de login é intuitivo e eficaz, proporcionando aos usuários uma entrada sem complicações na plataforma.
+
+
+## Teste de Agendamento
+### Objetivo: Verificar se um usuário conseguer agendar um serviço com facilidade
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/cb29ec00-5656-4977-93e6-bf57a62f6a59)
+
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/a8d9e244-a494-4872-ad3f-933a4eb3e5ea)
+
+### Conclusão
+Durante o teste de usabilidade, os participantes conseguiram identificar claramente os passos para realizar o agendamento, um dos pontos bem avaliados foi o caminho para agendar direto na tela inicial.
+
