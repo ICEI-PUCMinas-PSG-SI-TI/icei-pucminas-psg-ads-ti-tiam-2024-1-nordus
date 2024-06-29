@@ -72,10 +72,18 @@ Passos:<br>
 
 
 ## Teste de alteração de cadastro
-### Objetivo alterar os dados do usuário
+### Objetivo: alterar os dados do usuário
 Passos:<br>
 1° Acessar a tela dos dados do usuário<br>
 2° Alterar os dados<br>
 3° Salvar<br>
 
-### Resultado Esperado: O aplicativo volta uma mensagem informando que os dados foram ou não alterados. 
+### Resultado Esperado: O aplicativo retorna uma mensagem informando que os dados foram ou não alterados.
+
+## Teste Definindo folga do barbeiro
+### Objetivo: Conseguir definir uma data para folgar
+Passos:<br>
+1° Identificar data sem agendamento.<br>
+2° Pressionar Gerar Folga.<br>
+
+### Resultado Esperado: O aplicativo retorna uma mensagem informando que a folga foi gerada.
