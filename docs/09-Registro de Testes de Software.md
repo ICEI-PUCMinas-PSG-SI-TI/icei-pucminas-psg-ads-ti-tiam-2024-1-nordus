@@ -66,9 +66,9 @@ Após realizar o teste, foi concluido que o aplicativo não permitiu agendar uma
 ### Objetivo: Permitir que o cliente realize um agendamento na barbearia direto pelo aplicativo
 ### Resultado Esperado: O aplicativo retornar uma mensagem mostrando ou sucesso ou fracasso no agendamento do cliente.
 
-![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/b879f29e-19ec-47e6-93e6-6f66542f46db)
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/e9c8e1cd-a5f1-4453-a6a5-3570e05b3c42)
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/c8d0681b-6706-4cc5-9974-91af15328b53)
 
-![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/dca8d936-87e7-4f50-abea-82493d2438ae)
 
 
 ### Conclusão
