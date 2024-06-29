@@ -52,4 +52,12 @@ Após a realização do teste, foi identificado que a funcionalidade de login op
 ### Conclusão
 Após a realização do teste, ao inserir a senha incorreta, o aplicativo demonstrou um comportamento adequado. O acesso foi bloqueado conforme esperado, e um alerta foi exibido informando que o login ou a senha está incorreta. Esses resultados indicam que a funcionalidade de autenticação está funcionando corretamente ao identificar e responder adequadamente a tentativas de login com informações incorretas.
 
+## Teste de Agendamento em dias anteriores a data atual
+### Objetivo: Verificar se o aplicativo permite o agendamento de dias anteriores
+### Resultado Esperado: O aplicativo exibir uma mensagem ou não permitir a marcação
+
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/5842f3f0-c0e0-441e-b7ef-f8f006814ab9)
+
+### Conclusão 
+Após realizar o teste, foi concluido que o aplicativo não permitiu agendar uma data retroativa nem horários anteriores ao atual na data presente.
 
