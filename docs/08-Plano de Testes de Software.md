@@ -52,3 +52,38 @@ Passos:<br>
 3°Tentar enviar o formulário.<br>
 
 #### Resultado Esperado: O aplicativo exibe uma mensagem de erro indicando que as credenciais são inválidas e não permite o login.
+
+## Teste de Agendamento em dias anteriores a data atual
+### Objetivo: Verificar se o aplicativo permite o agendamento de dias anteriores
+Passos:<br>
+1° Acessar a Tela de Agendamento.<br>
+2° Realizar a marcação para um dia anterior ao da data atual.<br>
+
+### Resultado Esperado: O aplicativo exibir uma mensagem ou não permitir a marcação.
+
+## Teste de Agendamento
+### Objetivo: Permitir que o cliente realize um agendamento na barbearia direto pelo aplicativo
+Passos:<br>
+1° Acessar a tela de agendamento.<br>
+2° Escolher o barbeiro.<br>
+3° Escolher o horário.<br>
+
+### Resultado Esperado: O aplicativo retornar uma mensagem mostrando ou sucesso ou fracasso no agendamento do cliente.
+
+
+## Teste de alteração de cadastro
+### Objetivo: alterar os dados do usuário
+Passos:<br>
+1° Acessar a tela dos dados do usuário<br>
+2° Alterar os dados<br>
+3° Salvar<br>
+
+### Resultado Esperado: O aplicativo retorna uma mensagem informando que os dados foram ou não alterados.
+
+## Teste Definindo folga do barbeiro
+### Objetivo: Conseguir definir uma data para folgar
+Passos:<br>
+1° Identificar data sem agendamento.<br>
+2° Pressionar Gerar Folga.<br>
+
+### Resultado Esperado: O aplicativo retorna uma mensagem informando que a folga foi gerada.

@@ -52,4 +52,43 @@ Após a realização do teste, foi identificado que a funcionalidade de login op
 ### Conclusão
 Após a realização do teste, ao inserir a senha incorreta, o aplicativo demonstrou um comportamento adequado. O acesso foi bloqueado conforme esperado, e um alerta foi exibido informando que o login ou a senha está incorreta. Esses resultados indicam que a funcionalidade de autenticação está funcionando corretamente ao identificar e responder adequadamente a tentativas de login com informações incorretas.
 
+## Teste de Agendamento em dias anteriores a data atual
+### Objetivo: Verificar se o aplicativo permite o agendamento de dias anteriores
+### Resultado Esperado: O aplicativo exibir uma mensagem ou não permitir a marcação
 
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/5842f3f0-c0e0-441e-b7ef-f8f006814ab9)
+
+### Conclusão 
+Após realizar o teste, foi concluido que o aplicativo não permitiu agendar uma data retroativa nem horários anteriores ao atual na data presente.
+
+
+## Teste de Agendamento
+### Objetivo: Permitir que o cliente realize um agendamento na barbearia direto pelo aplicativo
+### Resultado Esperado: O aplicativo retornar uma mensagem mostrando ou sucesso ou fracasso no agendamento do cliente.
+
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/e9c8e1cd-a5f1-4453-a6a5-3570e05b3c42)
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/c8d0681b-6706-4cc5-9974-91af15328b53)
+
+
+
+### Conclusão
+Após seguir todos os passos propostos no teste, o cliente conseguiu com sucesso marcar seu agendamento e também foi possivel visualizar o agendamento que ele fez pelo acesso do barbeiro que foi selecionado
+
+
+## Teste de alteração de cadastro
+### Objetivo alterar os dados do usuário
+
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/3b9ff339-d79f-449e-8f51-e8255ee74da4)
+
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/503fcbd6-79b3-4ac3-8fe6-e33d0cf89bea)
+
+### Conclusão
+Após a conclusão do teste, foi constatado a alteração dos dados do cliente.
+
+## Teste definindo folga do barbeiro.
+### Objetivo: Conseguir definir uma data para folgar.
+
+![image](https://github.com/ICEI-PUCMinas-PSG-SI-TI/icei-pucminas-psg-ads-ti-tiam-2024-1-nordus/assets/116689119/f63af161-040e-4d81-aebc-6c883430b8f0)
+
+### Conclusão
+Após a realização do teste, foi identificado que a folga é definida, impossibilitando a marcação do horário mas não retorna nada ao barbeiro quando é definida a folga
