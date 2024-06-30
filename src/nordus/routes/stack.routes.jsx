@@ -20,7 +20,7 @@ export function StackRoutes({ setIsUserLoggedIn }) {
         component={Register}
         options={{ headerShown: false }}
       />
-      <Screen name="Home" component={Home} />
+      {/*<Screen name="Home" component={Home} />*/}
       <Screen
         name="Equipe"
         component={Equipe}

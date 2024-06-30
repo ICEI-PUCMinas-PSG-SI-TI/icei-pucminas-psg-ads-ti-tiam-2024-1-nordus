@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.BLACK,
     flex: 1,
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
     paddingTop: 20,
   },
   title: {
@@ -76,11 +76,13 @@ const styles = StyleSheet.create({
     fontWeight: "300",
     color: "#fff",
     marginBottom: 20,
+    paddingHorizontal: 8
   },
   servicesList: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
+    paddingHorizontal: 8
   },
   cardContainer: {
     width: "47%",

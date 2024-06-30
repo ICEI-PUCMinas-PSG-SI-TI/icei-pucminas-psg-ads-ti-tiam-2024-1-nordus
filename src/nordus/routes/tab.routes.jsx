@@ -1,13 +1,8 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import Profile from "../screens/Profile";
-
-import Login from "../screens/Login";
-import Register from "../screens/Register";
 import Assinaturas from "../screens/others/Assinaturas";
 import Agendamento from "../screens/others/Agendamento";
-import { SvgUri } from "react-native";
-import { Header } from "react-native/Libraries/NewAppScreen";
 
 import IconProfile from "../assets/icons/icon-profile.svg";
 import IconProfilePressed from "../assets/icons/icon-profile-tangerine.svg";
@@ -29,7 +24,7 @@ export function TabRoutes({ setIsUserLoggedIn }) {
         tabBarShowLabel: false,
         tabBarStyle: {
           backgroundColor: Colors.WHITE_SMOKE,
-          borderTopWidth: 0,
+          height: 60
         },
       }}
     >
@@ -87,13 +82,3 @@ export function TabRoutes({ setIsUserLoggedIn }) {
     </Tab.Navigator>
   );
 }
-
-/*
-      <Screen 
-        name="Login" 
-        options={{ headerShown: false }} 
-      >
-        {() => <Login setIsUserLoggedIn={setIsUserLoggedIn} />}
-      </Screen>
-
-*/

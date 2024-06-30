@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, Text, StyleSheet } from "react-native";
 import Servicos from "./Servicos";
 import AgendamentoAdicional from "./AgendamentosAdicional";
 import { getUserLoggedID, getUserName } from "../../utils/UserService";
@@ -43,16 +42,3 @@ export default function Agendamento() {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#2e2e2e",
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  text: {
-    fontSize: 42,
-    color: "#fff",
-  },
-});
